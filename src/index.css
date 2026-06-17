@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* ---- ARC design tokens (Tailwind v4 CSS-first config) ---- */
+@theme {
+  /* Brand greens — inspired by University of Bayreuth / Fraunhofer */
+  --color-arc-50: #ecfdf5;
+  --color-arc-100: #d1fae5;
+  --color-arc-200: #a6f0cd;
+  --color-arc-300: #6ee0b0;
+  --color-arc-400: #34c790;
+  --color-arc-500: #11a774;
+  --color-arc-600: #00805a;
+  --color-arc-700: #016a4c;
+  --color-arc-800: #06543e;
+  --color-arc-900: #074535;
+  --color-arc-950: #02261e;
+
+  /* Neutral ink */
+  --color-ink-900: #0f1c18;
+  --color-ink-700: #2b3a35;
+  --color-ink-500: #5b6b65;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+
+  --default-transition-duration: 200ms;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-white text-ink-900 font-sans antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-arc-600);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .container-arc {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* subtle dotted grid background */
+  .bg-grid {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(0, 128, 90, 0.12) 1px,
+      transparent 0
+    );
+    background-size: 28px 28px;
+  }
+}
