@@ -26,9 +26,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid
-          ? 'border-b border-black/5 bg-white/80 backdrop-blur-xl'
-          : 'bg-transparent'
+        solid ? 'border-b border-black/5 bg-white/80 backdrop-blur-xl' : 'bg-transparent'
       }`}
     >
       <nav className="container-arc flex h-16 items-center justify-between sm:h-18">
@@ -115,7 +113,9 @@ export default function Navbar() {
                 open ? 'translate-y-2 rotate-45' : ''
               }`}
             />
-            <span className={`block h-0.5 w-6 bg-current transition-opacity ${open ? 'opacity-0' : ''}`} />
+            <span
+              className={`block h-0.5 w-6 bg-current transition-opacity ${open ? 'opacity-0' : ''}`}
+            />
             <span
               className={`block h-0.5 w-6 bg-current transition-transform ${
                 open ? '-translate-y-2 -rotate-45' : ''

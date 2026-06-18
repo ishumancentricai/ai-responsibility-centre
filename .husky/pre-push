@@ -1,0 +1,2 @@
+# Run the test suite before pushing so broken data/logic doesn't reach CI.
+npm run test

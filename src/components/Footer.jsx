@@ -17,9 +17,8 @@ export default function Footer() {
             </div>
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
-            Productive AI systems that put people at the centre — and stay
-            committed to the common good. At the intersection of technology,
-            law and society.
+            Productive AI systems that put people at the centre — and stay committed to
+            the common good. At the intersection of technology, law and society.
           </p>
         </div>
 
@@ -64,7 +63,10 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-arc flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
-          <p>© {new Date().getFullYear()} AI Responsibility Centre (ARC). All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} AI Responsibility Centre (ARC). All rights
+            reserved.
+          </p>
           <div className="flex items-center gap-5">
             <Link to="/impressum" className="transition-colors hover:text-arc-300">
               Impressum
@@ -72,7 +74,10 @@ export default function Footer() {
             <Link to="/datenschutz" className="transition-colors hover:text-arc-300">
               Datenschutz
             </Link>
-            <Link to="https://www.uni-bayreuth.de/en" className="transition-colors hover:text-arc-300">
+            <Link
+              to="https://www.uni-bayreuth.de/en"
+              className="transition-colors hover:text-arc-300"
+            >
               University of Bayreuth
             </Link>
           </div>

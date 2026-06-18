@@ -56,7 +56,11 @@ export function StaggerItem({ children, className = '', y = 24 }) {
       className={className}
       variants={{
         hidden: reduce ? {} : { opacity: 0, y },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+        },
       }}
     >
       {children}

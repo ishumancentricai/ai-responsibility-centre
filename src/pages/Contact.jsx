@@ -61,9 +61,17 @@ export default function Contact() {
               <div className="grid gap-5">
                 <Field label="Name" name="name" type="text" />
                 <Field label="Email" name="email" type="email" />
-                <Field label="Organisation" name="organisation" type="text" required={false} />
+                <Field
+                  label="Organisation"
+                  name="organisation"
+                  type="text"
+                  required={false}
+                />
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-ink-700">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-ink-700"
+                  >
                     Message
                   </label>
                   <textarea
@@ -81,8 +89,8 @@ export default function Contact() {
                   Send message
                 </button>
                 <p className="text-xs text-ink-500">
-                  This opens your email app so you can review and send the
-                  message yourself.
+                  This opens your email app so you can review and send the message
+                  yourself.
                 </p>
               </div>
             </form>

@@ -34,7 +34,7 @@ One-time GitHub setup:
 
 The domain is pinned in the repo via [`public/CNAME`](public/CNAME), so each
 deploy keeps it. To make it resolve, set these DNS records at the registrar
-(IONOS) for the apex domain — and remove any domain *forwarding/redirect*:
+(IONOS) for the apex domain — and remove any domain _forwarding/redirect_:
 
 ```
 A     @   185.199.108.153

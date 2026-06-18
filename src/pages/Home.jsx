@@ -9,6 +9,7 @@ import {
 } from 'framer-motion'
 import ArcMark from '../components/ArcMark'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
+import UpcomingEvents from '../components/UpcomingEvents'
 import {
   VISION,
   MISSION,
@@ -22,6 +23,11 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <UpcomingEvents
+        className="border-b border-black/5 bg-arc-50/40 py-24 sm:py-32"
+        cardClassName="border border-black/5 bg-white shadow-sm"
+        cta={{ label: 'View all events & milestones', to: '/roadmap' }}
+      />
       <Qualities />
       <Gaps />
       <Stats />
@@ -74,7 +80,11 @@ function Hero() {
 
         {/* giant arch mark behind the text */}
         <motion.div
-          style={reduce ? undefined : { scale: markScale, rotate: markRotate, opacity: markOpacity }}
+          style={
+            reduce
+              ? undefined
+              : { scale: markScale, rotate: markRotate, opacity: markOpacity }
+          }
           className="pointer-events-none absolute"
           aria-hidden
         >
@@ -168,8 +178,8 @@ function Qualities() {
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 max-w-3xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            AI systems are here to stay. Those who help shape their use also
-            shape the standards, values and limits of their deployment.
+            AI systems are here to stay. Those who help shape their use also shape the
+            standards, values and limits of their deployment.
           </h2>
         </Reveal>
 
@@ -292,12 +302,26 @@ function Pillars() {
                 className="group flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-white to-arc-50/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-arc-200 hover:shadow-xl"
               >
                 <ArcMark className="h-9 w-9 text-arc-600" strokeWidth={5} />
-                <h3 className="mt-6 text-xl font-semibold text-ink-900">{pillar.title}</h3>
+                <h3 className="mt-6 text-xl font-semibold text-ink-900">
+                  {pillar.title}
+                </h3>
                 <p className="mt-3 flex-1 leading-relaxed text-ink-700">{pillar.body}</p>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700">
-                  Learn more
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
-                </span>
+                {pillar.id === 'policy' ? (
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink-500">
+                    <span className="relative flex h-2 w-2" aria-hidden>
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-arc-500 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-arc-600" />
+                    </span>
+                    Coming soon
+                  </span>
+                ) : (
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700">
+                    Learn more
+                    <span className="transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </span>
+                )}
               </Link>
             </StaggerItem>
           ))}
@@ -394,8 +418,8 @@ function CallToAction() {
               Help shape responsible AI — for whom, and to what end.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/70">
-              For research collaborations, policy exchange, or industry projects,
-              we’d love to hear from you.
+              For research collaborations, policy exchange, or industry projects, we’d
+              love to hear from you.
             </p>
             <Link
               to="/contact"

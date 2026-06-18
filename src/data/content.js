@@ -5,10 +5,11 @@ export const NAV = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/research', label: 'Research' },
-  { to: '/policy', label: 'Policy Advisory' },
+  // Policy Advisory is temporarily hidden from the menu until activated.
+  // The /policy route still works (shows a "coming soon" page).
   { to: '/roadmap', label: 'Events & Milestones' },
   { to: '/team', label: 'Team' },
-  { to: '/contact', label: 'Contact' },
+  // Contact is reached via the "Get in touch" button, so it's omitted here.
 ]
 
 export const VISION = {
@@ -21,8 +22,7 @@ export const VISION = {
 
 export const MISSION = {
   headline: 'We don’t just call for responsible AI — we engage.',
-  body:
-    'As computer scientists, engineers, legal professionals and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
+  body: 'As computer scientists, engineers, legal professionals and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
   linuxMoment:
     'The Linux moment of AI? We help shape the common-good path against dependence on a few providers — towards sovereignty for industry and society through open standards.',
 }
@@ -38,7 +38,7 @@ export const PILLARS = [
     id: 'policy',
     title: 'Policy Advisory',
     short: 'Evidence for regulation.',
-    body: 'Evidence for regulation — through regular exchange with political actors on AI regulation, including the EU AI Act, EU guidelines and as a Bavarian AI expert.',
+    body: 'Evidence for regulation — through regular exchange with political actors on AI regulation.',
   },
   {
     id: 'application',
@@ -88,7 +88,8 @@ export const EVENTS = [
     title: 'ICML 2026',
     location: 'Seoul, South Korea',
     type: 'Conference',
-    blurb: 'Presenting “Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting”.',
+    blurb:
+      'Presenting “Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting”.',
     href: 'https://icml.cc/',
   },
   {
@@ -112,7 +113,8 @@ export const MILESTONES = [
         title: 'Accepted at ICML ’26 — Seoul',
         text: '“Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting” — showing that a model’s internal representations improve human-preference predictions over surface-level outputs.',
         authors: 'Ball, S., Allmendinger, S., Kühl, N., & Kreuter, F.',
-        paper: 'Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting',
+        paper:
+          'Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting',
         venue: 'International Conference on Machine Learning (ICML), Seoul',
         year: 2026,
         href: 'https://arxiv.org/abs/2602.02882',
@@ -132,8 +134,10 @@ export const MILESTONES = [
         title: 'Accepted at FAccT ’26 — Montreal',
         text: '“Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI” — a framework that translates human-subject experiments into multi-agent AI environments to study how norms emerge.',
         authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
-        paper: 'Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI',
-        venue: 'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Montreal',
+        paper:
+          'Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI',
+        venue:
+          'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Montreal',
         year: 2026,
         href: 'https://arxiv.org/abs/2603.11974',
       },
@@ -218,8 +222,7 @@ export const TEAM = [
     initials: 'LK',
     image: '/team/lena-kaestner.png',
     role: 'Professor of Philosophy, Computer Science and Artificial Intelligence',
-    affiliation:
-      'Faculty of Humanities and Social Sciences, University of Bayreuth',
+    affiliation: 'Faculty of Humanities and Social Sciences, University of Bayreuth',
     focus: [
       'Philosophy of AI',
       'Explainable AI (XAI)',
@@ -246,12 +249,45 @@ export const TEAM = [
   },
 ]
 
+// Doctoral researchers. Photos go in public/team/ (set `image`, else initials
+// show). `orcid` is left blank until confirmed — only links with a value render.
+export const PHDS = [
+  {
+    name: 'Domenique Zipperling',
+    initials: 'DZ',
+    image: '/team/domenique-zipperling.jpeg',
+    research:
+      'Machine learning, explainable AI and fairness — including federated learning and fairness in human–AI collaboration.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=tmkXQUEAAAAJ',
+      linkedin: 'https://www.linkedin.com/in/domenique-zipperling/',
+      orcid: 'https://orcid.org/0009-0003-4598-9051',
+      researchgate: 'https://www.researchgate.net/profile/Domenique-Zipperling-2',
+    },
+  },
+  {
+    name: 'Simeon Allmendinger',
+    initials: 'SA',
+    image: '/team/simeon-allmendinger.jpeg',
+    research:
+      'AI-assisted decision-making, multi-agent AI and generative AI — including fairness in multi-agent systems.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=b6ShzNwAAAAJ',
+      linkedin: 'https://www.linkedin.com/in/simeon-allmendinger-279b2018b/',
+      orcid: 'https://orcid.org/0009-0005-8741-7734',
+      researchgate: 'https://www.researchgate.net/profile/Simeon-Allmendinger',
+    },
+  },
+]
+
 export const CONTACT = {
   institution: 'University of Bayreuth',
-  chair:
-    'Chair of Information Systems and Human-centric Artificial Intelligence',
+  chair: 'Chair of Information Systems and Human-centric Artificial Intelligence',
   links: [
-    { label: 'wi.uni-bayreuth.de', href: 'https://www.wi.uni-bayreuth.de/en/team/niklas_kuehl/index.php' },
+    {
+      label: 'wi.uni-bayreuth.de',
+      href: 'https://www.wi.uni-bayreuth.de/en/team/niklas_kuehl/index.php',
+    },
     { label: 'wi.fit.fraunhofer.de', href: 'https://www.fit.fraunhofer.de/en.html' },
   ],
 }
@@ -262,29 +298,39 @@ export const CONTACT = {
 // replace them before the site goes live. The rest are public, stable facts.
 // ---------------------------------------------------------------------------
 export const LEGAL = {
-  // Diensteanbieter / Verantwortlicher
+  // Diensteanbieter (Impressum) — the University; contact is its general office.
   provider: {
     name: 'Universität Bayreuth',
     legalForm: 'Körperschaft des öffentlichen Rechts',
     address: ['Universitätsstraße 30', '95447 Bayreuth', 'Deutschland'],
-    representedBy: 'den Präsidenten der Universität Bayreuth, ⟨Name des Präsidenten⟩',
-    phone: '+49 921 55 4756',
-    email: 'kuehl@uni-bayreuth.de',
+    representedBy:
+      'den Präsidenten Prof. Dr. Stefan Leible und die Kanzlerin Dr. Nicole Kaiser',
+    phone: '+49 (0)921 / 55-0',
+    fax: '+49 (0)921 / 55-5290',
+    email: 'poststelle@uni-bayreuth.de',
     vatId: 'DE 811 264 317',
-    supervisoryAuthority:
-      'Bayerisches Staatsministerium für Wissenschaft und Kunst, Salvatorstraße 2, 80333 München',
+    supervisoryAuthority: 'Bayerisches Staatsministerium für Wissenschaft und Kunst',
   },
-  // Inhaltlich verantwortlich nach § 18 Abs. 2 MStV
+  // Inhaltlich verantwortlich nach § 18 Abs. 2 MStV — the chair running ARC.
   contentResponsible: {
     name: 'Prof. Dr. Niklas Kühl',
     unit: 'Lehrstuhl für Wirtschaftsinformatik und humanzentrische Künstliche Intelligenz',
     address: ['Universität Bayreuth', 'Universitätsstraße 30', '95447 Bayreuth'],
+    phone: '+49 (0)921 / 55-4756',
     email: 'kuehl@uni-bayreuth.de',
   },
-  // Behördliche/r Datenschutzbeauftragte/r
+  // Verantwortlicher i. S. d. DSGVO (Datenschutz) — represented by the President.
+  controller: {
+    representedBy: 'den Präsidenten Prof. Dr. Stefan Leible',
+    phone: '+49 (0)921 / 55-5201',
+    email: 'praesident@uni-bayreuth.de',
+  },
+  // Behördlicher Datenschutzbeauftragter der Universität Bayreuth.
   dpo: {
-    name: 'Behördliche/r Datenschutzbeauftragte/r der Universität Bayreuth',
-    address: ['Universität Bayreuth', 'Universitätsstraße 30', '95447 Bayreuth'],
+    name: 'Jonas Holoubek',
+    unit: 'Zentrale Universitätsverwaltung (ZUV), Büro 1.17',
+    address: ['Universitätsstraße 30', '95447 Bayreuth'],
+    phone: '+49 (0)921 / 55-5335',
     email: 'datenschutz@uni-bayreuth.de',
   },
   // Aufsichtsbehörde für den Datenschutz
@@ -298,7 +344,8 @@ export const LEGAL = {
     provider: 'GitHub, Inc.',
     address: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA',
     service: 'GitHub Pages',
-    privacyUrl: 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
+    privacyUrl:
+      'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
   },
   lastUpdated: 'Juni 2026',
 }

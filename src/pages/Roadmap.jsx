@@ -1,6 +1,7 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
-import { EVENTS, MILESTONES, HIGHLIGHTS } from '../data/content'
+import UpcomingEvents from '../components/UpcomingEvents'
+import { MILESTONES, HIGHLIGHTS } from '../data/content'
 
 const TRACK_STYLES = {
   Research: 'bg-arc-100 text-arc-800',
@@ -18,65 +19,7 @@ export default function Roadmap() {
         intro="Scroll down to trace our journey back to the start."
       />
 
-      {/* Upcoming events */}
-      <section className="bg-white pt-16 sm:pt-20">
-        <div className="container-arc">
-          <Reveal>
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
-                  Upcoming events
-                </h2>
-                <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-ink-900 sm:text-3xl">
-                  Where you’ll find us next.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" step={0.1}>
-            {EVENTS.map((ev) => {
-              const Tag = ev.href ? 'a' : 'div'
-              return (
-                <StaggerItem key={`${ev.title}-${ev.date}`}>
-                  <Tag
-                    {...(ev.href
-                      ? { href: ev.href, target: '_blank', rel: 'noreferrer' }
-                      : {})}
-                    className={`group flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-6 transition-all duration-300 ${
-                      ev.href ? 'hover:-translate-y-1 hover:shadow-xl' : ''
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="inline-flex rounded-full bg-arc-600 px-3 py-1 text-xs font-bold tracking-wide text-white">
-                        {ev.date}
-                      </span>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-ink-500">
-                        {ev.type}
-                      </span>
-                    </div>
-                    <h3 className="mt-5 text-lg font-bold tracking-tight text-ink-900">
-                      {ev.title}
-                    </h3>
-                    <p className="mt-1 text-sm font-medium text-arc-700">{ev.location}</p>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">
-                      {ev.blurb}
-                    </p>
-                    {ev.href && (
-                      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700">
-                        Event website
-                        <span className="transition-transform group-hover:translate-x-1" aria-hidden>
-                          →
-                        </span>
-                      </span>
-                    )}
-                  </Tag>
-                </StaggerItem>
-              )
-            })}
-          </Stagger>
-        </div>
-      </section>
+      <UpcomingEvents className="bg-white pt-16 sm:pt-20" />
 
       {/* Highlights */}
       <section className="bg-white py-16 sm:py-20">
@@ -121,9 +64,7 @@ export default function Roadmap() {
               >
                 <span className="absolute h-4 w-4 animate-ping rounded-full bg-arc-500/60" />
               </span>
-              <p className="ml-8 text-ink-500 sm:ml-10">
-                ... building responsible AI
-              </p>
+              <p className="ml-8 text-ink-500 sm:ml-10">... building responsible AI</p>
             </div>
 
             <Stagger className="space-y-14" step={0.1}>
@@ -157,17 +98,23 @@ export default function Roadmap() {
                             >
                               {item.track}
                             </span>
-                            <span className="font-semibold text-ink-900">{item.title}</span>
+                            <span className="font-semibold text-ink-900">
+                              {item.title}
+                            </span>
                           </div>
 
                           {item.text && (
-                            <p className="mt-2 leading-relaxed text-ink-700">{item.text}</p>
+                            <p className="mt-2 leading-relaxed text-ink-700">
+                              {item.text}
+                            </p>
                           )}
 
                           {(item.authors || item.href) && (
                             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
                               {item.authors && (
-                                <span className="italic text-ink-500">{item.authors}</span>
+                                <span className="italic text-ink-500">
+                                  {item.authors}
+                                </span>
                               )}
                               {item.href && (
                                 <a
@@ -214,7 +161,9 @@ export default function Roadmap() {
           </span>
           {['Research', 'Application', 'Policy', 'Funding'].map((track) => (
             <span key={track} className="flex items-center gap-2 text-sm text-ink-700">
-              <span className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`} />
+              <span
+                className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`}
+              />
               {track}
             </span>
           ))}

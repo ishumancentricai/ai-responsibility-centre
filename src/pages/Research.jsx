@@ -23,30 +23,28 @@ export default function Research() {
             {PUBLICATIONS.map((p, i) => (
               <StaggerItem key={p.paper ?? p.title}>
                 <article className="flex gap-5 border-b border-black/5 pb-8 last:border-0">
-                    <span className="shrink-0 pt-0.5 font-semibold tabular-nums text-arc-600">
-                      [{i + 1}]
-                    </span>
-                    <div>
-                      <h2 className="text-lg font-semibold leading-snug text-ink-900">
-                        {p.paper ?? p.title}
-                      </h2>
-                      {p.authors && (
-                        <p className="mt-1.5 text-ink-700">{p.authors}</p>
-                      )}
-                      <p className="mt-1 text-sm italic text-ink-500">
-                        {[p.venue, p.year].filter(Boolean).join(', ')}
-                      </p>
-                      {p.href && (
-                        <a
-                          href={p.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
-                        >
-                          Read the paper
-                          <span aria-hidden>→</span>
-                        </a>
-                      )}
+                  <span className="shrink-0 pt-0.5 font-semibold tabular-nums text-arc-600">
+                    [{i + 1}]
+                  </span>
+                  <div>
+                    <h2 className="text-lg font-semibold leading-snug text-ink-900">
+                      {p.paper ?? p.title}
+                    </h2>
+                    {p.authors && <p className="mt-1.5 text-ink-700">{p.authors}</p>}
+                    <p className="mt-1 text-sm italic text-ink-500">
+                      {[p.venue, p.year].filter(Boolean).join(', ')}
+                    </p>
+                    {p.href && (
+                      <a
+                        href={p.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
+                      >
+                        Read the paper
+                        <span aria-hidden>→</span>
+                      </a>
+                    )}
                   </div>
                 </article>
               </StaggerItem>

@@ -2,7 +2,11 @@
  * ArcMark — the ARC "arch" logo mark as inline SVG so it can be
  * coloured, sized and animated freely.
  */
-export default function ArcMark({ className = '', stroke = 'currentColor', strokeWidth = 5 }) {
+export default function ArcMark({
+  className = '',
+  stroke = 'currentColor',
+  strokeWidth = 5,
+}) {
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-label="ARC">
       <path

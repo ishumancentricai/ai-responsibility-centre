@@ -35,7 +35,9 @@ export default function About() {
               ))}
             </Stagger>
             <Reveal delay={0.1}>
-              <p className="mt-8 text-lg leading-relaxed text-ink-700">{VISION.ambition}</p>
+              <p className="mt-8 text-lg leading-relaxed text-ink-700">
+                {VISION.ambition}
+              </p>
             </Reveal>
           </div>
         </div>
