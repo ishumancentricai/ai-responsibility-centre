@@ -19,10 +19,14 @@ export default function Navbar() {
   // close the mobile menu whenever the route changes
   useEffect(() => setOpen(false), [location.pathname])
 
+  // Solid (white) bar once scrolled or the mobile menu is open; otherwise the
+  // bar is transparent over the dark hero and needs light-coloured text.
+  const solid = scrolled || open
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open
+        solid
           ? 'border-b border-black/5 bg-white/80 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
@@ -33,8 +37,18 @@ export default function Navbar() {
             <ArcMark className="h-5 w-5" stroke="white" strokeWidth={6} />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="text-sm font-semibold tracking-tight text-ink-900">ARC</span>
-            <span className="text-[10px] font-medium uppercase tracking-wider text-ink-500">
+            <span
+              className={`text-sm font-semibold tracking-tight transition-colors ${
+                solid ? 'text-ink-900' : 'text-white'
+              }`}
+            >
+              ARC
+            </span>
+            <span
+              className={`text-[10px] font-medium uppercase tracking-wider transition-colors ${
+                solid ? 'text-ink-500' : 'text-white/70'
+              }`}
+            >
               AI Responsibility Centre
             </span>
           </span>
@@ -50,8 +64,12 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'text-arc-700'
-                      : 'text-ink-700 hover:text-arc-700'
+                      ? solid
+                        ? 'text-arc-700'
+                        : 'text-white'
+                      : solid
+                        ? 'text-ink-700 hover:text-arc-700'
+                        : 'text-white/80 hover:text-white'
                   }`
                 }
               >
@@ -61,7 +79,9 @@ export default function Navbar() {
                     {isActive && (
                       <motion.span
                         layoutId="nav-pill"
-                        className="absolute inset-0 -z-10 rounded-full bg-arc-50"
+                        className={`absolute inset-0 -z-10 rounded-full ${
+                          solid ? 'bg-arc-50' : 'bg-white/15'
+                        }`}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -83,7 +103,9 @@ export default function Navbar() {
         {/* mobile toggle */}
         <button
           onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-lg text-ink-900 lg:hidden"
+          className={`grid h-10 w-10 place-items-center rounded-lg transition-colors lg:hidden ${
+            solid ? 'text-ink-900' : 'text-white'
+          }`}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
         >

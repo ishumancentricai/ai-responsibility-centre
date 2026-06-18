@@ -53,7 +53,7 @@ export default function Contact() {
           {/* Simple, accessible contact form (no backend — opens mail client) */}
           <Reveal delay={0.08}>
             <form
-              action="mailto:info@example.org"
+              action="mailto:kuehl@uni-bayreuth.de"
               method="post"
               encType="text/plain"
               className="rounded-3xl border border-black/5 bg-arc-50/40 p-8"

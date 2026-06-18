@@ -1,13 +1,13 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
-import { PERSON } from '../data/content'
+import { PERSON, TEAM } from '../data/content'
 
 export default function Team() {
   return (
     <>
       <PageHeader
         eyebrow="Team"
-        title="Computer scientists, engineers, lawyers and philosophers."
+        title="Computer scientists, engineers, legal professionals and philosophers."
         intro="ARC brings together technology, law and the social sciences — an interdisciplinary team that makes responsibility actionable."
       />
 
@@ -48,6 +48,68 @@ export default function Team() {
               ))}
             </Stagger>
           </div>
+        </div>
+      </section>
+
+      {/* Members */}
+      <section className="border-t border-black/5 bg-white py-20 sm:py-24">
+        <div className="container-arc">
+          <Reveal>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+              Members
+            </h2>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <p className="mt-4 max-w-2xl text-xl font-medium leading-snug text-ink-900">
+              Principal members across philosophy, law and computer science.
+            </p>
+          </Reveal>
+
+          <Stagger className="mt-12 grid gap-6 md:grid-cols-2" step={0.12}>
+            {TEAM.map((member) => (
+              <StaggerItem key={member.name}>
+                <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-8">
+                  <div className="flex items-center gap-5">
+                    <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-arc-600 text-2xl font-bold text-white">
+                      {member.initials}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold tracking-tight text-ink-900">
+                        {member.name}
+                      </h3>
+                      <p className="mt-1 text-sm font-medium text-arc-700">{member.role}</p>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm leading-relaxed text-ink-500">
+                    {member.affiliation}
+                  </p>
+                  <p className="mt-5 flex-1 leading-relaxed text-ink-700">{member.bio}</p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {member.focus.map((f) => (
+                      <span
+                        key={f}
+                        className="rounded-full border border-arc-200 bg-white px-3 py-1 text-xs font-medium text-arc-800"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={member.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
+                  >
+                    University profile
+                    <span aria-hidden>→</span>
+                  </a>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </section>
 

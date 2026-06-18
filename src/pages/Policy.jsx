@@ -1,23 +1,20 @@
+import { Fragment } from 'react'
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
-import { LANDSCAPE } from '../data/content'
 
-const ACTIVITIES = [
+// The translation layer: regulation in, deployable practice out.
+const PIPELINE = [
   {
-    title: 'EU AI Act — Article 14',
-    body: 'Mandate from the EU Commission (2026) to help shape Article 14 on human oversight — turning principle into testable practice.',
+    step: 'Regulation',
+    body: 'The EU AI Act and its guidelines define what responsible AI must achieve.',
   },
   {
-    title: 'EU guidelines',
-    body: 'Contributing evidence and methods to EU-level guidelines on the responsible deployment of AI.',
+    step: 'ARC',
+    body: 'We translate legal principle into testable methods, controls and evidence.',
   },
   {
-    title: 'Bavarian AI expert',
-    body: 'Advising on AI regulation at the state level, connecting research with regional policy and industry.',
-  },
-  {
-    title: 'ARC Roundtable Series',
-    body: 'A recurring series of expert talks (Fachgespräche) with decision-makers — iterative exchange that turns research into regulation-ready evidence.',
+    step: 'Deployment',
+    body: 'Companies ship compliant AI systems — with oversight built in, not bolted on.',
   },
 ]
 
@@ -26,71 +23,91 @@ export default function Policy() {
     <>
       <PageHeader
         eyebrow="Policy Advisory"
-        title="Evidence for regulation, through direct exchange with decision-makers."
-        intro="We provide evidence for AI regulation and engage in regular, iterative dialogue with political actors at EU, federal and state level."
+        title="Turning regulation into running systems."
+        intro="The hardest part of responsible AI isn’t writing the rules — it’s deploying them. ARC builds the translation layer between policy and practice, and keeps the dialogue flowing in both directions."
       />
 
-      {/* Activities */}
-      <section className="bg-white py-20 sm:py-28">
-        <div className="container-arc">
-          <Stagger className="grid gap-6 md:grid-cols-2" step={0.12}>
-            {ACTIVITIES.map((a, i) => (
-              <StaggerItem key={a.title}>
-                <article className="flex h-full gap-5 rounded-3xl border border-black/5 bg-arc-50/40 p-8 transition-all hover:shadow-md">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-arc-600 font-bold text-white">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-semibold text-ink-900">{a.title}</h3>
-                    <p className="mt-2 leading-relaxed text-ink-700">{a.body}</p>
-                  </div>
-                </article>
-              </StaggerItem>
-            ))}
-          </Stagger>
+      {/* Upcoming banner */}
+      <section className="border-b border-black/5 bg-arc-50/60">
+        <div className="container-arc flex flex-wrap items-center gap-x-4 gap-y-2 py-5">
+          <span className="inline-flex items-center gap-2 rounded-full bg-arc-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+            Coming soon
+          </span>
+          <p className="text-sm font-medium text-ink-700">
+            Our first open instruments for translating AI regulation into
+            deployment are in the making.
+          </p>
         </div>
       </section>
 
-      {/* Levels */}
-      <section className="border-t border-black/5 bg-arc-950 py-20 text-white sm:py-28">
+      {/* Translation layer */}
+      <section className="bg-white py-20 sm:py-28">
         <div className="container-arc">
           <Reveal>
-            <h2 className="max-w-3xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-              A connecting bracket across all levels
+            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+              The translation layer
             </h2>
           </Reveal>
           <Reveal delay={0.05}>
-            <p className="mt-4 max-w-3xl leading-relaxed text-white/70">
-              The EU regulates, the federal government funds, and Bavaria
-              connects. ARC closes the implementation gap with interdisciplinary
-              research and open standards.
+            <p className="mt-4 max-w-3xl text-balance text-2xl font-semibold leading-snug text-ink-900 sm:text-3xl">
+              We don’t just advise on the rules — we compile them into practice,
+              and carry what we learn back to policymakers.
             </p>
           </Reveal>
 
-          <Stagger className="mt-12 space-y-4" step={0.12}>
-            {LANDSCAPE.map((row) => (
-              <StaggerItem key={row.level}>
-                <div className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur sm:flex-row sm:items-center">
-                  <div className="sm:w-56 sm:shrink-0">
-                    <p className="text-lg font-semibold">{row.level}</p>
-                    <p className="text-sm font-medium uppercase tracking-wider text-arc-300">
-                      {row.role}
-                    </p>
+          <Stagger className="mt-12 grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr]" step={0.12}>
+            {PIPELINE.map((stage, i) => (
+              <Fragment key={stage.step}>
+                <StaggerItem
+                  className={`flex h-full flex-col rounded-3xl border p-7 ${
+                    stage.step === 'ARC'
+                      ? 'border-arc-600 bg-arc-600 text-white shadow-lg shadow-arc-600/20'
+                      : 'border-black/5 bg-arc-50/40 text-ink-900'
+                  }`}
+                >
+                  <span
+                    className={`text-xs font-semibold uppercase tracking-wider ${
+                      stage.step === 'ARC' ? 'text-arc-100' : 'text-arc-600'
+                    }`}
+                  >
+                    Step {i + 1}
+                  </span>
+                  <p className="mt-2 text-2xl font-bold tracking-tight">{stage.step}</p>
+                  <p
+                    className={`mt-3 leading-relaxed ${
+                      stage.step === 'ARC' ? 'text-white/85' : 'text-ink-700'
+                    }`}
+                  >
+                    {stage.body}
+                  </p>
+                </StaggerItem>
+                {i < PIPELINE.length - 1 && (
+                  <div
+                    className="hidden flex-col items-center justify-center gap-1.5 md:flex"
+                    aria-hidden
+                  >
+                    <span className="text-2xl leading-none text-arc-500">→</span>
+                    <span className="text-2xl leading-none text-arc-300">←</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {row.nodes.map((n) => (
-                      <span
-                        key={n}
-                        className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80"
-                      >
-                        {n}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </StaggerItem>
+                )}
+              </Fragment>
             ))}
           </Stagger>
+
+          {/* Direction legend — the layer works both ways */}
+          <Reveal delay={0.1}>
+            <div className="mt-8 flex flex-col gap-2 text-sm text-ink-600 sm:flex-row sm:gap-8">
+              <p className="flex items-center gap-2">
+                <span className="text-base text-arc-500">→</span>
+                Regulation, translated into deployable practice.
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="text-base text-arc-300">←</span>
+                Evidence from deployment, carried back to policymakers.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

@@ -9,6 +9,8 @@ import Policy from './pages/Policy'
 import Roadmap from './pages/Roadmap'
 import Team from './pages/Team'
 import Contact from './pages/Contact'
+import Impressum from './pages/Impressum'
+import Datenschutz from './pages/Datenschutz'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

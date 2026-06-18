@@ -1,6 +1,6 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
-import { ROADMAP, ROADMAP_TARGETS } from '../data/content'
+import { EVENTS, MILESTONES, HIGHLIGHTS } from '../data/content'
 
 const TRACK_STYLES = {
   Research: 'bg-arc-100 text-arc-800',
@@ -13,64 +13,175 @@ export default function Roadmap() {
   return (
     <>
       <PageHeader
-        eyebrow="Roadmap 2026"
-        title="Milestones & deadlines on the path to a leading centre."
-        intro="Becoming a leading centre for Responsible AI in Europe takes research success, strong visibility & application, and direct policy impact — through iterative exchange with decision-makers."
+        eyebrow="Events & Milestones"
+        title="What we’ve been working on."
+        intro="Scroll down to trace our journey back to the start."
       />
 
-      {/* Targets */}
+      {/* Upcoming events */}
+      <section className="bg-white pt-16 sm:pt-20">
+        <div className="container-arc">
+          <Reveal>
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+                  Upcoming events
+                </h2>
+                <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-ink-900 sm:text-3xl">
+                  Where you’ll find us next.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" step={0.1}>
+            {EVENTS.map((ev) => {
+              const Tag = ev.href ? 'a' : 'div'
+              return (
+                <StaggerItem key={`${ev.title}-${ev.date}`}>
+                  <Tag
+                    {...(ev.href
+                      ? { href: ev.href, target: '_blank', rel: 'noreferrer' }
+                      : {})}
+                    className={`group flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-6 transition-all duration-300 ${
+                      ev.href ? 'hover:-translate-y-1 hover:shadow-xl' : ''
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="inline-flex rounded-full bg-arc-600 px-3 py-1 text-xs font-bold tracking-wide text-white">
+                        {ev.date}
+                      </span>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-ink-500">
+                        {ev.type}
+                      </span>
+                    </div>
+                    <h3 className="mt-5 text-lg font-bold tracking-tight text-ink-900">
+                      {ev.title}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-arc-700">{ev.location}</p>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">
+                      {ev.blurb}
+                    </p>
+                    {ev.href && (
+                      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700">
+                        Event website
+                        <span className="transition-transform group-hover:translate-x-1" aria-hidden>
+                          →
+                        </span>
+                      </span>
+                    )}
+                  </Tag>
+                </StaggerItem>
+              )
+            })}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* Highlights */}
       <section className="bg-white py-16 sm:py-20">
         <div className="container-arc">
-          <Stagger className="grid grid-cols-2 gap-8 border-b border-black/5 pb-16 lg:grid-cols-4" step={0.1}>
-            {ROADMAP_TARGETS.map((t) => (
-              <StaggerItem key={t.label}>
-                <p className="text-5xl font-bold tracking-tight text-arc-600">{t.value}</p>
-                <p className="mt-2 font-medium text-ink-700">{t.label}</p>
+          <Stagger
+            className="grid grid-cols-2 gap-8 border-b border-black/5 pb-16 lg:grid-cols-4"
+            step={0.1}
+          >
+            {HIGHLIGHTS.map((s) => (
+              <StaggerItem key={s.label}>
+                <p className="text-4xl font-bold tracking-tight text-arc-600 sm:text-5xl">
+                  {s.value}
+                </p>
+                <p className="mt-2 font-medium text-ink-900">{s.label}</p>
+                <p className="mt-1 text-sm text-ink-500">{s.sub}</p>
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Timeline — present at top, past at bottom */}
       <section className="bg-white pb-24 sm:pb-32">
         <div className="container-arc">
           <div className="relative">
             {/* vertical line */}
             <div
-              className="absolute left-[7px] top-2 bottom-2 w-px bg-arc-200 sm:left-[calc(8rem+7px)]"
+              className="absolute left-[7px] top-0 bottom-8 w-px bg-gradient-to-b from-arc-500 to-arc-100 sm:left-[calc(9rem+7px)]"
               aria-hidden
             />
-            <Stagger className="space-y-12" step={0.1}>
-              {ROADMAP.map((month) => (
-                <StaggerItem key={month.month}>
+
+            {/* "Now" marker */}
+            <div className="relative mb-12 flex flex-col gap-4 sm:flex-row sm:gap-8">
+              <div className="sm:w-36 sm:pr-6 sm:text-right">
+                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+                  Now
+                </span>
+              </div>
+              <span
+                className="absolute left-0 top-1 grid h-4 w-4 place-items-center rounded-full bg-arc-600 sm:left-36"
+                aria-hidden
+              >
+                <span className="absolute h-4 w-4 animate-ping rounded-full bg-arc-500/60" />
+              </span>
+              <p className="ml-8 text-ink-500 sm:ml-10">
+                ... building responsible AI
+              </p>
+            </div>
+
+            <Stagger className="space-y-14" step={0.1}>
+              {MILESTONES.map((group) => (
+                <StaggerItem key={group.period}>
                   <div className="relative flex flex-col gap-4 sm:flex-row sm:gap-8">
-                    <div className="flex items-center gap-4 sm:w-32 sm:flex-col sm:items-end sm:gap-0">
-                      <span className="order-2 text-base font-bold text-arc-700 sm:order-1">
-                        {month.month}
+                    <div className="sm:w-36 sm:shrink-0 sm:pr-6 sm:text-right">
+                      <span className="text-base font-bold text-arc-700">
+                        {group.period}
                       </span>
                     </div>
                     {/* dot */}
                     <span
-                      className="absolute left-0 top-1.5 grid h-4 w-4 place-items-center rounded-full border-2 border-arc-600 bg-white sm:left-32"
+                      className="absolute left-0 top-1.5 grid h-4 w-4 place-items-center rounded-full border-2 border-arc-600 bg-white sm:left-36"
                       aria-hidden
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-arc-600" />
                     </span>
-                    <ul className="ml-8 flex-1 space-y-3 sm:ml-10">
-                      {month.items.map((item, idx) => (
+
+                    <ul className="ml-8 flex-1 space-y-4 sm:ml-10">
+                      {group.items.map((item, idx) => (
                         <li
                           key={idx}
-                          className="flex flex-wrap items-center gap-3 rounded-2xl border border-black/5 bg-arc-50/40 px-5 py-3.5"
+                          className="rounded-2xl border border-black/5 bg-arc-50/40 p-5 transition-all hover:shadow-md"
                         >
-                          <span
-                            className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                              TRACK_STYLES[item.track] ?? 'bg-slate-100 text-slate-700'
-                            }`}
-                          >
-                            {item.track}
-                          </span>
-                          <span className="text-ink-800">{item.text}</span>
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span
+                              className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                                TRACK_STYLES[item.track] ?? 'bg-slate-100 text-slate-700'
+                              }`}
+                            >
+                              {item.track}
+                            </span>
+                            <span className="font-semibold text-ink-900">{item.title}</span>
+                          </div>
+
+                          {item.text && (
+                            <p className="mt-2 leading-relaxed text-ink-700">{item.text}</p>
+                          )}
+
+                          {(item.authors || item.href) && (
+                            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                              {item.authors && (
+                                <span className="italic text-ink-500">{item.authors}</span>
+                              )}
+                              {item.href && (
+                                <a
+                                  href={item.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex items-center gap-1.5 font-semibold text-arc-700 transition-colors hover:text-arc-800"
+                                >
+                                  Read the paper
+                                  <span aria-hidden>→</span>
+                                </a>
+                              )}
+                            </div>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -78,6 +189,19 @@ export default function Roadmap() {
                 </StaggerItem>
               ))}
             </Stagger>
+
+            {/* origin marker */}
+            <div className="relative mt-14 flex flex-col gap-4 sm:flex-row sm:gap-8">
+              <div className="sm:w-36 sm:pr-6 sm:text-right">
+                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-400">
+                  Where it began
+                </span>
+              </div>
+              <span
+                className="absolute left-0 top-1 h-4 w-4 rounded-full border-2 border-arc-200 bg-white sm:left-36"
+                aria-hidden
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -90,9 +214,7 @@ export default function Roadmap() {
           </span>
           {['Research', 'Application', 'Policy', 'Funding'].map((track) => (
             <span key={track} className="flex items-center gap-2 text-sm text-ink-700">
-              <span
-                className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`}
-              />
+              <span className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`} />
               {track}
             </span>
           ))}

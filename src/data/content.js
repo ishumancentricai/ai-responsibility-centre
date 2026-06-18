@@ -6,7 +6,7 @@ export const NAV = [
   { to: '/about', label: 'About' },
   { to: '/research', label: 'Research' },
   { to: '/policy', label: 'Policy Advisory' },
-  { to: '/roadmap', label: 'Roadmap' },
+  { to: '/roadmap', label: 'Events & Milestones' },
   { to: '/team', label: 'Team' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -16,15 +16,15 @@ export const VISION = {
     'Productive AI systems that put people at the centre — and stay committed to the common good.',
   qualities: ['safe', 'transparent', 'fair', 'sovereign', 'accountable'],
   ambition:
-    'ARC will become a leading centre for Responsible AI in Germany and Europe: the point of contact for research, policy and practice when the question is no longer only what AI can do — but how we shape it, for whom, and to what end.',
+    'ARC is a centre for Responsible AI: the point of contact for research, policy and practice when the question is no longer only what AI can do — but how we shape it, for whom, and to what end.',
 }
 
 export const MISSION = {
-  headline: 'We don’t just call for responsible AI — we build it.',
+  headline: 'We don’t just call for responsible AI — we engage.',
   body:
-    'As computer scientists, engineers, lawyers and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
+    'As computer scientists, engineers, legal professionals and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
   linuxMoment:
-    'The Linux moment of AI: we help shape the common-good path against dependence on a few providers — towards sovereignty for industry and society through open standards.',
+    'The Linux moment of AI? We help shape the common-good path against dependence on a few providers — towards sovereignty for industry and society through open standards.',
 }
 
 export const PILLARS = [
@@ -78,84 +78,105 @@ export const GAPS = [
   },
 ]
 
-export const STATS = [
-  { value: '75+', label: 'Publications in three years', sub: 'Top international outlets in IS, CS & HCI' },
-  { value: '€3.4M+', label: 'Third-party funding', sub: 'incl. €2.3M from industry projects' },
-  { value: '8', label: 'Doctoral researchers', sub: 'Interdisciplinary team' },
-  { value: 'Art. 14', label: 'EU AI Act mandate', sub: 'EU Commission, human oversight (2026)' },
+// Number of doctoral researchers in the ARC team (used for dynamic stats).
+export const DOCTORAL_RESEARCHERS = 6
+
+// Upcoming events where ARC participates — chronological (soonest first).
+export const EVENTS = [
+  {
+    date: 'Jul 2026',
+    title: 'ICML 2026',
+    location: 'Seoul, South Korea',
+    type: 'Conference',
+    blurb: 'Presenting “Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting”.',
+    href: 'https://icml.cc/',
+  },
+  {
+    date: 'Sep 2026',
+    title: 'AI Day UBT',
+    location: 'University of Bayreuth',
+    type: 'Campus event',
+    blurb: 'Campus-wide theme day on AI with keynotes and live demos.',
+    href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
+  },
 ]
 
-export const RESEARCH_PROJECTS = [
+// Reverse-chronological track record: the most recent achievement is first,
+// so the page reads from the present (top) back in time (scrolling down).
+export const MILESTONES = [
   {
-    name: 'FairLEA',
-    focus: 'Fair AI in law enforcement',
-    body: 'Interdisciplinary research on fairness in AI systems used for law enforcement.',
-  },
-  {
-    name: 'FoGG',
-    focus: 'Deepfakes in investigations',
-    body: 'Examining the role and detection of deepfakes in criminal investigations.',
-  },
-  {
-    name: 'RAIS²',
-    focus: 'Responsible AI in science & society',
-    body: 'Responsible AI across science and society, in cooperation with LMU and the Wharton School.',
-  },
-]
-
-export const ROADMAP = [
-  {
-    month: 'Jul 2026',
+    period: 'July 2026',
     items: [
-      { track: 'Research', text: 'ICML — presentation' },
-      { track: 'Application', text: 'Kick-off ARC — public launch' },
-      { track: 'Policy', text: 'Guidelines on Human Oversight (EU AI Act)' },
+      {
+        track: 'Research',
+        title: 'Accepted at ICML ’26 — Seoul',
+        text: '“Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting” — showing that a model’s internal representations improve human-preference predictions over surface-level outputs.',
+        authors: 'Ball, S., Allmendinger, S., Kühl, N., & Kreuter, F.',
+        paper: 'Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting',
+        venue: 'International Conference on Machine Learning (ICML), Seoul',
+        year: 2026,
+        href: 'https://arxiv.org/abs/2602.02882',
+      },
+      {
+        track: 'Policy',
+        title: 'EU Commission mandate — EU AI Act, Article 14',
+        text: 'Appointed to help shape the guidelines for human oversight under Article 14 of the EU AI Act — turning principle into testable practice.',
+      },
     ],
   },
   {
-    month: 'Aug 2026',
+    period: 'June 2026',
     items: [
-      { track: 'Research', text: 'AAAI — submission' },
-      { track: 'Application', text: 'Workshop “Develop” — methods for responsible-AI tooling' },
-    ],
-  },
-  {
-    month: 'Sep 2026',
-    items: [
-      { track: 'Research', text: 'CHI & ICLR — submission · ECAF — presentation' },
-      { track: 'Funding', text: 'Funding application BMFTR — Transformation in Democracy' },
-    ],
-  },
-  {
-    month: 'Oct 2026',
-    items: [
-      { track: 'Research', text: 'IUI — submission' },
-      { track: 'Application', text: 'AI Day UBT — campus-wide theme day with keynotes & demos' },
-      { track: 'Policy', text: 'Kick-off ARC Roundtable Series with decision-makers' },
-      { track: 'Funding', text: 'Funding application DFG / Weave — research grant' },
-    ],
-  },
-  {
-    month: 'Nov 2026',
-    items: [
-      { track: 'Research', text: 'ECIS — submission' },
-      { track: 'Application', text: 'Workshop “Operationalising Human Oversight”' },
-      { track: 'Funding', text: 'Funding application ZIM / BMWE — R&D cooperation project' },
-    ],
-  },
-  {
-    month: 'Dec 2026',
-    items: [
-      { track: 'Research', text: 'IJCAI, FAccT & ICML — submission' },
+      {
+        track: 'Research',
+        title: 'Accepted at FAccT ’26 — Melbourne',
+        text: '“Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI” — a framework that translates human-subject experiments into multi-agent AI environments to study how norms emerge.',
+        authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
+        paper: 'Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI',
+        venue: 'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Melbourne',
+        year: 2026,
+        href: 'https://arxiv.org/abs/2603.11974',
+      },
+      {
+        track: 'Funding',
+        title: 'Kick-off — AI Responsibiliy Centre (ARC)',
+        text: 'Launch of the ARC at the University of Bayreuth, with a team of 6 doctoral researchers and a focus on building responsible AI in research, policy and practice.',
+      },
     ],
   },
 ]
 
-export const ROADMAP_TARGETS = [
-  { value: '6', label: 'Papers' },
-  { value: '5', label: 'Workshops' },
-  { value: '25', label: 'Policy talks' },
-  { value: '3', label: 'Funding applications' },
+// Headline numbers derived from the timeline + events, so they stay in sync
+// automatically as milestones and events are added or removed. Shared by the
+// Home and Events & Milestones pages so the two always show the same figures.
+const milestoneItems = MILESTONES.flatMap((group) => group.items)
+const countTrack = (track) => milestoneItems.filter((i) => i.track === track).length
+const countEventType = (re) => EVENTS.filter((e) => re.test(e.type)).length
+const isWorkshop = (text = '') => /workshop/i.test(text)
+
+export const HIGHLIGHTS = [
+  {
+    value: countTrack('Research') + countEventType(/conference/i),
+    label: 'Research traction',
+    sub: 'Papers & conference talks',
+  },
+  {
+    value: countTrack('Policy') + countEventType(/policy/i),
+    label: 'Policy involvements',
+    sub: 'Mandates & advisory roles',
+  },
+  {
+    value:
+      countEventType(/workshop/i) +
+      milestoneItems.filter((i) => i.track === 'Workshop' || isWorkshop(i.title)).length,
+    label: 'Workshops',
+    sub: 'Hands-on methods & training',
+  },
+  {
+    value: DOCTORAL_RESEARCHERS,
+    label: 'Doctoral researchers',
+    sub: 'Interdisciplinary team',
+  },
 ]
 
 export const LANDSCAPE = [
@@ -199,18 +220,98 @@ export const PERSON = {
     },
     {
       year: '2026',
-      text: 'Mandate from the EU Commission to help shape Article 14 of the EU AI Act',
+      text: 'Mandate from the EU Commission to help shape guidelines for the Article 14 of the EU AI Act',
     },
   ],
-  collaborators: ['MIT-IBM Watson AI Lab', 'Stanford', 'CMU', 'Wharton School', 'LMU', 'University of Auckland', 'UT Austin'],
+  collaborators: ['Fraunhofer FIT', 'LMU Munich', '...'],
 }
 
+// Further principal members of the ARC interdisciplinary faculty.
+export const TEAM = [
+  {
+    name: 'Prof. Dr. Lena Kästner',
+    initials: 'LK',
+    role: 'Professor of Philosophy, Computer Science and Artificial Intelligence',
+    affiliation:
+      'Faculty of Humanities and Social Sciences, University of Bayreuth',
+    focus: [
+      'Philosophy of AI',
+      'Explainable AI (XAI)',
+      'Philosophy of mind & cognitive science',
+      'Scientific explanation',
+    ],
+    bio: 'Lena Kästner works at the intersection of philosophy and AI, with a focus on explainability and the foundations of natural and artificial cognition. She leads the “Explainable Intelligent Systems” project and brings the conceptual and ethical lens to responsible AI at ARC.',
+    href: 'https://www.phil.uni-bayreuth.de/en/people/kaestner/index.php',
+  },
+  {
+    name: 'Prof. Dr. Christian Rückert',
+    initials: 'CR',
+    role: 'Professor of Criminal Law, Criminal Procedure Law and IT Criminal Law',
+    affiliation: 'Faculty of Law and Economics, University of Bayreuth',
+    focus: [
+      'IT criminal law',
+      'Digital evidence',
+      'Cybercrime & forensic informatics',
+      'European criminal law',
+    ],
+    bio: 'Christian Rückert holds the Chair for Criminal Law, Criminal Procedure Law and IT Criminal Law. His work on digital data as evidence, cybercrime and forensic informatics anchors ARC’s legal expertise — directly relevant to projects on AI in law enforcement and deepfakes in investigations.',
+    href: 'https://www.strafrecht2.uni-bayreuth.de/de/team/Prof_-Dr_-Christian-Rueckert/index.php',
+  },
+]
+
 export const CONTACT = {
-  institution: 'University of Bayreuth · Fraunhofer FIT',
+  institution: 'University of Bayreuth',
   chair:
     'Chair of Information Systems and Human-centric Artificial Intelligence',
   links: [
-    { label: 'wi.uni-bayreuth.de', href: 'https://www.wi.uni-bayreuth.de' },
-    { label: 'wi.fit.fraunhofer.de', href: 'https://www.wi.fit.fraunhofer.de' },
+    { label: 'wi.uni-bayreuth.de', href: 'https://www.wi.uni-bayreuth.de/en/team/niklas_kuehl/index.php' },
+    { label: 'wi.fit.fraunhofer.de', href: 'https://www.fit.fraunhofer.de/en.html' },
   ],
+}
+
+// ---------------------------------------------------------------------------
+// Legal data for the Impressum (§ 5 DDG, § 18 MStV) and Datenschutzerklärung
+// (DSGVO / BayDSG). Values wrapped in ⟨…⟩ are placeholders — please confirm or
+// replace them before the site goes live. The rest are public, stable facts.
+// ---------------------------------------------------------------------------
+export const LEGAL = {
+  // Diensteanbieter / Verantwortlicher
+  provider: {
+    name: 'Universität Bayreuth',
+    legalForm: 'Körperschaft des öffentlichen Rechts',
+    address: ['Universitätsstraße 30', '95447 Bayreuth', 'Deutschland'],
+    representedBy: 'den Präsidenten der Universität Bayreuth, ⟨Name des Präsidenten⟩',
+    phone: '⟨Telefonnummer ergänzen⟩',
+    email: 'kuehl@uni-bayreuth.de',
+    vatId: '⟨USt-IdNr. ergänzen, sofern vorhanden⟩',
+    supervisoryAuthority:
+      'Bayerisches Staatsministerium für Wissenschaft und Kunst, Salvatorstraße 2, 80333 München',
+  },
+  // Inhaltlich verantwortlich nach § 18 Abs. 2 MStV
+  contentResponsible: {
+    name: 'Prof. Dr. Niklas Kühl',
+    unit: 'Lehrstuhl für Wirtschaftsinformatik und humanzentrische Künstliche Intelligenz',
+    address: ['Universität Bayreuth', 'Universitätsstraße 30', '95447 Bayreuth'],
+    email: 'kuehl@uni-bayreuth.de',
+  },
+  // Behördliche/r Datenschutzbeauftragte/r
+  dpo: {
+    name: 'Behördliche/r Datenschutzbeauftragte/r der Universität Bayreuth',
+    address: ['Universität Bayreuth', 'Universitätsstraße 30', '95447 Bayreuth'],
+    email: '⟨datenschutz@uni-bayreuth.de bestätigen⟩',
+  },
+  // Aufsichtsbehörde für den Datenschutz
+  dpa: {
+    name: 'Der Bayerische Landesbeauftragte für den Datenschutz (BayLfD)',
+    address: ['Wagmüllerstraße 18', '80538 München', 'Deutschland'],
+    web: 'https://www.datenschutz-bayern.de',
+  },
+  // Hosting-Dienstleister
+  hosting: {
+    provider: 'GitHub, Inc.',
+    address: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA',
+    service: 'GitHub Pages',
+    privacyUrl: 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
+  },
+  lastUpdated: 'Juni 2026',
 }

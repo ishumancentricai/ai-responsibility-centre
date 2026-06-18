@@ -13,7 +13,7 @@ export default function ArcMark({ className = '', stroke = 'currentColor', strok
         strokeLinecap="round"
       />
       <path
-        d="M28 48 V36 a4 4 0 0 1 8 0 V48"
+        d="M28 48 V36 a4 5 0 0 1 8 0 V48"
         fill="none"
         stroke={stroke}
         strokeWidth={strokeWidth}

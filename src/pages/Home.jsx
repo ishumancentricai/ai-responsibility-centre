@@ -14,7 +14,7 @@ import {
   MISSION,
   PILLARS,
   GAPS,
-  STATS,
+  HIGHLIGHTS,
   STRATEGY_PRINCIPLES,
 } from '../data/content'
 
@@ -92,7 +92,7 @@ function Hero() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-arc-200 backdrop-blur"
           >
-            University of Bayreuth · Fraunhofer FIT
+            University of Bayreuth
           </motion.p>
 
           <motion.h1
@@ -234,18 +234,19 @@ function Gaps() {
 /* ------------------------------------------------------------------ */
 function Stats() {
   return (
-    <section className="bg-arc-950 py-20 text-white sm:py-28">
+    <section className="bg-white py-16 sm:py-20">
       <div className="container-arc">
-        <Stagger className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4" step={0.1}>
-          {STATS.map((s) => (
+        <Stagger
+          className="grid grid-cols-2 gap-8 border-y border-black/5 py-16 lg:grid-cols-4"
+          step={0.1}
+        >
+          {HIGHLIGHTS.map((s) => (
             <StaggerItem key={s.label}>
-              <div>
-                <p className="text-4xl font-bold tracking-tight text-arc-300 sm:text-5xl">
-                  {s.value}
-                </p>
-                <p className="mt-3 font-medium">{s.label}</p>
-                <p className="mt-1 text-sm text-white/55">{s.sub}</p>
-              </div>
+              <p className="text-4xl font-bold tracking-tight text-arc-600 sm:text-5xl">
+                {s.value}
+              </p>
+              <p className="mt-2 font-medium text-ink-900">{s.label}</p>
+              <p className="mt-1 text-sm text-ink-500">{s.sub}</p>
             </StaggerItem>
           ))}
         </Stagger>

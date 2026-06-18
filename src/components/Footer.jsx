@@ -65,7 +65,17 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-arc flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
           <p>© {new Date().getFullYear()} AI Responsibility Centre (ARC). All rights reserved.</p>
-          <p>University of Bayreuth · Fraunhofer FIT</p>
+          <div className="flex items-center gap-5">
+            <Link to="/impressum" className="transition-colors hover:text-arc-300">
+              Impressum
+            </Link>
+            <Link to="/datenschutz" className="transition-colors hover:text-arc-300">
+              Datenschutz
+            </Link>
+            <Link to="https://www.uni-bayreuth.de/en" className="transition-colors hover:text-arc-300">
+              University of Bayreuth
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

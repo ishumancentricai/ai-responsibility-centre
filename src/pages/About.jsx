@@ -98,53 +98,6 @@ export default function About() {
           </Stagger>
         </div>
       </section>
-
-      {/* Landscape — connecting bracket across levels */}
-      <section className="border-t border-black/5 bg-arc-950 py-20 text-white sm:py-28">
-        <div className="container-arc">
-          <Reveal>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-300">
-              Where ARC fits
-            </h2>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p className="mt-4 max-w-3xl text-balance text-2xl font-semibold leading-snug sm:text-3xl">
-              ARC doesn’t duplicate structures — it closes the implementation gap.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-4 max-w-3xl leading-relaxed text-white/70">
-              While the EU regulates, the federal government funds and Bavaria
-              connects, ARC provides the connecting bracket across all levels —
-              through interdisciplinary research and open standards for active
-              building and practical application on the ground.
-            </p>
-          </Reveal>
-
-          <Stagger className="mt-12 grid gap-6 md:grid-cols-3" step={0.12}>
-            {LANDSCAPE.map((row) => (
-              <StaggerItem key={row.level}>
-                <div className="h-full rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
-                  <p className="text-lg font-semibold text-white">{row.level}</p>
-                  <p className="text-sm font-medium uppercase tracking-wider text-arc-300">
-                    {row.role}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {row.nodes.map((n) => (
-                      <span
-                        key={n}
-                        className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80"
-                      >
-                        {n}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
     </>
   )
 }
