@@ -129,11 +129,11 @@ export const MILESTONES = [
     items: [
       {
         track: 'Research',
-        title: 'Accepted at FAccT ’26 — Melbourne',
+        title: 'Accepted at FAccT ’26 — Montreal',
         text: '“Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI” — a framework that translates human-subject experiments into multi-agent AI environments to study how norms emerge.',
         authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
         paper: 'Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI',
-        venue: 'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Melbourne',
+        venue: 'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Montreal',
         year: 2026,
         href: 'https://arxiv.org/abs/2603.11974',
       },
