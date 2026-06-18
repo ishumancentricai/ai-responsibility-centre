@@ -31,20 +31,11 @@ jobs:
         run: npm ci
 
       - name: Build
-        # BASE_PATH = "/<repo-name>/" so assets resolve on the project page.
-        # When you attach a custom domain, set CUSTOM_DOMAIN below (or a repo
-        # variable) and the base becomes "/".
         run: npm run build
-        env:
-          BASE_PATH: ${{ vars.CUSTOM_DOMAIN && '/' || format('/{0}/', github.event.repository.name) }}
 
       - name: Add SPA 404 fallback
         # HashRouter doesn't strictly need this, but it keeps deep links safe.
         run: cp dist/index.html dist/404.html
-
-      - name: Add CNAME (only if a custom domain is configured)
-        if: vars.CUSTOM_DOMAIN != ''
-        run: echo "${{ vars.CUSTOM_DOMAIN }}" > dist/CNAME
 
       - uses: actions/upload-pages-artifact@v3
         with:

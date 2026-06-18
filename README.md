@@ -1,80 +1,53 @@
-# AI Responsibility Centre (ARC) — Landing Page
+# AI Responsibility Centre (ARC) — Website
 
-A modern, responsive, academic landing site for the **AI Responsibility Centre
-(ARC)** at the University of Bayreuth & Fraunhofer FIT.
+Public website for the **AI Responsibility Centre (ARC)**, University of Bayreuth.
+Built with React, Vite and Tailwind CSS. Live at **https://ai-responsibility-centre.eu**.
 
-Built with **React + Vite + Tailwind CSS v4** and **Framer Motion** for
-Apple-style scroll-driven animations (elements that fade, rotate, scale and
-reveal as you scroll).
-
-## Pages
-
-`Home` (interactive scroll story) · `About` (Vision / Mission / Strategy) ·
-`Research` · `Policy Advisory` · `Roadmap` · `Team` · `Contact`
-
-All copy lives in one place: [`src/data/content.js`](src/data/content.js) — edit
-there to update the site without touching components.
-
-## Local development
+## Quick start
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
-npm run build      # production build into dist/
-npm run preview    # preview the production build
+npm run dev       # local dev server
+npm run build     # production build → dist/
 ```
 
 Requires Node 20+ (Node 22 recommended).
 
-## Deployment (GitHub Pages — default domain)
+## Editing content
 
-This repo ships with a workflow at
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) that builds and
-publishes to GitHub Pages on every push to `main`.
+All text lives in [`src/data/content.js`](src/data/content.js) — edit there to
+update the site. Legal details (Impressum / Datenschutz) are in the `LEGAL`
+block of that file; values wrapped in `⟨…⟩` are placeholders to fill before
+relying on the legal pages.
 
-**One-time setup:**
+## Deployment
 
-1. Push this repo to GitHub (remote already set to
-   `ishumancentricai/ai-responsibility-centre`).
-2. In the repo: **Settings → Pages → Build and deployment → Source → GitHub
-   Actions**.
-3. Push to `main`. The site goes live at:
+Pushing to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml),
+which builds the site and publishes it to GitHub Pages.
 
-   ```
-   https://ishumancentricai.github.io/ai-responsibility-centre/
-   ```
+One-time GitHub setup:
 
-The workflow automatically sets Vite's `base` to `/<repo-name>/` so all assets
-resolve correctly on the project page. Routing uses `HashRouter`, so deep links
-work on any static host with no extra server config.
+- The repo must be **public** (GitHub Pages on the free plan).
+- **Settings → Pages → Source → GitHub Actions**.
 
-## Custom domain (later)
+## Custom domain (ai-responsibility-centre.eu)
 
-When you buy a domain:
+The domain is pinned in the repo via [`public/CNAME`](public/CNAME), so each
+deploy keeps it. To make it resolve, set these DNS records at the registrar
+(IONOS) for the apex domain — and remove any domain *forwarding/redirect*:
 
-1. Add a **repository variable** `CUSTOM_DOMAIN` (Settings → Secrets and
-   variables → Actions → Variables) set to e.g. `arc.example.org`.
-2. Point the domain's DNS at GitHub Pages (a `CNAME` record to
-   `ishumancentricai.github.io`, or `A`/`AAAA` records to GitHub's IPs).
-3. Re-run the workflow. It will:
-   - build with `base = "/"` (clean asset paths at the domain root), and
-   - write a `CNAME` file into the deploy so Pages serves your domain.
+```
+A     @   185.199.108.153
+A     @   185.199.109.153
+A     @   185.199.110.153
+A     @   185.199.111.153
+AAAA  @   2606:50c0:8000::153
+AAAA  @   2606:50c0:8001::153
+AAAA  @   2606:50c0:8002::153
+AAAA  @   2606:50c0:8003::153
+CNAME www ishumancentricai.github.io
+```
 
-No code changes needed — just the variable + DNS.
-
-## Tech stack
-
-| Concern        | Choice                          |
-| -------------- | ------------------------------- |
-| Framework      | React 18                        |
-| Build tool     | Vite 6                          |
-| Styling        | Tailwind CSS v4 (CSS-first)     |
-| Animations     | Framer Motion                   |
-| Routing        | React Router (HashRouter)       |
-| Hosting        | GitHub Pages via Actions        |
-
-## Customising the look
-
-Brand colours and fonts are defined as design tokens in
-[`src/index.css`](src/index.css) under `@theme` (the `arc-*` green scale and
-`ink-*` neutrals). Adjust them in one place to re-skin the whole site.
+Then in **Settings → Pages**: confirm the custom domain check passes and enable
+**Enforce HTTPS** (GitHub issues the certificate automatically once DNS
+resolves).

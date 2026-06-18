@@ -281,7 +281,7 @@ export const LEGAL = {
     legalForm: 'Körperschaft des öffentlichen Rechts',
     address: ['Universitätsstraße 30', '95447 Bayreuth', 'Deutschland'],
     representedBy: 'den Präsidenten der Universität Bayreuth, ⟨Name des Präsidenten⟩',
-    phone: '⟨Telefonnummer ergänzen⟩',
+    phone: '+49 921 55 4756',
     email: 'kuehl@uni-bayreuth.de',
     vatId: '⟨USt-IdNr. ergänzen, sofern vorhanden⟩',
     supervisoryAuthority:
