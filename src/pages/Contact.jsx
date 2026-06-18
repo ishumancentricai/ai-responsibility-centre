@@ -81,9 +81,8 @@ export default function Contact() {
                   Send message
                 </button>
                 <p className="text-xs text-ink-500">
-                  Note: this form opens your email client. Replace the recipient
-                  address in <code className="rounded bg-black/5 px-1">Contact.jsx</code> or
-                  wire it to a form backend before launch.
+                  This opens your email app so you can review and send the
+                  message yourself.
                 </p>
               </div>
             </form>

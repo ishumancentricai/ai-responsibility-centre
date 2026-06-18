@@ -1,11 +1,6 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
-import {
-  VISION,
-  MISSION,
-  STRATEGY_PRINCIPLES,
-  LANDSCAPE,
-} from '../data/content'
+import { VISION, MISSION, STRATEGY_PRINCIPLES } from '../data/content'
 
 export default function About() {
   return (

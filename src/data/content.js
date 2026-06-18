@@ -139,7 +139,7 @@ export const MILESTONES = [
       },
       {
         track: 'Funding',
-        title: 'Kick-off — AI Responsibiliy Centre (ARC)',
+        title: 'Kick-off — AI Responsibility Centre (ARC)',
         text: 'Launch of the ARC at the University of Bayreuth, with a team of 6 doctoral researchers and a focus on building responsible AI in research, policy and practice.',
       },
     ],
@@ -179,29 +179,14 @@ export const HIGHLIGHTS = [
   },
 ]
 
-export const LANDSCAPE = [
-  {
-    level: 'EU',
-    role: 'Regulation',
-    nodes: ['EU AI Act', 'GPAI', 'AI regulation study'],
-  },
-  {
-    level: 'Federal (Bund)',
-    role: 'Funding',
-    nodes: ['HTAD', 'KI4KMU', 'KI-MIG', 'KoKIVO'],
-  },
-  {
-    level: 'Bavaria',
-    role: 'Sovereignty',
-    nodes: ['BayernKI', 'baiosphere', 'MCML', 'Bavarian AI Council', 'Bavarian AI Agency', 'KI Transfer Plus', 'AI-BAY'],
-  },
-]
-
 export const PERSON = {
   name: 'Prof. Dr. Niklas Kühl',
   role: 'W3 Professor of Information Systems and Human-centric Artificial Intelligence',
   affiliation:
     'Faculty of Law, Business and Economics, University of Bayreuth · Fraunhofer FIT (Business Analytics)',
+  // Optional photo: put the file in public/team/ and set e.g. '/team/niklas-kuehl.jpg'.
+  // Leave empty to show the initials tile instead.
+  image: '',
   timeline: [
     { year: '2017', text: 'Dr.-Ing. in Information Systems (summa cum laude)' },
     {
@@ -231,6 +216,7 @@ export const TEAM = [
   {
     name: 'Prof. Dr. Lena Kästner',
     initials: 'LK',
+    image: '', // e.g. '/team/lena-kaestner.jpg' (file in public/team/)
     role: 'Professor of Philosophy, Computer Science and Artificial Intelligence',
     affiliation:
       'Faculty of Humanities and Social Sciences, University of Bayreuth',
@@ -246,6 +232,7 @@ export const TEAM = [
   {
     name: 'Prof. Dr. Christian Rückert',
     initials: 'CR',
+    image: '', // e.g. '/team/christian-rueckert.jpg' (file in public/team/)
     role: 'Professor of Criminal Law, Criminal Procedure Law and IT Criminal Law',
     affiliation: 'Faculty of Law and Economics, University of Bayreuth',
     focus: [
@@ -283,7 +270,7 @@ export const LEGAL = {
     representedBy: 'den Präsidenten der Universität Bayreuth, ⟨Name des Präsidenten⟩',
     phone: '+49 921 55 4756',
     email: 'kuehl@uni-bayreuth.de',
-    vatId: '⟨USt-IdNr. ergänzen, sofern vorhanden⟩',
+    vatId: 'DE 811 264 317',
     supervisoryAuthority:
       'Bayerisches Staatsministerium für Wissenschaft und Kunst, Salvatorstraße 2, 80333 München',
   },
@@ -298,7 +285,7 @@ export const LEGAL = {
   dpo: {
     name: 'Behördliche/r Datenschutzbeauftragte/r der Universität Bayreuth',
     address: ['Universität Bayreuth', 'Universitätsstraße 30', '95447 Bayreuth'],
-    email: '⟨datenschutz@uni-bayreuth.de bestätigen⟩',
+    email: 'datenschutz@uni-bayreuth.de',
   },
   // Aufsichtsbehörde für den Datenschutz
   dpa: {

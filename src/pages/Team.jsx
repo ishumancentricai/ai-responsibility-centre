@@ -16,9 +16,12 @@ export default function Team() {
         <div className="container-arc grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div className="rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-8">
-              <div className="flex h-48 w-48 items-center justify-center rounded-2xl bg-arc-600 text-6xl font-bold text-white">
-                NK
-              </div>
+              <Avatar
+                image={PERSON.image}
+                initials="NK"
+                name={PERSON.name}
+                className="h-48 w-48 rounded-2xl text-6xl"
+              />
               <h2 className="mt-6 text-2xl font-bold tracking-tight text-ink-900">
                 {PERSON.name}
               </h2>
@@ -70,9 +73,12 @@ export default function Team() {
               <StaggerItem key={member.name}>
                 <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-8">
                   <div className="flex items-center gap-5">
-                    <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-arc-600 text-2xl font-bold text-white">
-                      {member.initials}
-                    </div>
+                    <Avatar
+                      image={member.image}
+                      initials={member.initials}
+                      name={member.name}
+                      className="h-20 w-20 shrink-0 rounded-2xl text-2xl"
+                    />
                     <div>
                       <h3 className="text-xl font-bold tracking-tight text-ink-900">
                         {member.name}
@@ -138,5 +144,27 @@ export default function Team() {
         </div>
       </section>
     </>
+  )
+}
+
+// Shows a photo when `image` is set (path under /public, e.g.
+// "/team/niklas-kuehl.jpg"); otherwise falls back to the initials tile.
+function Avatar({ image, initials, name, className }) {
+  if (image) {
+    return (
+      <img
+        src={image}
+        alt={name}
+        loading="lazy"
+        className={`${className} object-cover`}
+      />
+    )
+  }
+  return (
+    <div
+      className={`${className} flex shrink-0 items-center justify-center bg-arc-600 font-bold text-white`}
+    >
+      {initials}
+    </div>
   )
 }
