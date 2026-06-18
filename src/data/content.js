@@ -181,12 +181,12 @@ export const HIGHLIGHTS = [
 
 export const PERSON = {
   name: 'Prof. Dr. Niklas Kühl',
-  role: 'W3 Professor of Information Systems and Human-centric Artificial Intelligence',
+  role: 'Professor of Information Systems and Human-centric Artificial Intelligence',
   affiliation:
     'Faculty of Law, Business and Economics, University of Bayreuth · Fraunhofer FIT (Business Analytics)',
   // Optional photo: put the file in public/team/ and set e.g. '/team/niklas-kuehl.jpg'.
   // Leave empty to show the initials tile instead.
-  image: '',
+  image: '/team/niklas-kuehl.jpeg',
   timeline: [
     { year: '2017', text: 'Dr.-Ing. in Information Systems (summa cum laude)' },
     {
@@ -211,12 +211,12 @@ export const PERSON = {
   collaborators: ['Fraunhofer FIT', 'LMU Munich', '...'],
 }
 
-// Further principal members of the ARC interdisciplinary faculty.
+// Further principal members of the ARC interdisciplinary team.
 export const TEAM = [
   {
     name: 'Prof. Dr. Lena Kästner',
     initials: 'LK',
-    image: '', // e.g. '/team/lena-kaestner.jpg' (file in public/team/)
+    image: '/team/lena-kaestner.png',
     role: 'Professor of Philosophy, Computer Science and Artificial Intelligence',
     affiliation:
       'Faculty of Humanities and Social Sciences, University of Bayreuth',
@@ -232,7 +232,7 @@ export const TEAM = [
   {
     name: 'Prof. Dr. Christian Rückert',
     initials: 'CR',
-    image: '', // e.g. '/team/christian-rueckert.jpg' (file in public/team/)
+    image: '/team/christian-rueckert.jpg',
     role: 'Professor of Criminal Law, Criminal Procedure Law and IT Criminal Law',
     affiliation: 'Faculty of Law and Economics, University of Bayreuth',
     focus: [
