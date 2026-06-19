@@ -121,8 +121,8 @@ export const MILESTONES = [
       },
       {
         track: 'Policy',
-        title: 'EU Commission mandate — EU AI Act, Article 14',
-        text: 'Appointed to help shape the guidelines for human oversight under Article 14 of the EU AI Act — turning principle into testable practice.',
+        title: 'AI Governance Advisory — Regulatory Oversight Frameworks',
+        text: 'Contributing to the development of guidelines for human oversight of AI systems within an emerging EU regulatory framework — turning principle into testable practice.',
       },
     ],
   },
