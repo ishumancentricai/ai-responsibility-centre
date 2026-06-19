@@ -195,22 +195,16 @@ export const PERSON = {
     { year: '2017', text: 'Dr.-Ing. in Information Systems (summa cum laude)' },
     {
       year: '2017–2023',
-      text: 'Head of the Applied AI Lab & habilitation in Applied Computer Science (KIT). Research stays at the MIT-IBM Watson AI Lab, UT Austin, the Wharton School (University of Pennsylvania) and the University of Auckland.',
+      text: 'Head of the Applied AI in Services Lab & Habilitation in Applied Computer Science (KIT). Research stays at the MIT-IBM Watson AI Lab, UT Austin, the Wharton School (University of Pennsylvania) and the University of Auckland.',
     },
     { year: '2020–2023', text: 'Managing Consultant Data Science, IBM' },
     {
       year: 'since 2023',
-      text: 'W3 Professor at the University of Bayreuth, leading a team of 8 doctoral researchers. Collaboration with CMU, Stanford, the Wharton School and LMU. Publications in leading outlets (e.g. ACM CSUR, EJIS, ICML, CVPR).',
+      text: 'W3 Professor at the University of Bayreuth. Collaboration with CMU, the Wharton School and LMU.',
     },
-    { year: 'since 2023', text: 'Group lead “Business Analytics”, Fraunhofer FIT' },
+    { year: 'since 2023', text: 'Group lead “Business Analytics”, Fraunhofer FIT, Branch Information Systems' },
     {
-      year: '2023',
-      text: 'Committee for Science and the Arts on “Opportunities and risks of AI in academia”',
-    },
-    {
-      year: '2026',
-      text: 'Mandate from the EU Commission to help shape guidelines for the Article 14 of the EU AI Act',
-    },
+    { year: 'since 2023', text: 'Director FIM Research Institute for Information Management' },
   ],
   collaborators: ['Fraunhofer FIT', 'LMU Munich', '...'],
 }
