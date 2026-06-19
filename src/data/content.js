@@ -203,7 +203,6 @@ export const PERSON = {
       text: 'W3 Professor at the University of Bayreuth. Collaboration with CMU, the Wharton School and LMU.',
     },
     { year: 'since 2023', text: 'Group lead “Business Analytics”, Fraunhofer FIT, Branch Information Systems' },
-    {
     { year: 'since 2023', text: 'Director FIM Research Institute for Information Management' },
   ],
   collaborators: ['Fraunhofer FIT', 'LMU Munich', '...'],
