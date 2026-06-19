@@ -17,6 +17,7 @@ import {
   GAPS,
   HIGHLIGHTS,
   STRATEGY_PRINCIPLES,
+  FUNDERS,
 } from '../data/content'
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
       <MissionBand />
       <Strategy />
       <CallToAction />
+      <Funders />
     </>
   )
 }
@@ -427,6 +429,48 @@ function CallToAction() {
             >
               Get in touch
             </Link>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Funders — funding bodies on a plain white band.                     */
+/* ------------------------------------------------------------------ */
+function Funders() {
+  return (
+    <section className="border-t border-black/5 bg-white py-16">
+      <div className="container-arc text-center">
+        <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ink-500">
+            Funded by
+          </p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <div className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
+            {FUNDERS.map((f) => (
+              <a
+                key={f.name}
+                href={f.href}
+                target="_blank"
+                rel="noreferrer"
+                title={f.name}
+                aria-label={f.name}
+                className="group flex max-w-[18rem] flex-col items-center gap-3 text-center"
+              >
+                <img
+                  src={f.logo}
+                  alt={f.name}
+                  loading="lazy"
+                  className="h-12 w-auto object-contain transition-opacity group-hover:opacity-70 sm:h-14"
+                />
+                <span className="text-xs font-medium leading-snug text-ink-600">
+                  {f.name}
+                </span>
+              </a>
+            ))}
           </div>
         </Reveal>
       </div>

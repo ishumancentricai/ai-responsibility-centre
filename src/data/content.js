@@ -81,6 +81,20 @@ export const GAPS = [
 // Number of doctoral researchers in the ARC team (used for dynamic stats).
 export const DOCTORAL_RESEARCHERS = 6
 
+// Funding bodies shown at the foot of the home page.
+export const FUNDERS = [
+  {
+    name: 'Bayerisches Staatsministerium für Wirtschaft, Landesentwicklung und Energie',
+    logo: '/funding/stmwi.svg',
+    href: 'https://www.stmwi.bayern.de/',
+  },
+  {
+    name: 'University of Bayreuth',
+    logo: '/funding/uni-bayreuth.png',
+    href: 'https://www.uni-bayreuth.de/',
+  },
+]
+
 // Upcoming events where ARC participates — chronological (soonest first).
 export const EVENTS = [
   {
@@ -202,8 +216,14 @@ export const PERSON = {
       year: 'since 2023',
       text: 'W3 Professor at the University of Bayreuth. Collaboration with CMU, the Wharton School and LMU.',
     },
-    { year: 'since 2023', text: 'Group lead “Business Analytics”, Fraunhofer FIT, Branch Information Systems' },
-    { year: 'since 2023', text: 'Director FIM Research Institute for Information Management' },
+    {
+      year: 'since 2023',
+      text: 'Group lead “Business Analytics”, Fraunhofer FIT, Branch Information Systems',
+    },
+    {
+      year: 'since 2023',
+      text: 'Director FIM Research Institute for Information Management',
+    },
   ],
   collaborators: ['Fraunhofer FIT', 'LMU Munich', '...'],
 }
@@ -269,6 +289,84 @@ export const PHDS = [
       linkedin: 'https://www.linkedin.com/in/simeon-allmendinger-279b2018b/',
       orcid: 'https://orcid.org/0009-0005-8741-7734',
       researchgate: 'https://www.researchgate.net/profile/Simeon-Allmendinger',
+    },
+  },
+  {
+    name: 'Luca Deck',
+    initials: 'LD',
+    image: '/team/luca-deck.jpeg',
+    research:
+      'Algorithmic fairness, explainable and ethical AI — including the implications of the EU AI Act and deepfakes.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=3hac5y8AAAAJ',
+      linkedin: 'https://de.linkedin.com/in/luca-deck',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Luca-Deck',
+    },
+  },
+  {
+    name: 'Lars Böcking',
+    initials: 'LB',
+    image: '/team/lars-boecking.jpeg',
+    research:
+      'Data-centric AI for multivariate time series with varying temporal and spatial resolution, and privacy-preserving algorithm selection.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=nEoKGgUAAAAJ',
+      linkedin: 'https://www.linkedin.com/in/boecking/',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Lars-Boecking',
+    },
+  },
+  {
+    name: 'Leopold Müller',
+    initials: 'LM',
+    image: '/team/leopold-mueller.jpeg',
+    research:
+      'Human–AI collaboration and language models — including LLM-enhanced prompt engineering and small language models for technical requirements.',
+    links: {
+      scholar: 'https://scholar.google.de/citations?user=qhVY6gwAAAAJ',
+      linkedin: '',
+      orcid: '',
+      researchgate: '',
+    },
+  },
+  {
+    name: 'Victor Kolominsky-Rabas',
+    initials: 'VK',
+    image: '/team/victor-kolominsky-rabas.jpeg',
+    research:
+      'Machine learning, neural networks and computer vision, with a focus on human-centric AI and its real-world application.',
+    links: {
+      scholar: '',
+      linkedin: '',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Victor-Kolominsky-Rabas-2',
+    },
+  },
+  {
+    name: 'Anton Hummel',
+    initials: 'AH',
+    image: '/team/anton-hummel.jpeg',
+    research:
+      'Explainable AI and regulatory compliance — aligning the EU AI Act with clinical decision support and human oversight of black-box models.',
+    links: {
+      scholar: '',
+      linkedin: 'https://de.linkedin.com/in/anton-hummel',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Anton-Hummel',
+    },
+  },
+  {
+    name: 'Jannek Sekowski',
+    initials: 'JS',
+    image: '/team/jannek-sekowski.jpg',
+    research:
+      'Designing and evaluating interactive AI systems and natural-language interfaces for human–AI interaction.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=rf9UGl8AAAAJ',
+      linkedin: 'https://www.linkedin.com/in/jannek-sekowski-59327b251/',
+      orcid: '',
+      researchgate: '',
     },
   },
 ]

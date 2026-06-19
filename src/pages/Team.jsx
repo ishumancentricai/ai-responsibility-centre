@@ -2,6 +2,12 @@ import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import { PERSON, TEAM, PHDS } from '../data/content'
 
+// Doctoral researchers sorted alphabetically by surname (last word of name).
+const surname = (name) => name.trim().split(/\s+/).pop()
+const PHDS_SORTED = [...PHDS].sort((a, b) =>
+  surname(a.name).localeCompare(surname(b.name), 'de'),
+)
+
 export default function Team() {
   return (
     <>
@@ -136,7 +142,7 @@ export default function Team() {
           </Reveal>
 
           <Stagger className="mt-12 grid gap-6 sm:grid-cols-2" step={0.12}>
-            {PHDS.map((phd) => (
+            {PHDS_SORTED.map((phd) => (
               <StaggerItem key={phd.name}>
                 <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl">
                   <div className="flex items-center gap-4">
