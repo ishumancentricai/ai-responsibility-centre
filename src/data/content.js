@@ -84,9 +84,9 @@ export const DOCTORAL_RESEARCHERS = 6
 // Funding bodies shown at the foot of the home page.
 export const FUNDERS = [
   {
-    name: 'Bayerisches Staatsministerium für Wirtschaft, Landesentwicklung und Energie',
-    logo: '/funding/stmwi.svg',
-    href: 'https://www.stmwi.bayern.de/',
+    name: 'Bavarian Ministry of Science, Research and Art',
+    logo: '/funding/stmwk.svg',
+    href: 'https://www.stmwk.bayern.de/',
   },
   {
     name: 'University of Bayreuth',
