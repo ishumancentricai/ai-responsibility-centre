@@ -78,9 +78,6 @@ export const GAPS = [
   },
 ]
 
-// Number of doctoral researchers in the ARC team (used for dynamic stats).
-export const DOCTORAL_RESEARCHERS = 6
-
 // Funding bodies shown at the foot of the home page.
 export const FUNDERS = [
   {
@@ -145,6 +142,17 @@ export const MILESTONES = [
     items: [
       {
         track: 'Research',
+        title: 'Presented at ECIS ’26 — Milan',
+        text: '“Where Are the Humans? A Scoping Review of Fairness in Multi-Agent AI Systems” — finding that fairness in multi-agent AI is often addressed superficially and arguing it should be embedded throughout development.',
+        authors: 'Allmendinger, S., Deck, L., & Müller, L.',
+        paper:
+          'Where Are the Humans? A Scoping Review of Fairness in Multi-Agent AI Systems',
+        venue: 'European Conference on Information Systems (ECIS), Milan',
+        year: 2026,
+        href: 'https://aisel.aisnet.org/ecis2026/litrev/litrev/6/',
+      },
+      {
+        track: 'Research',
         title: 'Accepted at FAccT ’26 — Montreal',
         text: '“Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI” — a framework that translates human-subject experiments into multi-agent AI environments to study how norms emerge.',
         authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
@@ -161,39 +169,6 @@ export const MILESTONES = [
         text: 'Launch of the ARC at the University of Bayreuth, with a team of 6 doctoral researchers and a focus on building responsible AI in research, policy and practice.',
       },
     ],
-  },
-]
-
-// Headline numbers derived from the timeline + events, so they stay in sync
-// automatically as milestones and events are added or removed. Shared by the
-// Home and Events & Milestones pages so the two always show the same figures.
-const milestoneItems = MILESTONES.flatMap((group) => group.items)
-const countTrack = (track) => milestoneItems.filter((i) => i.track === track).length
-const countEventType = (re) => EVENTS.filter((e) => re.test(e.type)).length
-const isWorkshop = (text = '') => /workshop/i.test(text)
-
-export const HIGHLIGHTS = [
-  {
-    value: countTrack('Research') + countEventType(/conference/i),
-    label: 'Research traction',
-    sub: 'Papers & conference talks',
-  },
-  {
-    value: countTrack('Policy') + countEventType(/policy/i),
-    label: 'Policy involvements',
-    sub: 'Mandates & advisory roles',
-  },
-  {
-    value:
-      countEventType(/workshop/i) +
-      milestoneItems.filter((i) => i.track === 'Workshop' || isWorkshop(i.title)).length,
-    label: 'Workshops',
-    sub: 'Hands-on methods & training',
-  },
-  {
-    value: DOCTORAL_RESEARCHERS,
-    label: 'Doctoral researchers',
-    sub: 'Interdisciplinary team',
   },
 ]
 
@@ -268,6 +243,7 @@ export const PHDS = [
   {
     name: 'Domenique Zipperling',
     initials: 'DZ',
+    group: 'cs',
     image: '/team/domenique-zipperling.jpeg',
     research:
       'Machine learning, explainable AI and fairness — including federated learning and fairness in human–AI collaboration.',
@@ -281,6 +257,7 @@ export const PHDS = [
   {
     name: 'Simeon Allmendinger',
     initials: 'SA',
+    group: 'cs',
     image: '/team/simeon-allmendinger.jpeg',
     research:
       'AI-assisted decision-making, multi-agent AI and generative AI — including fairness in multi-agent systems.',
@@ -294,19 +271,21 @@ export const PHDS = [
   {
     name: 'Luca Deck',
     initials: 'LD',
+    group: 'cs',
     image: '/team/luca-deck.jpeg',
     research:
       'Algorithmic fairness, explainable and ethical AI — including the implications of the EU AI Act and deepfakes.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=3hac5y8AAAAJ',
       linkedin: 'https://de.linkedin.com/in/luca-deck',
-      orcid: '',
+      orcid: 'https://orcid.org/0000-0003-3773-2769',
       researchgate: 'https://www.researchgate.net/profile/Luca-Deck',
     },
   },
   {
     name: 'Lars Böcking',
     initials: 'LB',
+    group: 'cs',
     image: '/team/lars-boecking.jpeg',
     research:
       'Data-centric AI for multivariate time series with varying temporal and spatial resolution, and privacy-preserving algorithm selection.',
@@ -320,6 +299,7 @@ export const PHDS = [
   {
     name: 'Leopold Müller',
     initials: 'LM',
+    group: 'cs',
     image: '/team/leopold-mueller.jpeg',
     research:
       'Human–AI collaboration and language models — including LLM-enhanced prompt engineering and small language models for technical requirements.',
@@ -333,6 +313,7 @@ export const PHDS = [
   {
     name: 'Victor Kolominsky-Rabas',
     initials: 'VK',
+    group: 'cs',
     image: '/team/victor-kolominsky-rabas.jpeg',
     research:
       'Machine learning, neural networks and computer vision, with a focus on human-centric AI and its real-world application.',
@@ -346,6 +327,7 @@ export const PHDS = [
   {
     name: 'Anton Hummel',
     initials: 'AH',
+    group: 'cs',
     image: '/team/anton-hummel.jpeg',
     research:
       'Explainable AI and regulatory compliance — aligning the EU AI Act with clinical decision support and human oversight of black-box models.',
@@ -359,6 +341,7 @@ export const PHDS = [
   {
     name: 'Jannek Sekowski',
     initials: 'JS',
+    group: 'cs',
     image: '/team/jannek-sekowski.jpg',
     research:
       'Designing and evaluating interactive AI systems and natural-language interfaces for human–AI interaction.',
@@ -369,6 +352,132 @@ export const PHDS = [
       researchgate: '',
     },
   },
+  {
+    name: 'Valentin Mayer',
+    initials: 'VM',
+    group: 'cs',
+    image: '', // e.g. '/team/valentin-mayer.jpg'
+    research:
+      'Human–AI collaboration and AI transparency — including explanations for AI novices and the EU AI Act.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=741P4pkAAAAJ',
+      linkedin: 'https://www.linkedin.com/in/valentin-mayer-a78127199/',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Valentin-Mayer',
+    },
+  },
+  {
+    name: 'Timo Speith',
+    initials: 'TS',
+    group: 'phil',
+    image: '', // e.g. '/team/timo-speith.jpg'
+    research:
+      'Explainable AI, AI ethics and the philosophy of technology — bridging philosophy and computer science.',
+    links: {
+      scholar: 'https://scholar.google.de/citations?user=l3QOkFEAAAAJ',
+      linkedin: 'https://www.linkedin.com/in/timo-speith/',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Timo-Speith',
+    },
+  },
+  {
+    name: 'Astrid Schomäcker',
+    initials: 'AS',
+    group: 'phil',
+    image: '', // e.g. '/team/astrid-schomaecker.jpg'
+    research:
+      'Philosophy of explainable AI — the relationship between explainability, understanding and algorithmic fairness.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=i023olgAAAAJ',
+      linkedin: '',
+      orcid: '',
+      researchgate:
+        'https://www.researchgate.net/scientific-contributions/Astrid-Schomaecker-2199553856',
+    },
+  },
+  {
+    name: 'Bartosz Radomski',
+    initials: 'BR',
+    group: 'phil',
+    image: '', // e.g. '/team/bartosz-radomski.jpg'
+    research:
+      'Philosophy of cognition and AI — situated cognition, the free-energy principle and theories of adaptivity.',
+    links: {
+      scholar: '',
+      linkedin: '',
+      orcid: '',
+      researchgate: 'https://www.researchgate.net/profile/Bartosz-Radomski-2',
+    },
+  },
+  {
+    name: 'Simon Lobinger',
+    initials: 'SL',
+    group: 'law',
+    image: '', // e.g. '/team/simon-lobinger.jpg'
+    research:
+      'IT and criminal law aspects of AI — digital evidence and the legal foundations of responsible AI.',
+    links: {
+      scholar: '',
+      linkedin: 'https://www.linkedin.com/in/simon-lobinger-87108926b/',
+      orcid: '',
+      researchgate: '',
+    },
+  },
+  {
+    name: 'Timo Grüneke',
+    initials: 'TG',
+    group: 'cs',
+    image: '', // e.g. '/team/timo-grueneke.jpg'
+    research: 'Business & information systems engineering at the FIM Research Center.',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=sQeK4QQAAAAJ',
+      linkedin: 'https://www.linkedin.com/in/timo-grueneke/',
+      orcid: '',
+      researchgate: '',
+    },
+  },
+  {
+    name: 'Jana Elsner',
+    initials: 'JE',
+    group: 'law',
+    image: '', // e.g. '/team/jana-elsner.jpg'
+    research:
+      'Criminal law and criminal procedure — the legal dimensions of AI and digital evidence.',
+    links: {
+      website:
+        'https://www.strafrecht2.uni-bayreuth.de/de/team/Wissenschaftliche-Mitarbeitende/index.html',
+    },
+  },
+  {
+    name: 'Lorenz Meinen',
+    initials: 'LM',
+    group: 'law',
+    image: '', // e.g. '/team/lorenz-meinen.jpg'
+    research:
+      'Deepfakes in criminal prosecution — the “For the Greater Good?” (FoGG, bidt) project on digital evidence.',
+    links: {
+      website:
+        'https://www.strafrecht2.uni-bayreuth.de/de/team/Wissenschaftliche-Mitarbeitende/index.html',
+    },
+  },
+  {
+    name: 'Raimund Weidlich',
+    initials: 'RW',
+    group: 'law',
+    image: '', // e.g. '/team/raimund-weidlich.jpg'
+    research: 'Criminal law, criminal procedure and IT criminal law.',
+    links: {
+      website:
+        'https://www.strafrecht2.uni-bayreuth.de/de/team/Wissenschaftliche-Mitarbeitende/index.html',
+    },
+  },
+]
+
+// Discipline groupings for the doctoral researchers (render order).
+export const PHD_GROUPS = [
+  { id: 'cs', label: 'Computer Science & Information Systems' },
+  { id: 'law', label: 'IT & Criminal Law' },
+  { id: 'phil', label: 'Philosophy of AI' },
 ]
 
 export const CONTACT = {
@@ -440,3 +549,40 @@ export const LEGAL = {
   },
   lastUpdated: 'Juni 2026',
 }
+
+// Number of doctoral researchers — derived from the PHDS list.
+export const DOCTORAL_RESEARCHERS = PHDS.length
+
+// Headline numbers derived from the timeline, events and team, so they stay in
+// sync automatically as entries are added. Each milestone is counted once by
+// its track (no double counting with events). Shared by the Home and
+// Events & Milestones pages so the two always show the same figures.
+const milestoneItems = MILESTONES.flatMap((group) => group.items)
+const countTrack = (track) => milestoneItems.filter((i) => i.track === track).length
+const countEventType = (re) => EVENTS.filter((e) => re.test(e.type)).length
+const isWorkshop = (text = '') => /workshop/i.test(text)
+
+export const HIGHLIGHTS = [
+  {
+    value: countTrack('Research'),
+    label: 'Research traction',
+    sub: 'Peer-reviewed papers',
+  },
+  {
+    value: countTrack('Policy'),
+    label: 'Policy involvements',
+    sub: 'Mandates & advisory roles',
+  },
+  {
+    value:
+      countEventType(/workshop/i) +
+      milestoneItems.filter((i) => i.track === 'Workshop' || isWorkshop(i.title)).length,
+    label: 'Workshops',
+    sub: 'Hands-on methods & training',
+  },
+  {
+    value: DOCTORAL_RESEARCHERS,
+    label: 'Doctoral researchers',
+    sub: 'Interdisciplinary team',
+  },
+]

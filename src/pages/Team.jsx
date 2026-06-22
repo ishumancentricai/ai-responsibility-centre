@@ -1,12 +1,13 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
-import { PERSON, TEAM, PHDS } from '../data/content'
+import { PERSON, TEAM, PHDS, PHD_GROUPS } from '../data/content'
 
-// Doctoral researchers sorted alphabetically by surname (last word of name).
+// Doctoral researchers grouped by discipline, each sorted by surname.
 const surname = (name) => name.trim().split(/\s+/).pop()
-const PHDS_SORTED = [...PHDS].sort((a, b) =>
-  surname(a.name).localeCompare(surname(b.name), 'de'),
-)
+const phdsInGroup = (id) =>
+  PHDS.filter((p) => p.group === id).sort((a, b) =>
+    surname(a.name).localeCompare(surname(b.name), 'de'),
+  )
 
 export default function Team() {
   return (
@@ -127,7 +128,7 @@ export default function Team() {
         </div>
       </section>
 
-      {/* Doctoral researchers */}
+      {/* Doctoral researchers — grouped by discipline */}
       <section className="border-t border-black/5 bg-arc-50/40 py-20 sm:py-24">
         <div className="container-arc">
           <Reveal>
@@ -137,38 +138,50 @@ export default function Team() {
           </Reveal>
           <Reveal delay={0.05}>
             <p className="mt-4 max-w-2xl text-xl font-medium leading-snug text-ink-900">
-              The team turning responsible AI into research and practice.
+              The team turning responsible AI into research and practice — across computer
+              science, law and philosophy.
             </p>
           </Reveal>
 
-          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2" step={0.12}>
-            {PHDS_SORTED.map((phd) => (
-              <StaggerItem key={phd.name}>
-                <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl">
-                  <div className="flex items-center gap-4">
-                    <Avatar
-                      image={phd.image}
-                      initials={phd.initials}
-                      name={phd.name}
-                      className="h-16 w-16 rounded-2xl text-xl"
-                    />
-                    <div>
-                      <h3 className="text-lg font-bold tracking-tight text-ink-900">
-                        {phd.name}
-                      </h3>
-                      <p className="mt-0.5 text-sm font-medium text-arc-700">
-                        Doctoral researcher
-                      </p>
-                    </div>
-                  </div>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-700">
-                    {phd.research}
-                  </p>
-                  <SocialLinks links={phd.links} name={phd.name} />
-                </article>
-              </StaggerItem>
-            ))}
-          </Stagger>
+          {PHD_GROUPS.map((grp) => {
+            const members = phdsInGroup(grp.id)
+            if (members.length === 0) return null
+            return (
+              <div key={grp.id} className="mt-14 first:mt-12">
+                <h3 className="text-lg font-bold tracking-tight text-ink-900">
+                  {grp.label}
+                </h3>
+                <Stagger className="mt-6 grid gap-6 sm:grid-cols-2" step={0.1}>
+                  {members.map((phd) => (
+                    <StaggerItem key={phd.name}>
+                      <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl">
+                        <div className="flex items-center gap-4">
+                          <Avatar
+                            image={phd.image}
+                            initials={phd.initials}
+                            name={phd.name}
+                            className="h-16 w-16 rounded-2xl text-xl"
+                          />
+                          <div>
+                            <h4 className="text-lg font-bold tracking-tight text-ink-900">
+                              {phd.name}
+                            </h4>
+                            <p className="mt-0.5 text-sm font-medium text-arc-700">
+                              Doctoral researcher
+                            </p>
+                          </div>
+                        </div>
+                        <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-700">
+                          {phd.research}
+                        </p>
+                        <SocialLinks links={phd.links} name={phd.name} />
+                      </article>
+                    </StaggerItem>
+                  ))}
+                </Stagger>
+              </div>
+            )
+          })}
         </div>
       </section>
 
@@ -239,6 +252,12 @@ function SocialLinks({ links = {}, name }) {
       href: links.researchgate,
       icon: <ResearchGateIcon />,
     },
+    {
+      key: 'website',
+      label: 'University profile',
+      href: links.website,
+      icon: <GlobeIcon />,
+    },
   ].filter((i) => i.href)
 
   if (items.length === 0) return null
@@ -259,6 +278,22 @@ function SocialLinks({ links = {}, name }) {
         </a>
       ))}
     </div>
+  )
+}
+
+function GlobeIcon() {
+  return (
+    <svg
+      className="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#016a4c"
+      strokeWidth="1.6"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z" />
+    </svg>
   )
 }
 

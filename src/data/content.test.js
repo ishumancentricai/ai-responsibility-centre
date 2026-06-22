@@ -13,6 +13,7 @@ import {
   PERSON,
   TEAM,
   PHDS,
+  PHD_GROUPS,
   CONTACT,
   LEGAL,
 } from './content'
@@ -98,12 +99,14 @@ describe('team', () => {
     }
   })
 
-  it('doctoral researchers have a description and valid profile links', () => {
+  it('doctoral researchers have a description, valid links and a known group', () => {
+    const groupIds = PHD_GROUPS.map((g) => g.id)
     expect(PHDS.length).toBeGreaterThan(0)
     for (const phd of PHDS) {
       expect(phd.name.length).toBeGreaterThan(0)
       expect(phd.initials.length).toBe(2)
       expect(phd.research.length).toBeGreaterThan(0)
+      expect(groupIds).toContain(phd.group)
       expect(typeof phd.links).toBe('object')
       for (const url of Object.values(phd.links)) {
         if (url) expect(isHttpUrl(url)).toBe(true)
