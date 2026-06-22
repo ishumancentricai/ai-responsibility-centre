@@ -85,8 +85,8 @@ describe('HIGHLIGHTS', () => {
       expect(h.value).toBeGreaterThanOrEqual(0)
       expect(h.label.length).toBeGreaterThan(0)
     }
-    const doctoral = HIGHLIGHTS.find((h) => /doctoral/i.test(h.label))
-    expect(doctoral.value).toBe(DOCTORAL_RESEARCHERS)
+    const researchers = HIGHLIGHTS.find((h) => /researcher/i.test(h.label))
+    expect(researchers.value).toBe(DOCTORAL_RESEARCHERS)
   })
 })
 

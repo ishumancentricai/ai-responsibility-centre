@@ -385,6 +385,7 @@ export const PHDS = [
     name: 'Timo Speith',
     initials: 'TS',
     group: 'phil',
+    role: 'Postdoctoral researcher',
     image: '', // e.g. '/team/timo-speith.jpg'
     research:
       'Explainable AI, AI ethics and the philosophy of technology — bridging philosophy and computer science.',
@@ -399,6 +400,7 @@ export const PHDS = [
     name: 'Astrid Schomäcker',
     initials: 'AS',
     group: 'phil',
+    role: 'Postdoctoral researcher',
     image: '', // e.g. '/team/astrid-schomaecker.jpg'
     research:
       'Philosophy of explainable AI — the relationship between explainability, understanding and algorithmic fairness.',
@@ -414,6 +416,7 @@ export const PHDS = [
     name: 'Bartosz Radomski',
     initials: 'BR',
     group: 'phil',
+    role: 'Postdoctoral researcher',
     image: '', // e.g. '/team/bartosz-radomski.jpg'
     research:
       'Philosophy of cognition and AI — situated cognition, the free-energy principle and theories of adaptivity.',
@@ -428,6 +431,7 @@ export const PHDS = [
     name: 'Simon Lobinger',
     initials: 'SL',
     group: 'law',
+    role: 'Student assistant',
     image: '', // e.g. '/team/simon-lobinger.jpg'
     research:
       'IT and criminal law aspects of AI — digital evidence and the legal foundations of responsible AI.',
@@ -598,7 +602,7 @@ export const HIGHLIGHTS = [
   },
   {
     value: DOCTORAL_RESEARCHERS,
-    label: 'Doctoral researchers',
+    label: 'Researchers',
     sub: 'Interdisciplinary team',
   },
 ]

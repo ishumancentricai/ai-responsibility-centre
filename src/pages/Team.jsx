@@ -121,12 +121,12 @@ export default function Team() {
         </div>
       </section>
 
-      {/* Doctoral researchers — grouped by discipline */}
+      {/* Researchers — grouped by discipline */}
       <section className="border-t border-black/5 bg-arc-50/40 py-20 sm:py-24">
         <div className="container-arc">
           <Reveal>
             <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
-              Doctoral researchers
+              Researchers
             </h2>
           </Reveal>
           <Reveal delay={0.05}>
@@ -160,7 +160,7 @@ export default function Team() {
                               {phd.name}
                             </h4>
                             <p className="mt-0.5 text-sm font-medium text-arc-700">
-                              Doctoral researcher
+                              {phd.role ?? 'Doctoral researcher'}
                             </p>
                           </div>
                         </div>
