@@ -66,15 +66,15 @@ export const STRATEGY_PRINCIPLES = [
 export const GAPS = [
   {
     title: 'Trust gap',
-    body: 'AI systems make mistakes. Trust needs evidence, control and clear limits.',
+    body: 'AI systems make mistakes, yet trust in them too often rests on assumption rather than evidence, control or clear limits. Our goal is to make that trust earned — grounded in verifiable evidence, meaningful oversight and well-defined boundaries.',
   },
   {
     title: 'Design gap',
-    body: 'The AI Act is adopted, but practicable standards, testing procedures and evidence are still missing.',
+    body: 'The AI Act is in force, but the practicable standards, testing procedures and evidence needed to implement it are still missing. Our goal is to build the methods, tests and evidence that turn regulation into deployable practice.',
   },
   {
     title: 'Structure gap',
-    body: 'Safe AI needs technology, law and the social sciences — effectively united at one interface.',
+    body: 'Safe AI needs technology, law and the social sciences, yet these disciplines rarely meet at a single interface. Our goal is to unite them in one centre, so responsible AI is built rather than merely demanded.',
   },
 ]
 
@@ -164,7 +164,7 @@ export const MILESTONES = [
         href: 'https://arxiv.org/abs/2603.11974',
       },
       {
-        track: 'Funding',
+        track: 'Announcement',
         title: 'Kick-off — AI Responsibility Centre (ARC)',
         text: 'Launch of the ARC at the University of Bayreuth, with a team of 6 doctoral researchers and a focus on building responsible AI in research, policy and practice.',
       },
@@ -180,6 +180,13 @@ export const PERSON = {
   // Optional photo: put the file in public/team/ and set e.g. '/team/niklas-kuehl.jpg'.
   // Leave empty to show the initials tile instead.
   image: '/team/niklas-kuehl.jpeg',
+  links: {
+    scholar: 'https://scholar.google.com/citations?user=79KpdDQAAAAJ',
+    linkedin: 'https://www.linkedin.com/in/niklaskuehl/',
+    orcid: 'https://orcid.org/0000-0001-6750-0876',
+    researchgate: 'https://www.researchgate.net/profile/Niklas-Kuehl',
+    website: 'https://nkukit.github.io/',
+  },
   timeline: [
     { year: '2017', text: 'Dr.-Ing. in Information Systems (summa cum laude)' },
     {
@@ -218,7 +225,11 @@ export const TEAM = [
       'Scientific explanation',
     ],
     bio: 'Lena Kästner works at the intersection of philosophy and AI, with a focus on explainability and the foundations of natural and artificial cognition. She leads the “Explainable Intelligent Systems” project and brings the conceptual and ethical lens to responsible AI at ARC.',
-    href: 'https://www.phil.uni-bayreuth.de/en/people/kaestner/index.php',
+    links: {
+      scholar: 'https://scholar.google.com/citations?user=HoOWtRgAAAAJ',
+      linkedin: 'https://de.linkedin.com/in/lenakaestner',
+      website: 'https://www.phil.uni-bayreuth.de/en/people/kaestner/index.php',
+    },
   },
   {
     name: 'Prof. Dr. Christian Rückert',
@@ -233,7 +244,11 @@ export const TEAM = [
       'European criminal law',
     ],
     bio: 'Christian Rückert holds the Chair for Criminal Law, Criminal Procedure Law and IT Criminal Law. His work on digital data as evidence, cybercrime and forensic informatics anchors ARC’s legal expertise — directly relevant to projects on AI in law enforcement and deepfakes in investigations.',
-    href: 'https://www.strafrecht2.uni-bayreuth.de/de/team/Prof_-Dr_-Christian-Rueckert/index.php',
+    links: {
+      linkedin: 'https://www.linkedin.com/in/christian-r%C3%BCckert-296122189/',
+      website:
+        'https://www.strafrecht2.uni-bayreuth.de/de/team/Prof_-Dr_-Christian-Rueckert/index.php',
+    },
   },
 ]
 

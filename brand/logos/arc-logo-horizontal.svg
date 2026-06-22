@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 96" width="380" height="96" role="img" aria-label="AI Responsibility Centre">
+  <!-- badge -->
+  <g transform="translate(8 16)">
+    <rect width="64" height="64" rx="14" fill="#00805a" />
+    <path d="M18 46 V30 a14 14 0 0 1 28 0 V46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
+    <path d="M28 46 V36 a4 4 0 0 1 8 0 V46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
+  </g>
+  <!-- wordmark -->
+  <text x="88" y="46" font-family="Inter, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="-1" fill="#0f1c18">ARC</text>
+  <text x="89" y="70" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="2.5" fill="#5b6b65">AI RESPONSIBILITY CENTRE</text>
+</svg>

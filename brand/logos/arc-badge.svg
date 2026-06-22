@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="ARC badge">
+  <rect width="64" height="64" rx="14" fill="#00805a" />
+  <path d="M18 46 V30 a14 14 0 0 1 28 0 V46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
+  <path d="M28 46 V36 a4 4 0 0 1 8 0 V46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
+</svg>

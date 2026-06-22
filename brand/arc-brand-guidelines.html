@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ARC — Brand Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      :root {
+        --arc-50: #ecfdf5;
+        --arc-200: #a6f0cd;
+        --arc-300: #6ee0b0;
+        --arc-500: #11a774;
+        --arc-600: #00805a;
+        --arc-800: #06543e;
+        --arc-950: #02261e;
+        --ink-900: #0f1c18;
+        --ink-700: #2b3a35;
+        --ink-500: #5b6b65;
+      }
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+      body {
+        font-family: 'Inter', Helvetica, Arial, sans-serif;
+        color: var(--ink-900);
+        font-size: 11px;
+        line-height: 1.55;
+      }
+      .page {
+        page-break-after: always;
+      }
+      .page:last-child {
+        page-break-after: auto;
+      }
+      h1 {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+      h2 {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--arc-600);
+        margin-bottom: 14px;
+      }
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+      }
+      p {
+        color: var(--ink-700);
+      }
+      .muted {
+        color: var(--ink-500);
+      }
+      section {
+        margin-top: 22px;
+      }
+      /* Cover band */
+      .cover {
+        background: var(--arc-950);
+        color: #fff;
+        border-radius: 18px;
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+      .cover .blob {
+        position: absolute;
+        right: -80px;
+        top: -80px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(0, 128, 90, 0.35);
+        filter: blur(40px);
+      }
+      .cover img {
+        height: 64px;
+        position: relative;
+      }
+      .cover h1 {
+        margin-top: 26px;
+        position: relative;
+      }
+      .cover p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 8px;
+        position: relative;
+        max-width: 460px;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        padding: 20px;
+      }
+      .logo-tile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 94px;
+        border-radius: 14px;
+      }
+      .logo-tile.light {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .logo-tile.tint {
+        background: var(--arc-50);
+      }
+      .logo-tile.dark {
+        background: var(--arc-950);
+      }
+      .logo-tile img {
+        max-height: 56px;
+        max-width: 80%;
+      }
+      .caption {
+        font-size: 9px;
+        color: var(--ink-500);
+        margin-top: 6px;
+      }
+      /* Swatches */
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+      }
+      .swatch {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .swatch .chip {
+        height: 56px;
+      }
+      .swatch .meta {
+        padding: 7px 8px;
+      }
+      .swatch .name {
+        font-weight: 700;
+        font-size: 9px;
+      }
+      .swatch .hex {
+        font-size: 9px;
+        color: var(--ink-500);
+        text-transform: uppercase;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      /* UI samples */
+      .btn {
+        display: inline-block;
+        background: var(--arc-600);
+        color: #fff;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 11px 22px;
+        border-radius: 999px;
+      }
+      .btn.secondary {
+        background: #fff;
+        color: var(--arc-800);
+        border: 1px solid var(--arc-200);
+      }
+      .chip-pill {
+        display: inline-block;
+        background: var(--arc-50);
+        border: 1px solid var(--arc-200);
+        color: var(--arc-800);
+        font-weight: 500;
+        font-size: 11px;
+        padding: 6px 14px;
+        border-radius: 999px;
+      }
+      .type-sample {
+        border-left: 4px solid var(--arc-500);
+        padding-left: 16px;
+      }
+      .footer {
+        margin-top: 34px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        font-size: 9px;
+        color: var(--ink-500);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE 1 -->
+    <div class="page">
+      <div class="cover">
+        <div class="blob"></div>
+        <img src="./logos/arc-logo-horizontal-white.svg" alt="ARC" />
+        <h1>Brand Guidelines</h1>
+        <p>
+          The visual language of the AI Responsibility Centre — logo, colour, type and UI.
+          Use this as the basis for slides, documents and templates.
+        </p>
+      </div>
+
+      <section>
+        <h2>Logo</h2>
+        <div class="grid2">
+          <div>
+            <div class="logo-tile light">
+              <img src="./logos/arc-logo-horizontal.svg" alt="ARC logo" />
+            </div>
+            <div class="caption">Primary lockup — on light backgrounds</div>
+          </div>
+          <div>
+            <div class="logo-tile dark">
+              <img src="./logos/arc-logo-horizontal-white.svg" alt="ARC logo white" />
+            </div>
+            <div class="caption">
+              Reversed lockup — on dark / photographic backgrounds
+            </div>
+          </div>
+          <div>
+            <div class="logo-tile tint">
+              <img src="./logos/arc-badge.svg" alt="ARC badge" />
+            </div>
+            <div class="caption">Badge / app icon — green tile, white arch</div>
+          </div>
+          <div>
+            <div class="logo-tile light">
+              <img src="./logos/arc-mark-green.svg" alt="ARC mark" />
+            </div>
+            <div class="caption">Mark only — for favicons & small uses</div>
+          </div>
+        </div>
+        <p class="muted" style="margin-top: 12px">
+          Keep clear space of at least the height of the arch around the logo. Don't
+          recolour, stretch, rotate or add effects. The arch always reads as an open
+          doorway.
+        </p>
+      </section>
+
+      <section>
+        <h2>Colour</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="chip" style="background: #ecfdf5"></div>
+            <div class="meta">
+              <div class="name">arc-50</div>
+              <div class="hex">#ECFDF5</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #a6f0cd"></div>
+            <div class="meta">
+              <div class="name">arc-200</div>
+              <div class="hex">#A6F0CD</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #6ee0b0"></div>
+            <div class="meta">
+              <div class="name">arc-300</div>
+              <div class="hex">#6EE0B0</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #11a774"></div>
+            <div class="meta">
+              <div class="name">arc-500</div>
+              <div class="hex">#11A774</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #00805a"></div>
+            <div class="meta">
+              <div class="name">arc-600 ★</div>
+              <div class="hex">#00805A</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #02261e"></div>
+            <div class="meta">
+              <div class="name">arc-950</div>
+              <div class="hex">#02261E</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #0f1c18"></div>
+            <div class="meta">
+              <div class="name">ink-900</div>
+              <div class="hex">#0F1C18</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #2b3a35"></div>
+            <div class="meta">
+              <div class="name">ink-700</div>
+              <div class="hex">#2B3A35</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #5b6b65"></div>
+            <div class="meta">
+              <div class="name">ink-500</div>
+              <div class="hex">#5B6B65</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #ffffff"></div>
+            <div class="meta">
+              <div class="name">white</div>
+              <div class="hex">#FFFFFF</div>
+            </div>
+          </div>
+        </div>
+        <p class="muted" style="margin-top: 12px">
+          <strong style="color: var(--ink-700)">arc-600 (#00805A)</strong> is the primary
+          brand colour. <strong style="color: var(--ink-700)">arc-950</strong> anchors
+          dark sections; <strong style="color: var(--ink-700)">arc-50</strong>
+          is the soft tint for alternating bands. Ink tones carry all text.
+        </p>
+      </section>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+      <section style="margin-top: 0">
+        <h2>Typography</h2>
+        <div class="card">
+          <div class="type-sample">
+            <div
+              class="muted"
+              style="font-size: 9px; letter-spacing: 2px; text-transform: uppercase"
+            >
+              Inter
+            </div>
+            <div
+              style="
+                font-size: 30px;
+                font-weight: 800;
+                letter-spacing: -0.5px;
+                margin-top: 6px;
+              "
+            >
+              AI in service of people.
+            </div>
+            <div style="font-size: 15px; font-weight: 600; margin-top: 10px">
+              Productive AI systems that put people at the centre.
+            </div>
+            <div style="margin-top: 8px; max-width: 520px">
+              Body copy uses Inter Regular at a comfortable measure. We pair bold,
+              tightly-tracked headlines with calm, readable paragraphs.
+            </div>
+          </div>
+          <div class="row" style="margin-top: 16px">
+            <span class="chip-pill">Regular 400</span>
+            <span class="chip-pill">Medium 500</span>
+            <span class="chip-pill">Semibold 600</span>
+            <span class="chip-pill">Bold 700</span>
+            <span class="chip-pill">Extrabold 800</span>
+          </div>
+          <p class="caption" style="margin-top: 12px">
+            Typeface: <strong>Inter</strong> (Google Fonts, open source). Fallback:
+            Helvetica / Arial. For Office templates, Arial or Aptos are acceptable
+            substitutes.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>UI elements</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>Buttons</h3>
+            <div class="row" style="margin-top: 14px">
+              <span class="btn">Get in touch</span>
+              <span class="btn secondary">Learn more</span>
+            </div>
+            <p class="caption" style="margin-top: 12px">
+              Fully rounded (pill). Primary = arc-600; secondary = white with arc-200
+              border.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Tags &amp; chips</h3>
+            <div class="row" style="margin-top: 14px">
+              <span class="chip-pill">safe</span>
+              <span class="chip-pill">transparent</span>
+              <span class="chip-pill">fair</span>
+              <span class="chip-pill">accountable</span>
+            </div>
+            <p class="caption" style="margin-top: 12px">
+              Soft arc-50 fill, arc-200 border, arc-800 text. Used for qualities, focus
+              areas and event types.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 16px">
+          <h3>Shape &amp; feel</h3>
+          <p style="margin-top: 8px">
+            Generous rounded corners (cards ~24px, pills fully round), thin hairline
+            borders (black @ 5–8% opacity), soft shadows, and alternating white / arc-50
+            bands. Clean, academic and confident — never loud.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Voice</h2>
+        <div class="card">
+          <h3>"We don't just call for responsible AI — we engage."</h3>
+          <p style="margin-top: 8px; max-width: 560px">
+            Direct, evidence-led and human-centred. We build and test responsible AI
+            rather than merely demanding it. Tone: precise, optimistic, grounded.
+          </p>
+        </div>
+      </section>
+
+      <div class="footer">
+        <span>© AI Responsibility Centre · University of Bayreuth</span>
+        <span>info@ai-responsibility-centre.eu</span>
+      </div>
+    </div>
+  </body>
+</html>

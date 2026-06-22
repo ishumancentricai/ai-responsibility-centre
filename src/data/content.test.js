@@ -91,11 +91,18 @@ describe('HIGHLIGHTS', () => {
 })
 
 describe('team', () => {
-  it('lead and faculty have the required fields', () => {
+  it('lead and faculty have the required fields and valid links', () => {
     expect(PERSON.name).toMatch(/Kühl/)
+    const checkLinks = (links = {}) => {
+      for (const url of Object.values(links)) {
+        if (url) expect(isHttpUrl(url)).toBe(true)
+      }
+    }
+    checkLinks(PERSON.links)
     for (const m of TEAM) {
       expect(m.name && m.initials && m.role && m.bio).toBeTruthy()
-      expect(isHttpUrl(m.href)).toBe(true)
+      expect(typeof m.links).toBe('object')
+      checkLinks(m.links)
     }
   })
 

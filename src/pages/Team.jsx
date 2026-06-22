@@ -36,6 +36,7 @@ export default function Team() {
               <p className="mt-3 text-sm leading-relaxed text-ink-500">
                 {PERSON.affiliation}
               </p>
+              <SocialLinks links={PERSON.links} name={PERSON.name} />
             </div>
           </Reveal>
 
@@ -112,15 +113,7 @@ export default function Team() {
                     ))}
                   </div>
 
-                  <a
-                    href={member.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
-                  >
-                    University profile
-                    <span aria-hidden>→</span>
-                  </a>
+                  <SocialLinks links={member.links} name={member.name} />
                 </article>
               </StaggerItem>
             ))}
