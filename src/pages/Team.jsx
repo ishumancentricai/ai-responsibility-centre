@@ -36,6 +36,9 @@ export default function Team() {
               <p className="mt-3 text-sm leading-relaxed text-ink-500">
                 {PERSON.affiliation}
               </p>
+              {PERSON.bio && (
+                <p className="mt-4 text-sm leading-relaxed text-ink-700">{PERSON.bio}</p>
+              )}
               <SocialLinks links={PERSON.links} name={PERSON.name} />
             </div>
           </Reveal>

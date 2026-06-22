@@ -177,6 +177,7 @@ export const PERSON = {
   role: 'Professor of Information Systems and Human-centric Artificial Intelligence',
   affiliation:
     'Faculty of Law, Business and Economics, University of Bayreuth · Fraunhofer FIT (Business Analytics)',
+  bio: 'Niklas Kühl works at the interface of machine learning and human-centric design. His research builds and studies real-world AI applications — spanning human–AI collaboration, decision support, explainable and responsible AI, and generative AI — and turns those insights into evidence for policy and practice.',
   // Optional photo: put the file in public/team/ and set e.g. '/team/niklas-kuehl.jpg'.
   // Leave empty to show the initials tile instead.
   image: '/team/niklas-kuehl.jpeg',
@@ -503,6 +504,11 @@ export const CONTACT = {
   institution: 'University of Bayreuth',
   chair: 'Chair of Information Systems and Human-centric Artificial Intelligence',
   email: 'info@ai-responsibility-centre.eu',
+  pressEmail: 'press@ai-responsibility-centre.eu',
+  jobsEmail: 'jobs@ai-responsibility-centre.eu',
+  // Public Web3Forms access key (safe to commit — it only delivers to the
+  // address configured at web3forms.com).
+  formAccessKey: 'c7a94dbc-871b-433a-baf6-b9d2919a0450',
   links: [
     {
       label: 'wi.uni-bayreuth.de',
