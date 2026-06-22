@@ -22,7 +22,7 @@ export const VISION = {
 
 export const MISSION = {
   headline: 'We don’t just call for responsible AI — we engage.',
-  body: 'As computer scientists, engineers, legal professionals and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
+  body: 'As information systems researchers, engineers, legal professionals and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
   linuxMoment:
     'The Linux moment of AI? We help shape the common-good path against dependence on a few providers — towards sovereignty for industry and society through open standards.',
 }
@@ -475,7 +475,7 @@ export const PHDS = [
 
 // Discipline groupings for the doctoral researchers (render order).
 export const PHD_GROUPS = [
-  { id: 'cs', label: 'Computer Science & Information Systems' },
+  { id: 'cs', label: 'Information Systems & AI' },
   { id: 'law', label: 'IT & Criminal Law' },
   { id: 'phil', label: 'Philosophy of AI' },
 ]
@@ -483,6 +483,7 @@ export const PHD_GROUPS = [
 export const CONTACT = {
   institution: 'University of Bayreuth',
   chair: 'Chair of Information Systems and Human-centric Artificial Intelligence',
+  email: 'info@ai-responsibility-centre.eu',
   links: [
     {
       label: 'wi.uni-bayreuth.de',

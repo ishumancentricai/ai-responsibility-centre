@@ -30,6 +30,19 @@ export default function Contact() {
                 </div>
                 <div>
                   <dt className="text-sm font-semibold uppercase tracking-wider text-ink-500">
+                    Email
+                  </dt>
+                  <dd className="mt-1">
+                    <a
+                      href={`mailto:${CONTACT.email}`}
+                      className="font-medium text-arc-700 hover:text-arc-800 hover:underline"
+                    >
+                      {CONTACT.email}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-sm font-semibold uppercase tracking-wider text-ink-500">
                     Web
                   </dt>
                   <dd className="mt-1 space-y-1">
@@ -53,7 +66,7 @@ export default function Contact() {
           {/* Simple, accessible contact form (no backend — opens mail client) */}
           <Reveal delay={0.08}>
             <form
-              action="mailto:kuehl@uni-bayreuth.de"
+              action={`mailto:${CONTACT.email}`}
               method="post"
               encType="text/plain"
               className="rounded-3xl border border-black/5 bg-arc-50/40 p-8"

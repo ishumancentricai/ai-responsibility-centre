@@ -14,7 +14,7 @@ export default function Team() {
     <>
       <PageHeader
         eyebrow="Team"
-        title="Computer scientists, engineers, legal professionals and philosophers."
+        title="Engineers, legal professionals and philosophers."
         intro="ARC brings together technology, law and the social sciences — an interdisciplinary team that makes responsibility actionable."
       />
 
@@ -71,7 +71,7 @@ export default function Team() {
           </Reveal>
           <Reveal delay={0.05}>
             <p className="mt-4 max-w-2xl text-xl font-medium leading-snug text-ink-900">
-              Principal members across philosophy, law and computer science.
+              Principal members across information systems, law and philosophy.
             </p>
           </Reveal>
 
