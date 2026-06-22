@@ -53,7 +53,7 @@ export default function Roadmap() {
 
             {/* "Now" marker */}
             <div className="relative mb-12 flex flex-col gap-4 sm:flex-row sm:gap-8">
-              <div className="sm:w-36 sm:pr-6 sm:text-right">
+              <div className="ml-8 sm:ml-0 sm:w-36 sm:pr-6 sm:text-right">
                 <span className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
                   Now
                 </span>
@@ -71,7 +71,7 @@ export default function Roadmap() {
               {MILESTONES.map((group) => (
                 <StaggerItem key={group.period}>
                   <div className="relative flex flex-col gap-4 sm:flex-row sm:gap-8">
-                    <div className="sm:w-36 sm:shrink-0 sm:pr-6 sm:text-right">
+                    <div className="ml-8 sm:ml-0 sm:w-36 sm:shrink-0 sm:pr-6 sm:text-right">
                       <span className="text-base font-bold text-arc-700">
                         {group.period}
                       </span>
@@ -139,7 +139,7 @@ export default function Roadmap() {
 
             {/* origin marker */}
             <div className="relative mt-14 flex flex-col gap-4 sm:flex-row sm:gap-8">
-              <div className="sm:w-36 sm:pr-6 sm:text-right">
+              <div className="ml-8 sm:ml-0 sm:w-36 sm:pr-6 sm:text-right">
                 <span className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-400">
                   Where it began
                 </span>

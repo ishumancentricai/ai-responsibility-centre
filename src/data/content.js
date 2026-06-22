@@ -246,7 +246,7 @@ export const PHDS = [
     group: 'cs',
     image: '/team/domenique-zipperling.jpeg',
     research:
-      'Machine learning, explainable AI and fairness — including federated learning and fairness in human–AI collaboration.',
+      'Causally grounded AI in human–AI decision-making, with a focus on high-stakes settings: how can AI-supported decisions move beyond predictive performance toward fair, transparent, and socially responsible outcomes.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=tmkXQUEAAAAJ',
       linkedin: 'https://www.linkedin.com/in/domenique-zipperling/',
@@ -356,13 +356,13 @@ export const PHDS = [
     name: 'Valentin Mayer',
     initials: 'VM',
     group: 'cs',
-    image: '', // e.g. '/team/valentin-mayer.jpg'
+    image: '/team/valentin-mayer.jpg',
     research:
-      'Human–AI collaboration and AI transparency — including explanations for AI novices and the EU AI Act.',
+      'Management and governance of AI in organizations – including the regulatory compliance with the EU AI Act.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=741P4pkAAAAJ',
       linkedin: 'https://www.linkedin.com/in/valentin-mayer-a78127199/',
-      orcid: '',
+      orcid: 'https://orcid.org/0009-0001-8089-2218',
       researchgate: 'https://www.researchgate.net/profile/Valentin-Mayer',
     },
   },
