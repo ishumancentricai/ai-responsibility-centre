@@ -418,13 +418,13 @@ export const PHDS = [
     initials: 'BR',
     group: 'phil',
     role: 'Postdoctoral researcher',
-    image: '', // e.g. '/team/bartosz-radomski.jpg'
+    image: '/team/bartosz-radomski.jpeg',
     research:
-      'Philosophy of cognition and AI — situated cognition, the free-energy principle and theories of adaptivity.',
+      'Philosophy of cognitive science and AI: formal models of cognition, theories of natural and artificial adaptivity, and embodied and situated cognition.',
     links: {
       scholar: '',
-      linkedin: '',
-      orcid: '',
+      linkedin: 'https://de.linkedin.com/in/bartoszradomski',
+      orcid: 'https://orcid.org/0000-0003-4107-2425',
       researchgate: 'https://www.researchgate.net/profile/Bartosz-Radomski-2',
     },
   },
