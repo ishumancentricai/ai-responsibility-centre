@@ -21,7 +21,7 @@ export const VISION = {
 }
 
 export const MISSION = {
-  headline: 'We don’t just call for responsible AI — we engage.',
+  headline: 'We don’t just call for responsible AI — we build it.',
   body: 'As information systems researchers, engineers, legal professionals and philosophers, we advance algorithms and systems and make responsibility directly actionable, instead of merely demanding it.',
   linuxMoment:
     'The Linux moment of AI? We help shape the common-good path against dependence on a few providers — towards sovereignty for industry and society through open standards.',
@@ -274,6 +274,7 @@ export const PHDS = [
     name: 'Simeon Allmendinger',
     initials: 'SA',
     group: 'cs',
+    role: 'Managing director / Doctoral researcher',
     image: '/team/simeon-allmendinger.jpeg',
     research:
       'AI-assisted decision-making, multi-agent AI and generative AI — including fairness in multi-agent systems.',
@@ -290,12 +291,13 @@ export const PHDS = [
     group: 'cs',
     image: '/team/luca-deck.jpeg',
     research:
-      'Algorithmic fairness, explainable and ethical AI — including the implications of the EU AI Act and deepfakes.',
+      'Works in interdisciplinary teams on the design and evaluation of AI systems with respect to social, ethical, and legal norms. In addition to fairness and explainability, his research focuses on the regulation of deepfakes in criminal law and on platforms.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=3hac5y8AAAAJ',
-      linkedin: 'https://de.linkedin.com/in/luca-deck',
-      orcid: 'https://orcid.org/0000-0003-3773-2769',
       researchgate: 'https://www.researchgate.net/profile/Luca-Deck',
+      linkedin: 'https://www.linkedin.com/in/luca-deck/',
+      orcid: 'https://orcid.org/0000-0003-3773-2769',
+      website: 'https://lucad98.github.io/',
     },
   },
   {
@@ -387,13 +389,13 @@ export const PHDS = [
     initials: 'TS',
     group: 'phil',
     role: 'Postdoctoral researcher',
-    image: '', // e.g. '/team/timo-speith.jpg'
+    image: '/team/timo-speith.jpg',
     research:
-      'Explainable AI, AI ethics and the philosophy of technology — bridging philosophy and computer science.',
+      'Works at the intersection of philosophy and computer science, with a focus on ethical AI, especially explainable AI, fairness, and autonomy. His work examines how AI systems can be designed, evaluated, and governed in ways that make them more socially beneficial.',
     links: {
-      scholar: 'https://scholar.google.de/citations?user=l3QOkFEAAAAJ',
+      scholar: 'https://scholar.google.com/citations?user=l3QOkFEAAAAJ',
       linkedin: 'https://www.linkedin.com/in/timo-speith/',
-      orcid: '',
+      orcid: 'https://orcid.org/0000-0002-6675-154X',
       researchgate: 'https://www.researchgate.net/profile/Timo-Speith',
     },
   },
@@ -433,9 +435,9 @@ export const PHDS = [
     initials: 'SL',
     group: 'law',
     role: 'Student assistant',
-    image: '', // e.g. '/team/simon-lobinger.jpg'
+    image: '/team/simon-lobinger.png',
     research:
-      'IT and criminal law aspects of AI — digital evidence and the legal foundations of responsible AI.',
+      'Responsible use of artificial intelligence in criminal law, examining both the legal challenges and the opportunities associated with its application in criminal justice and law enforcement.',
     links: {
       scholar: '',
       linkedin: 'https://www.linkedin.com/in/simon-lobinger-87108926b/',
@@ -484,8 +486,8 @@ export const PHDS = [
     name: 'Raimund Weidlich',
     initials: 'RW',
     group: 'law',
-    image: '', // e.g. '/team/raimund-weidlich.jpg'
-    research: 'Criminal law, criminal procedure and IT criminal law.',
+    image: '/team/raimund-weidlich.jpeg',
+    research: 'Deepfakes and electoral interference — criminal law regulation of AI.',
     links: {
       website:
         'https://www.strafrecht2.uni-bayreuth.de/de/team/Wissenschaftliche-Mitarbeitende/index.html',
