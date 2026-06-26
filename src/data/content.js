@@ -174,6 +174,7 @@ export const MILESTONES = [
 
 export const PERSON = {
   name: 'Prof. Dr. Niklas Kühl',
+  arcRole: 'Executive Director',
   role: 'Professor of Information Systems and Human-centric Artificial Intelligence',
   affiliation:
     'Faculty of Law, Business and Economics, University of Bayreuth · Fraunhofer FIT (Business Analytics)',
@@ -217,6 +218,7 @@ export const TEAM = [
     name: 'Prof. Dr. Lena Kästner',
     initials: 'LK',
     image: '/team/lena-kaestner.png',
+    arcRole: 'Co-Director',
     role: 'Professor of Philosophy, Computer Science and Artificial Intelligence',
     affiliation: 'Faculty of Humanities and Social Sciences, University of Bayreuth',
     focus: [
@@ -236,6 +238,7 @@ export const TEAM = [
     name: 'Prof. Dr. Christian Rückert',
     initials: 'CR',
     image: '/team/christian-rueckert.jpg',
+    arcRole: 'Co-Director',
     role: 'Professor of Criminal Law, Criminal Procedure Law and IT Criminal Law',
     affiliation: 'Faculty of Law and Economics, University of Bayreuth',
     focus: [
@@ -274,7 +277,8 @@ export const PHDS = [
     name: 'Simeon Allmendinger',
     initials: 'SA',
     group: 'cs',
-    role: 'Managing director / Doctoral researcher',
+    arcRole: 'Managing Director',
+    role: 'Doctoral researcher',
     image: '/team/simeon-allmendinger.jpeg',
     research:
       'AI-assisted decision-making, multi-agent AI and generative AI — including fairness in multi-agent systems.',

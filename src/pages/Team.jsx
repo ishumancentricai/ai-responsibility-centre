@@ -32,7 +32,12 @@ export default function Team() {
               <h2 className="mt-6 text-2xl font-bold tracking-tight text-ink-900">
                 {PERSON.name}
               </h2>
-              <p className="mt-2 font-medium text-arc-700">{PERSON.role}</p>
+              {PERSON.arcRole && (
+                <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-arc-600">
+                  {PERSON.arcRole}
+                </p>
+              )}
+              <p className="mt-1 font-medium text-arc-700">{PERSON.role}</p>
               <p className="mt-3 text-sm leading-relaxed text-ink-500">
                 {PERSON.affiliation}
               </p>
@@ -94,6 +99,11 @@ export default function Team() {
                       <h3 className="text-xl font-bold tracking-tight text-ink-900">
                         {member.name}
                       </h3>
+                      {member.arcRole && (
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-arc-600">
+                          {member.arcRole}
+                        </p>
+                      )}
                       <p className="mt-1 text-sm font-medium text-arc-700">
                         {member.role}
                       </p>
@@ -162,6 +172,11 @@ export default function Team() {
                             <h4 className="text-lg font-bold tracking-tight text-ink-900">
                               {phd.name}
                             </h4>
+                            {phd.arcRole && (
+                              <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-arc-600">
+                                {phd.arcRole}
+                              </p>
+                            )}
                             <p className="mt-0.5 text-sm font-medium text-arc-700">
                               {phd.role ?? 'Doctoral researcher'}
                             </p>
