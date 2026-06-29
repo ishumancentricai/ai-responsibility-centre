@@ -324,12 +324,12 @@ export const PHDS = [
     group: 'cs',
     image: '/team/leopold-mueller.jpeg',
     research:
-      'Human–AI collaboration and language models — including LLM-enhanced prompt engineering and small language models for technical requirements.',
+      'Development of generative AI solutions for real-world applications and AI-based decision support systems in minimal invasive surgeries.',
     links: {
       scholar: 'https://scholar.google.de/citations?user=qhVY6gwAAAAJ',
-      linkedin: '',
-      orcid: '',
-      researchgate: '',
+      linkedin: 'https://linkedin.com/in/leopoldmueller',
+      orcid: 'https://orcid.org/0009-0008-9968-8103',
+      researchgate: 'https://www.researchgate.net/profile/Leopold-Mueller-2',
     },
   },
   {
