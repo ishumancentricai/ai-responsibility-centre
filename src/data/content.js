@@ -82,7 +82,7 @@ export const GAPS = [
 export const FUNDERS = [
   {
     name: 'Bavarian Ministry of Science, Research and Art',
-    logo: '/funding/stmwk.svg',
+    logo: '/funding/stmwk.png',
     href: 'https://www.stmwk.bayern.de/',
   },
   {
@@ -121,7 +121,7 @@ export const MILESTONES = [
     items: [
       {
         track: 'Research',
-        title: 'Accepted at ICML ’26 — Seoul',
+        title: 'Presented at ICML ’26 — Seoul',
         text: '“Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting” — showing that a model’s internal representations improve human-preference predictions over surface-level outputs.',
         authors: 'Ball, S., Allmendinger, S., Kühl, N., & Kreuter, F.',
         paper:
@@ -153,7 +153,7 @@ export const MILESTONES = [
       },
       {
         track: 'Research',
-        title: 'Accepted at FAccT ’26 — Montreal',
+        title: 'Presented at FAccT ’26 — Montreal',
         text: '“Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI” — a framework that translates human-subject experiments into multi-agent AI environments to study how norms emerge.',
         authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
         paper:
