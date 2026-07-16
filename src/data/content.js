@@ -209,7 +209,7 @@ export const PERSON = {
       text: 'Director FIM Research Institute for Information Management',
     },
   ],
-  collaborators: ['Fraunhofer FIT', 'LMU Munich', '...'],
+  collaborators: ['Fraunhofer FIT', 'LMU Munich', 'TUM', 'FIM', 'KSRI', '...'],
 }
 
 // Further principal members of the ARC interdisciplinary team.
@@ -466,12 +466,12 @@ export const PHDS = [
     name: 'Jana Elsner',
     initials: 'JE',
     group: 'law',
-    image: '', // e.g. '/team/jana-elsner.jpg'
+    image: '/team/jana-elsner.jpg',
     research:
-      'Criminal law and criminal procedure — the legal dimensions of AI and digital evidence.',
+      'Criminal procedure law, with a focus on the use of artificial intelligence in criminal prosecution and law enforcement in fields such as the cryptocurrency sector — within the FAIRLEA project (“Fair AI Research for Law Enforcement Agencies”, Volkswagen Foundation) on cryptoasset forensics.',
     links: {
-      website:
-        'https://www.strafrecht2.uni-bayreuth.de/de/team/Wissenschaftliche-Mitarbeitende/index.html',
+      linkedin: 'https://de.linkedin.com/in/jana-elsner-40a798382',
+      website: 'https://fairlea.de/research/',
     },
   },
   {
