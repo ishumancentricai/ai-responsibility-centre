@@ -408,13 +408,13 @@ export const PHDS = [
     initials: 'AS',
     group: 'phil',
     role: 'Postdoctoral researcher',
-    image: '', // e.g. '/team/astrid-schomaecker.jpg'
+    image: '/team/astrid-schomaecker.jpg',
     research:
-      'Philosophy of explainable AI — the relationship between explainability, understanding and algorithmic fairness.',
+      'Philosophy of AI, researching the epistemological and ethical effects of deepfakes within the FoGG projects. Generally interested in analyzing the societal impact of AI and the potential of different mitigation strategies, especially algorithmic fairness, explainable AI and AI ethics more generally.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=i023olgAAAAJ',
-      linkedin: '',
-      orcid: '',
+      linkedin: 'https://www.linkedin.com/in/astrid-schom%C3%A4cker-8aa56329a/',
+      orcid: 'https://orcid.org/0000-0002-0128-9083',
       researchgate:
         'https://www.researchgate.net/scientific-contributions/Astrid-Schomaecker-2199553856',
     },
