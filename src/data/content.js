@@ -453,13 +453,14 @@ export const PHDS = [
     name: 'Timo Grüneke',
     initials: 'TG',
     group: 'cs',
-    image: '', // e.g. '/team/timo-grueneke.jpg'
-    research: 'Business & information systems engineering at the FIM Research Center.',
+    image: '/team/timo-grueneke.jpeg',
+    research:
+      'Digital systems as knowledge mediators across the individual and the organizational level: how can AI-based systems move beyond delivering knowledge toward knowledge that learners recognize and organizations adopt, orchestrate, and turn into value.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=sQeK4QQAAAAJ',
       linkedin: 'https://www.linkedin.com/in/timo-grueneke/',
-      orcid: '',
-      researchgate: '',
+      orcid: 'https://orcid.org/0000-0001-7138-0395',
+      researchgate: 'https://www.researchgate.net/profile/Timo-Grueneke',
     },
   },
   {
