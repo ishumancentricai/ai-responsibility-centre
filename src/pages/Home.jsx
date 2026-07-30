@@ -449,7 +449,7 @@ function Funders() {
           </p>
         </Reveal>
         <Reveal delay={0.05}>
-          <div className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
             {FUNDERS.map((f) => (
               <a
                 key={f.name}
@@ -458,13 +458,13 @@ function Funders() {
                 rel="noreferrer"
                 title={f.name}
                 aria-label={f.name}
-                className="group flex max-w-[18rem] flex-col items-center gap-3 text-center"
+                className="group flex max-w-[24rem] flex-col items-center gap-3 text-center"
               >
                 <img
                   src={f.logo}
                   alt={f.name}
                   loading="lazy"
-                  className="h-12 w-auto object-contain transition-opacity group-hover:opacity-70 sm:h-14"
+                  className={`w-auto object-contain transition-opacity group-hover:opacity-70 ${f.logoHeight || 'h-12 sm:h-14'}`}
                 />
                 <span className="text-xs font-medium leading-snug text-ink-600">
                   {f.name}
