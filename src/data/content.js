@@ -82,7 +82,7 @@ export const GAPS = [
 export const FUNDERS = [
   {
     name: 'Bavarian Ministry of Science, Research and Art',
-    logo: '/funding/stmwk.png',
+    logo: '/funding/StMWK_RGB_rechts-lang_fuer_Online.png',
     href: 'https://www.stmwk.bayern.de/',
   },
   {
