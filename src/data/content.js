@@ -81,13 +81,13 @@ export const GAPS = [
 // Funding bodies shown at the foot of the home page.
 export const FUNDERS = [
   {
-    name: 'Bavarian Ministry of Science, Research and Art',
-    logo: '/funding/StMWK_RGB_rechts-lang_fuer_Online.png',
+    name: 'Bavarian Ministry of Science and the Arts (StMWK)',
+    logo: '/funding/Stmwk_eng_4C.svg',
     href: 'https://www.stmwk.bayern.de/',
-    // The official StMWK PNG has ~23% transparent padding top and bottom,
-    // so it needs a taller box than logos that fill their canvas to appear
-    // the same optical height as the others.
-    logoHeight: 'h-[70px] sm:h-[82px]',
+    // The official StMWK logo carries ~20% transparent padding top/bottom, so
+    // it needs a taller box than logos that fill their canvas to appear the
+    // same optical height as the others.
+    logoHeight: 'h-[62px] sm:h-[74px]',
   },
   {
     name: 'University of Bayreuth',
