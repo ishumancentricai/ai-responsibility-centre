@@ -119,7 +119,7 @@ export default function Team() {
                     {member.focus.map((f) => (
                       <span
                         key={f}
-                        className="rounded-full border border-arc-200 bg-white px-3 py-1 text-xs font-medium text-arc-800"
+                        className="inline-flex rounded-full border border-arc-200 bg-white px-3 py-1 text-xs font-medium text-arc-800"
                       >
                         {f}
                       </span>
@@ -212,7 +212,7 @@ export default function Team() {
           <Stagger className="mt-8 flex flex-wrap gap-3">
             {PERSON.collaborators.map((c) => (
               <StaggerItem key={c}>
-                <span className="rounded-full border border-arc-200 bg-white px-5 py-2 text-base font-medium text-arc-800">
+                <span className="inline-flex rounded-full border border-arc-200 bg-white px-5 py-2 text-base font-medium text-arc-800">
                   {c}
                 </span>
               </StaggerItem>
