@@ -121,6 +121,22 @@ export const EVENTS = [
 // so the page reads from the present (top) back in time (scrolling down).
 export const MILESTONES = [
   {
+    period: 'September 2026',
+    items: [
+      {
+        track: 'Research',
+        title: 'Presented at ECAF ’26 — Ghent',
+        text: '“Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness” — a systematic review of 79 papers mapping data-level fairness interventions into data refinement and data extension strategies, and proposing a unified data-centric fairness framework.',
+        authors: 'Deck, L., Zipperling, D., Jessat, L., & Kühl, N.',
+        paper:
+          'Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness',
+        venue: 'European Conference on Algorithmic Fairness (ECAF), Ghent',
+        year: 2026,
+        href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
+      },
+    ],
+  },
+  {
     period: 'July 2026',
     items: [
       {
