@@ -10,6 +10,7 @@ import {
 import ArcMark from '../components/ArcMark'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import UpcomingEvents from '../components/UpcomingEvents'
+import InTheMedia from '../components/InTheMedia'
 import {
   VISION,
   MISSION,
@@ -29,6 +30,7 @@ export default function Home() {
         cardClassName="border border-black/5 bg-white shadow-sm"
         cta={{ label: 'View all events & milestones', to: '/roadmap' }}
       />
+      <InTheMedia />
       <Qualities />
       <Gaps />
       <Stats />

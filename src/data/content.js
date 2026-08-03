@@ -192,6 +192,25 @@ export const MILESTONES = [
   },
 ]
 
+// Press & media coverage featuring ARC and its members — newest first.
+// COPYRIGHT: store only the outlet, the piece's own headline, our OWN short
+// neutral summary and an outbound link. Never reproduce article text or use a
+// publication's photo — the portrait below is ARC's own team image.
+export const PRESS = [
+  {
+    outlet: 'Frankenpost',
+    date: '3 August 2026',
+    type: 'Interview',
+    title: '„Die KI ist nicht böse geworden“',
+    // Our own neutral one-liner about the topic — not a quote from the article.
+    summary:
+      'An interview on the risks of agentic AI — why recent “break-out” incidents reflect gaps in oversight and IT security rather than malicious machines, and how responsible AI keeps humans in control.',
+    person: 'Prof. Dr. Niklas Kühl',
+    image: '/team/niklas-kuehl.jpeg',
+    href: 'https://www.frankenpost.de/inhalt.interview-die-ki-ist-nicht-boese-geworden.4d151ece-f8f1-4470-92ce-fb055a3c9613.html',
+  },
+]
+
 export const PERSON = {
   name: 'Prof. Dr. Niklas Kühl',
   arcRole: 'Executive Director',
