@@ -99,16 +99,16 @@ export const FUNDERS = [
 // Upcoming events where ARC participates — chronological (soonest first).
 export const EVENTS = [
   {
-    date: 'Jul 2026',
-    title: 'ICML 2026',
-    location: 'Seoul, South Korea',
+    date: 'Sep 2–4, 2026',
+    title: 'ECAF 2026',
+    location: 'Ghent, Belgium',
     type: 'Conference',
     blurb:
-      'Presenting “Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting”.',
-    href: 'https://icml.cc/',
+      'Presenting “Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness”.',
+    href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
   },
   {
-    date: 'Sep 2026',
+    date: 'Sep 25, 2026',
     title: 'AI Day UBT',
     location: 'University of Bayreuth',
     type: 'Campus event',

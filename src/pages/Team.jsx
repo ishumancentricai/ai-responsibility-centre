@@ -1,4 +1,4 @@
-import PageHeader from '../components/PageHeader'
+import TeamHero from '../components/TeamHero'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import { PERSON, TEAM, PHDS, PHD_GROUPS } from '../data/content'
 
@@ -9,13 +9,25 @@ const phdsInGroup = (id) =>
     surname(a.name).localeCompare(surname(b.name), 'de'),
   )
 
+// Headline figures for the hero, derived so they stay in sync with the lists.
+const HERO_STATS = [
+  { value: 1 + TEAM.length + PHDS.length, label: 'People' },
+  { value: PHD_GROUPS.length, label: 'Disciplines' },
+  {
+    // The list ends in an ellipsis placeholder, so it's a floor, not a total.
+    value: `${PERSON.collaborators.filter((c) => c !== '...').length}+`,
+    label: 'Partner institutions',
+  },
+]
+
 export default function Team() {
   return (
     <>
-      <PageHeader
+      <TeamHero
         eyebrow="Team"
         title="Engineers, legal professionals and philosophers."
         intro="ARC brings together technology, law and the social sciences — an interdisciplinary team that makes responsibility actionable."
+        stats={HERO_STATS}
       />
 
       {/* Lead */}

@@ -449,7 +449,7 @@ function Funders() {
           </p>
         </Reveal>
         <Reveal delay={0.05}>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+          <div className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
             {FUNDERS.map((f) => (
               <a
                 key={f.name}
@@ -460,12 +460,17 @@ function Funders() {
                 aria-label={f.name}
                 className="group flex max-w-[24rem] flex-col items-center gap-3 text-center"
               >
-                <img
-                  src={f.logo}
-                  alt={f.name}
-                  loading="lazy"
-                  className={`w-auto object-contain transition-opacity group-hover:opacity-70 ${f.logoHeight || 'h-12 sm:h-14'}`}
-                />
+                {/* Fixed-height box sized to the tallest logo, so every caption
+                    starts at the same vertical position regardless of how tall
+                    the individual logo is. */}
+                <div className="flex h-[62px] items-center justify-center sm:h-[74px]">
+                  <img
+                    src={f.logo}
+                    alt={f.name}
+                    loading="lazy"
+                    className={`w-auto object-contain transition-opacity group-hover:opacity-70 ${f.logoHeight || 'h-12 sm:h-14'}`}
+                  />
+                </div>
                 <span className="text-xs font-medium leading-snug text-ink-600">
                   {f.name}
                 </span>
