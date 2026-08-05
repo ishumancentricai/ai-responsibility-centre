@@ -195,8 +195,49 @@ export const MILESTONES = [
 // Press & media coverage featuring ARC and its members — newest first.
 // COPYRIGHT: store only the outlet, the piece's own headline, our OWN short
 // neutral summary and an outbound link. Never reproduce article text or use a
-// publication's photo — the portrait below is ARC's own team image.
+// publication's photo — portraits are ARC's own team images. `coverage` lists
+// outlets that picked up the same story (e.g. a dpa wire) as outbound links.
+// Leave `image` empty to show the ARC mark instead of a portrait.
 export const PRESS = [
+  {
+    outlet: 'University of Bayreuth',
+    via: 'dpa',
+    date: '4 August 2026',
+    type: 'Press release',
+    title: 'So will die Uni Bayreuth die KI zähmen',
+    summary:
+      'The University of Bayreuth launches the AI Responsibility Centre — an interdisciplinary centre uniting information systems, law and philosophy to build trustworthy, well-governed AI, funded by the Bavarian State Ministry of Science and the Arts.',
+    person: 'Team of the AI Responsibility Centre (ARC)',
+    image: '/team/team_upright.jpg',
+    href: 'https://www.uni-bayreuth.de/pressemitteilung/ARC',
+    coverage: [
+      {
+        outlet: 'Süddeutsche Zeitung',
+        href: 'https://www.sueddeutsche.de/bayern/neues-forschungszentrum-so-will-die-uni-bayreuth-die-ki-zaehmen-dpa.urn-newsml-dpa-com-20090101-260804-930-482153',
+      },
+      {
+        outlet: 'ZEIT ONLINE',
+        href: 'https://www.zeit.de/news/2026-08/04/so-will-die-uni-bayreuth-die-ki-zaehmen',
+      },
+      {
+        outlet: 'WELT',
+        href: 'https://www.welt.de/regionales/bayern/article6a71bd36cc46967c04cae60a/so-will-die-uni-bayreuth-die-ki-zaehmen.html',
+      },
+      {
+        outlet: 'Schwäbische',
+        href: 'https://www.schwaebische.de/regional/bayern/so-will-die-uni-bayreuth-die-ki-zaehmen-4764050',
+      },
+      {
+        outlet: 'FLZ',
+        href: 'https://www.flz.de/so-will-die-uni-bayreuth-die-ki-zaehmen/cnt-id-ps-745a4c0b-3a97-4659-87e7-42df811c492f',
+      },
+      {
+        outlet: 'diebayern.de',
+        href: 'https://www.diebayern.de/bildung/so-will-die-uni-bayreuth-die-ki-zaehmen-3165871',
+      },
+      { outlet: 'idw', href: 'https://idw-online.de/de/news875507' },
+    ],
+  },
   {
     outlet: 'Frankenpost',
     date: '3 August 2026',
@@ -209,6 +250,17 @@ export const PRESS = [
     image: '/team/niklas-kuehl.jpeg',
     href: 'https://www.frankenpost.de/inhalt.interview-die-ki-ist-nicht-boese-geworden.4d151ece-f8f1-4470-92ce-fb055a3c9613.html',
   },
+  {
+    outlet: 'University of Bayreuth',
+    date: '16 July 2026',
+    type: 'Press release',
+    title: 'Wie KI Wahlentscheidungen vorhersagt',
+    summary:
+      'How do language models “predict” elections? A Bayreuth–LMU study probes what LLMs encode internally about political preferences across six national elections — a complement to, not a replacement for, traditional polling.',
+    person: 'Simeon Allmendinger, Prof. Dr. Niklas Kühl',
+    image: '/team/simeon-allmendinger.jpeg',
+    href: 'https://www.uni-bayreuth.de/pressemitteilung/ki-wahlprognosen',
+  },
 ]
 
 export const PERSON = {
@@ -218,8 +270,6 @@ export const PERSON = {
   affiliation:
     'Faculty of Law, Business and Economics, University of Bayreuth · Fraunhofer FIT (Business Analytics)',
   bio: 'Niklas Kühl works at the interface of machine learning and human-centric design. His research builds and studies real-world AI applications — spanning human–AI collaboration, decision support, explainable and responsible AI, and generative AI — and turns those insights into evidence for policy and practice.',
-  // Optional photo: put the file in public/team/ and set e.g. '/team/niklas-kuehl.jpg'.
-  // Leave empty to show the initials tile instead.
   image: '/team/niklas-kuehl.jpeg',
   links: {
     scholar: 'https://scholar.google.com/citations?user=79KpdDQAAAAJ',
