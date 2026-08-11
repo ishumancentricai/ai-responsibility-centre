@@ -200,6 +200,17 @@ export const MILESTONES = [
 // Leave `image` empty to show the ARC mark instead of a portrait.
 export const PRESS = [
   {
+    outlet: 'WDR 5 Quarks',
+    date: '10 August 2026',
+    type: 'Podcast',
+    title: 'Verantwortungsvolle KI',
+    summary:
+      'A WDR 5 Quarks “Wissenschaft und mehr” segment on responsible AI — how AI systems can be built and governed so people keep meaningful control.',
+    person: 'Prof. Dr. Niklas Kühl',
+    image: '/team/niklas-kuehl.jpeg',
+    href: 'https://www1.wdr.de/mediathek/audio/wdr5/quarks/wissenschaft-und-mehr/audio-klimaanlagen-verantwortungsvolle-ki-babys-und-musik-100.html',
+  },
+  {
     outlet: 'University of Bayreuth',
     via: 'dpa',
     date: '4 August 2026',
