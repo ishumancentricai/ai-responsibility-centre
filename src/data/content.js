@@ -104,7 +104,7 @@ export const EVENTS = [
     location: 'Kongresszentrum Dresden',
     type: 'Conference',
     blurb:
-      'Two days of applied AI across nine stages — 100+ speakers on keynotes, masterclasses and startup pitches about putting AI into practice.',
+      'Niklas Kühl keynoting “KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — how Bavaria’s BAIOSPHERE ecosystem connects research, industry and policy to accelerate transfer.',
     href: 'https://brainsonsilicon.com/',
   },
   {
