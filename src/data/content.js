@@ -99,13 +99,13 @@ export const FUNDERS = [
 // Upcoming events where ARC participates — chronological (soonest first).
 export const EVENTS = [
   {
-    date: 'Sep 2–4, 2026',
-    title: 'ECAF 2026',
-    location: 'Ghent, Belgium',
+    date: 'Sep 14–15, 2026',
+    title: 'Brains on Silicon 2026',
+    location: 'Kongresszentrum Dresden',
     type: 'Conference',
     blurb:
-      'Presenting “Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness”.',
-    href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
+      'Two days of applied AI across nine stages — 100+ speakers on keynotes, masterclasses and startup pitches about putting AI into practice.',
+    href: 'https://brainsonsilicon.com/',
   },
   {
     date: 'Sep 25, 2026',
