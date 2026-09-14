@@ -99,12 +99,12 @@ export const FUNDERS = [
 // Upcoming events where ARC participates — chronological (soonest first).
 export const EVENTS = [
   {
-    date: 'Sep 14–15, 2026',
+    date: 'Sep 15, 2026 · 11:00',
     title: 'Brains on Silicon 2026',
-    location: 'Kongresszentrum Dresden',
+    location: 'ICD Dresden — Stage 4',
     type: 'Conference',
     blurb:
-      'Niklas Kühl keynoting “KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — how Bavaria’s BAIOSPHERE ecosystem connects research, industry and policy to accelerate transfer.',
+      'Keynote with BAIOSPHERE CEO Michael Klimke: “KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
     href: 'https://brainsonsilicon.com/',
   },
   {
