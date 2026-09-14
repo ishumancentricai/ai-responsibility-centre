@@ -99,7 +99,7 @@ export const FUNDERS = [
 // Upcoming events where ARC participates — chronological (soonest first).
 export const EVENTS = [
   {
-    date: 'Sep 15, 2026 · 11:00',
+    date: 'Sep 15, 2026, 11:00',
     title: 'Brains on Silicon 2026',
     location: 'ICD Dresden — Stage 4',
     type: 'Conference',
