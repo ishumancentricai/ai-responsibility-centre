@@ -125,6 +125,18 @@ export const MILESTONES = [
     items: [
       {
         track: 'Research',
+        title: 'Published in AI and Ethics',
+        text: '“What is AI ethics, and what is it good for? Clarifying debates on AI ethics” — separating the instances of AI ethics (research, education, practice, governance instruments) from the purposes they serve (knowledge, communication, application), so that criticism of “ethics washing” lands on specific practices instead of dismissing the field as a whole.',
+        authors:
+          'Schomäcker, A., Speith, T., Deck, L., Helfer, T., Zhang, H., & Kästner, L.',
+        paper:
+          'What is AI ethics, and what is it good for? Clarifying debates on AI ethics',
+        venue: 'AI and Ethics 6(5), Article 528',
+        year: 2026,
+        href: 'https://doi.org/10.1007/s43681-026-01326-6',
+      },
+      {
+        track: 'Research',
         title: 'Presented at ECAF ’26 — Ghent',
         text: '“Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness” — a systematic review of 79 papers mapping data-level fairness interventions into data refinement and data extension strategies, and proposing a unified data-centric fairness framework.',
         authors: 'Deck, L., Zipperling, D., Jessat, L., & Kühl, N.',
