@@ -106,6 +106,15 @@ export const EVENTS = [
     blurb: 'Campus-wide theme day on AI with keynotes and live demos.',
     href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
   },
+  {
+    date: 'Oct 5, 2026, 15:30',
+    title: 'Who Presses the Button?',
+    location: 'Nokia Bell Labs, Cambridge',
+    type: 'Talk',
+    blurb:
+      'Keynote by Niklas Kühl on human oversight between claim and practice: Article 14 of the EU AI Act asks for a human in the loop, but studies with 136 decision-makers and 101 radiologists show that oversight only works when the system is designed so that person can actually disagree. Free, in person or online.',
+    href: 'https://www.eventbrite.co.uk/e/who-presses-the-button-human-oversight-of-ai-between-claim-and-practice-tickets-2001539238743',
+  },
 ]
 
 // Reverse-chronological track record: the most recent achievement is first,
