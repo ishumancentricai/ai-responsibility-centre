@@ -99,15 +99,6 @@ export const FUNDERS = [
 // Upcoming events where ARC participates — chronological (soonest first).
 export const EVENTS = [
   {
-    date: 'Sep 15, 2026, 11:00',
-    title: 'Brains on Silicon 2026',
-    location: 'ICD Dresden — Stage 4',
-    type: 'Conference',
-    blurb:
-      'Keynote with BAIOSPHERE CEO Michael Klimke: “KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
-    href: 'https://brainsonsilicon.com/',
-  },
-  {
     date: 'Sep 25, 2026',
     title: 'AI Day UBT',
     location: 'University of Bayreuth',
@@ -145,6 +136,12 @@ export const MILESTONES = [
         venue: 'European Conference on Algorithmic Fairness (ECAF), Ghent',
         year: 2026,
         href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
+      },
+      {
+        track: 'Announcement',
+        title: 'Keynote at Brains on Silicon ’26 — Dresden',
+        text: '“KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — a joint keynote with BAIOSPHERE CEO Michael Klimke on how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
+        href: 'https://brainsonsilicon.com/',
       },
     ],
   },
