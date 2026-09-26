@@ -142,6 +142,7 @@ export const MILESTONES = [
           'Schomäcker, A., Speith, T., Deck, L., Helfer, T., Zhang, H., & Kästner, L.',
         paper:
           'What is AI ethics, and what is it good for? Clarifying debates on AI ethics',
+        properties: ['Accountable', 'Transparent'],
         venue: 'AI and Ethics 6(5), Article 528',
         year: 2026,
         href: 'https://doi.org/10.1007/s43681-026-01326-6',
@@ -163,6 +164,7 @@ export const MILESTONES = [
         authors: 'Deck, L., Zipperling, D., Jessat, L., & Kühl, N.',
         paper:
           'Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness',
+        properties: ['Fair'],
         venue: 'European Conference on Algorithmic Fairness (ECAF), Ghent',
         year: 2026,
         href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
@@ -179,6 +181,7 @@ export const MILESTONES = [
         authors: 'Ball, S., Allmendinger, S., Kühl, N., & Kreuter, F.',
         paper:
           'Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting',
+        properties: ['Transparent', 'Aligned'],
         venue: 'International Conference on Machine Learning (ICML), Seoul',
         year: 2026,
         href: 'https://arxiv.org/abs/2602.02882',
@@ -200,6 +203,7 @@ export const MILESTONES = [
         authors: 'Allmendinger, S., Deck, L., & Müller, L.',
         paper:
           'Where Are the Humans? A Scoping Review of Fairness in Multi-Agent AI Systems',
+        properties: ['Fair', 'Human oversight'],
         venue: 'European Conference on Information Systems (ECIS), Milan',
         year: 2026,
         href: 'https://aisel.aisnet.org/ecis2026/litrev/litrev/6/',
@@ -211,6 +215,7 @@ export const MILESTONES = [
         authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
         paper:
           'Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI',
+        properties: ['Safe', 'Aligned'],
         venue:
           'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Montreal',
         year: 2026,

@@ -5,9 +5,9 @@ import { motion, useReducedMotion } from 'framer-motion'
  *
  * Each one says the same sentence in pictures: the ground breaks, and the
  * arch of the ARC mark spans the break. What stands inside the arch is what
- * we bring to that particular gap — evidence, measurement, or disciplines
- * brought together. Sharing the arch keeps the three reading as a set
- * instead of as three icons picked off a shelf.
+ * we bring to that gap — a shield for trust, a bulb and pencil for design,
+ * a network for structure. Sharing the arch keeps the three reading as a
+ * set instead of as three icons picked off a shelf.
  *
  * The arch draws itself on scroll; under reduced motion it is simply there.
  */
@@ -20,20 +20,29 @@ const BANK_LEFT = 'M6 70 H46'
 const BANK_RIGHT = 'M74 70 H114'
 
 const GLYPHS = {
-  // Trust: evidence, not assumption.
-  trust: [{ d: 'M50 52 l7 8 l14 -17', cap: 'round' }],
-  // Design: the standards and tests that make regulation deployable.
-  design: [
-    { d: 'M46 47 h28 v13 h-28 z' },
-    { d: 'M53 47 v5' },
-    { d: 'M60 47 v7' },
-    { d: 'M67 47 v5' },
+  // Trust: a shield with a check — assurance you can point at.
+  trust: [
+    { d: 'M60 38 l14 5 v10 c0 8 -6 12.5 -14 15 c-8 -2.5 -14 -7 -14 -15 v-10 z' },
+    { d: 'M53 53 l5 5 l10 -11' },
   ],
-  // Structure: separate disciplines running into one centre.
+  // Design: the idea and the hand that draws it.
+  design: [
+    { cx: 50, cy: 50, r: 7 },
+    { d: 'M46 58 h8' },
+    { d: 'M47.5 61.5 h5' },
+    { d: 'M74 44 l4 4 l-13 13 l-5.5 1.5 l1.5 -5.5 z' },
+    { d: 'M70.5 47.5 l4 4' },
+  ],
+  // Structure: disciplines meeting as a network, not a queue.
   structure: [
-    { d: 'M48 66 C48 56 60 56 60 47' },
-    { d: 'M60 66 V47' },
-    { d: 'M72 66 C72 56 60 56 60 47' },
+    {
+      d: 'M60 43 L48 52 M60 43 L72 52 M48 52 L52 64 M72 52 L68 64 M52 64 L68 64 M48 52 L72 52',
+    },
+    { cx: 60, cy: 43, r: 3, fill: true },
+    { cx: 48, cy: 52, r: 3, fill: true },
+    { cx: 72, cy: 52, r: 3, fill: true },
+    { cx: 52, cy: 64, r: 3, fill: true },
+    { cx: 68, cy: 64, r: 3, fill: true },
   ],
 }
 
@@ -92,18 +101,27 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
       />
 
       {/* what stands inside it */}
-      {glyph.map((g, i) => (
-        <motion.path
-          key={g.d}
-          d={g.d}
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap={g.cap ?? 'round'}
-          className="text-ink-700"
-          viewport={{ once: true, margin: '-60px' }}
-          {...draw(0.95 + i * 0.08, 0.45)}
-        />
-      ))}
+      {glyph.map((g, i) => {
+        const common = {
+          stroke: 'currentColor',
+          strokeWidth: 2.5,
+          className: 'text-ink-700',
+          viewport: { once: true, margin: '-60px' },
+          ...draw(0.95 + i * 0.07, 0.45),
+        }
+        return g.d ? (
+          <motion.path key={g.d} d={g.d} {...common} />
+        ) : (
+          <motion.circle
+            key={`${g.cx}-${g.cy}`}
+            cx={g.cx}
+            cy={g.cy}
+            r={g.r}
+            fill={g.fill ? 'currentColor' : 'none'}
+            {...common}
+          />
+        )
+      })}
     </svg>
   )
 }
