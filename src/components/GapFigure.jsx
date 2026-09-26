@@ -50,27 +50,37 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
   const reduce = useReducedMotion()
   const glyph = GLYPHS[variant] ?? GLYPHS.trust
 
-  // One shared timeline: banks, then the span, then what stands inside it.
-  const draw = (delay, duration) =>
+  // The <svg> holds the only viewport trigger, and every child inherits the
+  // variant label from it. This is not a style choice: an IntersectionObserver
+  // attached to a <path> or <circle> never fires, because SVG geometry
+  // elements generate no CSS box for it to observe — so a `whileInView` on the
+  // shapes themselves leaves them stuck at opacity 0.
+  const stroke = (delay, duration) =>
     reduce
-      ? {}
+      ? undefined
       : {
-          initial: { pathLength: 0, opacity: 0 },
-          whileInView: { pathLength: 1, opacity: 1 },
-          transition: {
-            pathLength: { duration, delay, ease: [0.22, 1, 0.36, 1] },
-            opacity: { duration: 0.2, delay },
+          hidden: { pathLength: 0, opacity: 0 },
+          shown: {
+            pathLength: 1,
+            opacity: 1,
+            transition: {
+              pathLength: { duration, delay, ease: [0.22, 1, 0.36, 1] },
+              opacity: { duration: 0.2, delay },
+            },
           },
         }
 
   return (
-    <svg
+    <motion.svg
       viewBox="0 0 120 78"
       className={className}
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden
+      initial={reduce ? false : 'hidden'}
+      whileInView={reduce ? undefined : 'shown'}
+      viewport={{ once: true, margin: '-60px' }}
     >
       {/* banks */}
       <motion.path
@@ -78,16 +88,14 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
         stroke="currentColor"
         strokeWidth="2.5"
         className="text-ink-900/25"
-        viewport={{ once: true, margin: '-60px' }}
-        {...draw(0, 0.45)}
+        variants={stroke(0, 0.45)}
       />
       <motion.path
         d={BANK_RIGHT}
         stroke="currentColor"
         strokeWidth="2.5"
         className="text-ink-900/25"
-        viewport={{ once: true, margin: '-60px' }}
-        {...draw(0.1, 0.45)}
+        variants={stroke(0.1, 0.45)}
       />
 
       {/* the span */}
@@ -96,8 +104,7 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
         stroke="currentColor"
         strokeWidth="3.5"
         className="text-arc-600 transition-colors duration-300 group-hover:text-arc-500"
-        viewport={{ once: true, margin: '-60px' }}
-        {...draw(0.28, 0.95)}
+        variants={stroke(0.28, 0.95)}
       />
 
       {/* what stands inside it */}
@@ -106,8 +113,7 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
           stroke: 'currentColor',
           strokeWidth: 2.5,
           className: 'text-ink-700',
-          viewport: { once: true, margin: '-60px' },
-          ...draw(0.95 + i * 0.07, 0.45),
+          variants: stroke(0.95 + i * 0.07, 0.45),
         }
         return g.d ? (
           <motion.path key={g.d} d={g.d} {...common} />
@@ -122,6 +128,6 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
           />
         )
       })}
-    </svg>
+    </motion.svg>
   )
 }
