@@ -9,6 +9,7 @@ import {
   DOCTORAL_RESEARCHERS,
   EVENTS,
   MILESTONES,
+  RESEARCH_PROPERTIES,
   HIGHLIGHTS,
   PERSON,
   TEAM,
@@ -73,6 +74,20 @@ describe('MILESTONES', () => {
       expect(r.paper && r.venue).toBeTruthy()
       expect(typeof r.year).toBe('number')
       expect(isHttpUrl(r.href)).toBe(true)
+    }
+  })
+
+  it('research properties come from the closed vocabulary', () => {
+    const research = MILESTONES.flatMap((g) => g.items).filter(
+      (i) => i.track === 'Research',
+    )
+    for (const r of research) {
+      if (!r.properties) continue
+      expect(Array.isArray(r.properties)).toBe(true)
+      expect(r.properties.length).toBeGreaterThan(0)
+      for (const prop of r.properties) {
+        expect(RESEARCH_PROPERTIES).toContain(prop)
+      }
     }
   })
 })

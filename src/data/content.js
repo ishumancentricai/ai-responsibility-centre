@@ -99,6 +99,17 @@ export const FUNDERS = [
   },
 ]
 
+// The only properties a publication may be tagged with. Keeping the set
+// closed is the point: a column of tags is only comparable if everyone
+// draws from the same five. `content.test.js` enforces it.
+export const RESEARCH_PROPERTIES = [
+  'Safe',
+  'Fair',
+  'Transparent',
+  'Sovereign',
+  'Accountable',
+]
+
 // Upcoming events where ARC participates — chronological (soonest first).
 // Optional `image: '/events/<file>.jpg'` turns the card into a photo poster;
 // without one the card falls back to a typographic plate in the brand green.
@@ -181,7 +192,7 @@ export const MILESTONES = [
         authors: 'Ball, S., Allmendinger, S., Kühl, N., & Kreuter, F.',
         paper:
           'Reading Between the Tokens: Improving Preference Predictions through Mechanistic Forecasting',
-        properties: ['Transparent', 'Aligned'],
+        properties: ['Transparent'],
         venue: 'International Conference on Machine Learning (ICML), Seoul',
         year: 2026,
         href: 'https://arxiv.org/abs/2602.02882',
@@ -203,7 +214,7 @@ export const MILESTONES = [
         authors: 'Allmendinger, S., Deck, L., & Müller, L.',
         paper:
           'Where Are the Humans? A Scoping Review of Fairness in Multi-Agent AI Systems',
-        properties: ['Fair', 'Human oversight'],
+        properties: ['Fair', 'Accountable'],
         venue: 'European Conference on Information Systems (ECIS), Milan',
         year: 2026,
         href: 'https://aisel.aisnet.org/ecis2026/litrev/litrev/6/',
@@ -215,7 +226,7 @@ export const MILESTONES = [
         authors: 'Deck, L., Allmendinger, S., Müller, L., & Kühl, N.',
         paper:
           'Normative Common Ground Replication (NormCoRe): Replication-by-Translation for Studying Norms in Multi-Agent AI',
-        properties: ['Safe', 'Aligned'],
+        properties: ['Safe', 'Accountable'],
         venue:
           'ACM Conference on Fairness, Accountability, and Transparency (FAccT), Montreal',
         year: 2026,
