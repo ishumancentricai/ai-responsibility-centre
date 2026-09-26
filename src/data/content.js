@@ -97,6 +97,8 @@ export const FUNDERS = [
 ]
 
 // Upcoming events where ARC participates — chronological (soonest first).
+// Optional `image: '/events/<file>.jpg'` turns the card into a photo poster;
+// without one the card falls back to a typographic plate in the brand green.
 export const EVENTS = [
   {
     date: 'Sep 25, 2026',

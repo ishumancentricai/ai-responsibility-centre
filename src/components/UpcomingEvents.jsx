@@ -1,28 +1,40 @@
 import { Link } from 'react-router-dom'
 import Reveal, { Stagger, StaggerItem } from './Reveal'
+import ArcMark from './ArcMark'
 import { EVENTS } from '../data/content'
 
-// Colour-coded by event type.
-const TYPE_STYLES = {
-  Conference: 'bg-arc-100 text-arc-800',
-  'Campus event': 'bg-violet-100 text-violet-800',
-  Workshop: 'bg-amber-100 text-amber-800',
-  Talk: 'bg-emerald-100 text-emerald-800',
-  Launch: 'bg-rose-100 text-rose-800',
-  Policy: 'bg-sky-100 text-sky-800',
+/**
+ * Split "Oct 5, 2026, 15:30" or "Sep 14–15, 2026" into the month and day
+ * shown on the card's date plate. Anything unparseable falls back to the
+ * raw string, so a hand-written date can never break the layout.
+ */
+function splitDate(date = '') {
+  const m = /^([A-Za-z]{3,})\s+(\d+(?:[–-]\d+)?)/.exec(date)
+  return m ? { month: m[1].slice(0, 3), day: m[2] } : { month: null, day: null }
+}
+
+// Everything after the day and year — a time, if the entry carries one.
+function timeOf(date = '') {
+  const m = /,\s*(\d{1,2}:\d{2})\s*$/.exec(date)
+  return m ? m[1] : null
 }
 
 /**
- * UpcomingEvents — engaging events card grid, shared by the Home and
- * Events & Milestones pages so both stay in sync.
+ * UpcomingEvents — events as poster cards: a full-bleed photograph under a
+ * deep scrim with the billing set over it, or, until a photograph exists,
+ * a typographic plate built from the brand's own arch mark. Shared by the
+ * Home and Events & Milestones pages so both stay in sync.
+ *
+ * Give an entry `image: '/events/<file>.jpg'` to use a photograph.
  */
 export default function UpcomingEvents({
   className = 'bg-white py-20 sm:py-28',
-  cardClassName = 'border border-black/5 bg-gradient-to-b from-arc-50 to-white',
   heading = 'Upcoming events',
   subheading = 'Where you’ll find us next.',
   cta,
 }) {
+  if (!EVENTS.length) return null
+
   return (
     <section className={className}>
       <div className="container-arc">
@@ -43,7 +55,7 @@ export default function UpcomingEvents({
             {cta && (
               <Link
                 to={cta.to}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
+                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
               >
                 {cta.label}
                 <Arrow />
@@ -53,71 +65,108 @@ export default function UpcomingEvents({
         </Reveal>
 
         <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" step={0.1}>
-          {EVENTS.map((ev) => {
-            const Tag = ev.href ? 'a' : 'div'
-            return (
-              <StaggerItem key={`${ev.title}-${ev.date}`}>
-                <Tag
-                  {...(ev.href
-                    ? { href: ev.href, target: '_blank', rel: 'noreferrer' }
-                    : {})}
-                  className={`group relative flex h-full flex-col overflow-hidden rounded-3xl p-6 transition-all duration-300 ${cardClassName} ${
-                    ev.href
-                      ? 'hover:-translate-y-1.5 hover:border-arc-300 hover:shadow-2xl hover:shadow-arc-900/10'
-                      : ''
-                  }`}
-                >
-                  {/* animated top accent */}
-                  <span
-                    className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-arc-600 to-arc-300 transition-transform duration-300 group-hover:scale-x-100"
-                    aria-hidden
-                  />
-
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-arc-600 px-3 py-1 text-xs font-bold tracking-wide text-white">
-                      <CalendarIcon />
-                      {ev.date}
-                    </span>
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                        TYPE_STYLES[ev.type] ?? 'bg-slate-100 text-slate-700'
-                      }`}
-                    >
-                      {ev.type}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-5 text-lg font-bold leading-snug tracking-tight text-ink-900">
-                    {ev.title}
-                  </h3>
-                  <p className="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-arc-700">
-                    <PinIcon />
-                    {ev.location}
-                  </p>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">
-                    {ev.blurb}
-                  </p>
-
-                  {ev.href && (
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700">
-                      Event website
-                      <Arrow />
-                    </span>
-                  )}
-                </Tag>
-              </StaggerItem>
-            )
-          })}
+          {EVENTS.map((ev) => (
+            <StaggerItem key={`${ev.title}-${ev.date}`}>
+              <EventPoster ev={ev} />
+            </StaggerItem>
+          ))}
         </Stagger>
       </div>
     </section>
   )
 }
 
+function EventPoster({ ev }) {
+  const Tag = ev.href ? 'a' : 'div'
+  const { month, day } = splitDate(ev.date)
+  const time = timeOf(ev.date)
+
+  return (
+    <Tag
+      {...(ev.href ? { href: ev.href, target: '_blank', rel: 'noreferrer' } : {})}
+      className={`group relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-2xl bg-arc-950 p-6 transition-shadow duration-300 ${
+        ev.href
+          ? 'hover:shadow-2xl hover:shadow-arc-950/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-400 focus-visible:ring-offset-2'
+          : ''
+      }`}
+    >
+      {ev.image ? (
+        <img
+          src={ev.image}
+          alt=""
+          loading="lazy"
+          className="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+        />
+      ) : (
+        /* No photograph yet: an engraved arch mark on the deep brand green,
+           cropped hard so it reads as a printed poster rather than a gap. */
+        <span className="absolute inset-0 -z-20 overflow-hidden" aria-hidden>
+          <span className="absolute inset-0 bg-gradient-to-br from-arc-800 via-arc-900 to-arc-950" />
+          <ArcMark
+            className="absolute -right-16 -top-20 h-80 w-80 text-white/[0.07]"
+            strokeWidth={3}
+          />
+          <span className="absolute inset-0 bg-grid opacity-[0.35]" />
+        </span>
+      )}
+
+      {/* scrim — anchors the type and keeps contrast on any photograph */}
+      <span
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900 via-ink-900/75 to-ink-900/25 transition-opacity duration-300 group-hover:from-ink-900 group-hover:via-ink-900/70"
+        aria-hidden
+      />
+
+      {/* date plate, top-left — tear-off calendar, not a pill */}
+      <div className="absolute left-6 top-6 flex flex-col items-center rounded-lg bg-white/95 px-3 py-2 text-arc-900 shadow-sm backdrop-blur-sm">
+        {month ? (
+          <>
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.18em]">
+              {month}
+            </span>
+            <span className="text-2xl font-bold leading-none tabular-nums">{day}</span>
+          </>
+        ) : (
+          <span className="text-xs font-bold uppercase tracking-wide">{ev.date}</span>
+        )}
+      </div>
+
+      {/* billing */}
+      <div className="relative">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-arc-300">
+          {ev.type}
+          {time && <span className="text-white/45"> · {time}</span>}
+        </p>
+
+        <h3 className="mt-2 text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl">
+          {ev.title}
+        </h3>
+
+        <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-white/70">
+          <PinIcon />
+          {ev.location}
+        </p>
+
+        {ev.blurb && (
+          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/65">
+            {ev.blurb}
+          </p>
+        )}
+
+        {ev.href && (
+          <span className="mt-4 inline-flex items-center gap-1.5 border-t border-white/15 pt-4 text-sm font-semibold text-white">
+            Event website
+            <Arrow />
+          </span>
+        )}
+      </div>
+    </Tag>
+  )
+}
+
 function Arrow() {
   return (
     <svg
-      className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
+      className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden
@@ -128,28 +177,6 @@ function Arrow() {
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function CalendarIcon() {
-  return (
-    <svg className="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <rect
-        x="2.5"
-        y="3.5"
-        width="11"
-        height="10"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M2.5 6.5h11M5.5 2v3M10.5 2v3"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
       />
     </svg>
   )

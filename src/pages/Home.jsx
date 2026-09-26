@@ -27,7 +27,6 @@ export default function Home() {
       <Hero />
       <UpcomingEvents
         className="border-b border-black/5 bg-arc-50/40 py-24 sm:py-32"
-        cardClassName="border border-black/5 bg-white shadow-sm"
         cta={{ label: 'View all events & milestones', to: '/roadmap' }}
       />
       <InTheMedia />
