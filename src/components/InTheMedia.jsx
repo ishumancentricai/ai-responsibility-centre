@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useMemo, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
 import Reveal from './Reveal'
 import ArcMark from './ArcMark'
 import { PRESS } from '../data/content'
@@ -12,38 +12,83 @@ const READ_LABEL = {
   Video: 'Watch the interview',
 }
 
+// Seconds per full pass, one per column. Deliberately uneven, so the columns
+// never fall into step and the wall keeps drifting rather than marching.
+const DURATIONS = [74, 92, 83, 101]
+
 /**
- * Where a card sits in the stack, given how far it is from the open page.
- *
- * Pages hinge on their left edge, the way a broadsheet does: the open page
- * lies flat, unread pages wait underneath with their right edge peeking out,
- * and a page you have read swings left past 90° and is gone. Everything is a
- * transform on a composited layer, so the turn stays on the GPU.
+ * Every card on the wall: each press story, plus each outlet that picked a
+ * story up. The syndication mentions carry only the outlet and a link — that
+ * is all we hold on them — which makes them the short cards, and the stories
+ * with a portrait the tall ones.
  */
-function pageState(offset) {
-  if (offset < 0) {
-    // Already turned — swung left off the spine.
-    return { rotateY: -118, x: '-4%', z: 40, scale: 1, opacity: 0 }
+function buildCards() {
+  const stories = PRESS.map((item) => ({ kind: 'story', key: item.href, item }))
+  const mentions = PRESS.flatMap((item) =>
+    (item.coverage ?? []).map((cv) => ({
+      kind: 'mention',
+      key: `${item.href}#${cv.href}`,
+      outlet: cv.outlet,
+      href: cv.href,
+      story: item.title,
+    })),
+  )
+
+  // Shuffled once, with a fixed seed. Dealing a neatly interleaved list
+  // round-robin would hand every story to the same two columns; a seeded
+  // shuffle scatters tall and short while keeping the wall identical on
+  // every render.
+  return shuffle([...stories, ...mentions], 0x5eed)
+}
+
+/** Fisher–Yates driven by mulberry32, so the order is mixed but fixed. */
+function shuffle(list, seed) {
+  let s = seed
+  const rand = () => {
+    s = (s + 0x6d2b79f5) | 0
+    let t = Math.imul(s ^ (s >>> 15), 1 | s)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
   }
-  if (offset === 0) {
-    return { rotateY: 0, x: '0%', z: 0, scale: 1, opacity: 1 }
+  const out = [...list]
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rand() * (i + 1))
+    ;[out[i], out[j]] = [out[j], out[i]]
   }
-  // Still to come: progressively further back, nudged right so the edges show.
-  const depth = Math.min(offset, 3)
-  return {
-    rotateY: 3.5 * depth,
-    x: `${2.6 * depth}%`,
-    z: -70 * depth,
-    scale: 1 - 0.035 * depth,
-    opacity: depth >= 3 ? 0 : 0.5 - 0.12 * (depth - 1),
-  }
+  return out
+}
+
+// Deal round-robin, so neighbouring columns never start on the same card.
+function dealColumns(cards, count) {
+  const cols = Array.from({ length: count }, () => [])
+  cards.forEach((card, i) => cols[i % count].push(card))
+  return cols
+}
+
+const pick = (w) => (w >= 1024 ? 4 : w >= 640 ? 2 : 1)
+
+/** 4 columns on a desktop, 2 on a tablet, 1 on a phone. */
+function useColumnCount() {
+  const [count, setCount] = useState(() =>
+    typeof window === 'undefined' ? 4 : pick(window.innerWidth),
+  )
+  useEffect(() => {
+    const onResize = () => setCount(pick(window.innerWidth))
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+  return count
 }
 
 /**
- * InTheMedia — press & media coverage as a deck you leaf through, newest
- * first. Drag, arrow keys, the prev/next buttons or the progress rail all
- * turn the page. Only the open page takes pointer input, so the edges
- * peeking out behind it can never swallow a click.
+ * InTheMedia — press coverage as a wall of columns creeping downward, each on
+ * its own clock. Cards take the height their content needs, so the wall stays
+ * uneven without anything jumping.
+ *
+ * The drift pauses on hover and on keyboard focus, and there is an explicit
+ * pause control besides (WCAG 2.2.2). Under reduced motion the wall is simply
+ * a static grid. Each column renders its cards twice so the loop closes
+ * seamlessly; the second pass is hidden from assistive tech.
  *
  * Only outlet, headline, our own summary and outbound links — never article
  * text; portraits are ARC's own images.
@@ -52,303 +97,204 @@ export default function InTheMedia({
   className = 'border-b border-black/5 bg-paper-200 py-20 sm:py-28',
 }) {
   const reduce = useReducedMotion()
-  const [active, setActive] = useState(0)
-  const drag = useRef({ x: 0, moved: false })
-  const many = PRESS.length > 1
+  const [paused, setPaused] = useState(false)
+  const columnCount = useColumnCount()
+  const cards = useMemo(() => buildCards(), [])
+  const columns = useMemo(() => dealColumns(cards, columnCount), [cards, columnCount])
 
   if (!PRESS.length) return null
 
-  const last = PRESS.length - 1
-  const goTo = (i) => setActive(Math.min(Math.max(i, 0), last))
-  const step = (dir) => goTo(active + dir)
-
-  const onKeyDown = (e) => {
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      step(1)
-    } else if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      step(-1)
-    }
+  // A static grid when the visitor has asked for less motion.
+  if (reduce) {
+    return (
+      <section className={className}>
+        <div className="container-arc">
+          <Header />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {cards.map((card) => (
+              <Card key={card.key} card={card} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
   }
 
-  // Pointer drag — a flick past the threshold turns the page. The flag
-  // suppresses the click that would otherwise follow the whole-card link.
-  const onPointerDown = (e) => {
-    drag.current = { x: e.clientX, moved: false }
-  }
-  const onPointerUp = (e) => {
-    const dx = e.clientX - drag.current.x
-    if (Math.abs(dx) > 60) {
-      drag.current.moved = true
-      step(dx < 0 ? 1 : -1)
-    }
-  }
-  const onClickCapture = (e) => {
-    if (drag.current.moved) {
-      e.preventDefault()
-      e.stopPropagation()
-      drag.current.moved = false
-    }
-  }
+  const mask = 'linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent)'
 
   return (
     <section className={className}>
       <div className="container-arc">
-        <Reveal>
-          <div className="flex items-end justify-between gap-4 border-b border-ink-900/15 pb-5">
-            <div>
-              <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
-                In the media
-              </h2>
-              <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-ink-900 sm:text-3xl">
-                ARC in the press.
-              </p>
-            </div>
-            {many && (
-              <div className="flex items-center gap-4">
-                <p className="hidden text-sm tabular-nums text-ink-500 sm:block">
-                  <span className="font-semibold text-ink-900">
-                    {String(active + 1).padStart(2, '0')}
-                  </span>
-                  <span className="mx-1.5 text-ink-500/50">/</span>
-                  {String(PRESS.length).padStart(2, '0')}
-                </p>
-                <div className="hidden gap-2 sm:flex">
-                  <NavButton
-                    label="Previous article"
-                    onClick={() => step(-1)}
-                    disabled={active === 0}
-                    dir={-1}
-                  />
-                  <NavButton
-                    label="Next article"
-                    onClick={() => step(1)}
-                    disabled={active === last}
-                    dir={1}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </Reveal>
+        <Header paused={paused} onToggle={() => setPaused((p) => !p)} />
 
-        {/* Stage — one grid cell holds every page, so the section is exactly
-            as tall as the longest article and never jumps while turning. */}
+        {/* The wall. Hovering or tabbing into it stops the drift. */}
         <div
-          onKeyDown={onKeyDown}
-          onPointerDown={many ? onPointerDown : undefined}
-          onPointerUp={many ? onPointerUp : undefined}
-          onClickCapture={onClickCapture}
-          tabIndex={many ? 0 : undefined}
-          role={many ? 'region' : undefined}
-          aria-roledescription={many ? 'carousel' : undefined}
-          aria-label={many ? 'Press coverage' : undefined}
-          className="mt-10 grid touch-pan-y select-none focus-visible:outline-none"
-          style={{ perspective: '1900px', perspectiveOrigin: '30% 50%' }}
+          className="group relative mt-10 h-[34rem] overflow-hidden sm:h-[40rem] lg:h-[46rem]"
+          style={{ maskImage: mask, WebkitMaskImage: mask }}
         >
-          {PRESS.map((item, i) => {
-            const offset = i - active
-            const s = pageState(offset)
-            const buried = offset !== 0
-            return (
-              <motion.div
-                key={item.href}
-                className="col-start-1 row-start-1"
-                style={{
-                  transformOrigin: 'left center',
-                  backfaceVisibility: 'hidden',
-                  zIndex: PRESS.length - Math.abs(offset),
-                  pointerEvents: offset === 0 ? 'auto' : 'none',
-                }}
-                initial={false}
-                animate={
-                  reduce
-                    ? { opacity: offset === 0 ? 1 : 0 }
-                    : {
-                        rotateY: s.rotateY,
-                        x: s.x,
-                        z: s.z,
-                        scale: s.scale,
-                        opacity: s.opacity,
-                      }
-                }
-                transition={
-                  reduce
-                    ? { duration: 0.2 }
-                    : { duration: 0.75, ease: [0.33, 1, 0.68, 1] }
-                }
-                aria-hidden={buried}
-              >
-                <PressCard item={item} inert={buried} />
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {many && (
-          <div className="mt-7 flex gap-1.5">
-            {PRESS.map((item, i) => (
-              <button
-                key={item.href}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to ${item.outlet}: ${item.title}`}
-                aria-current={i === active}
-                className="group flex-1 py-2"
-              >
-                <span
-                  className={`block h-0.5 w-full transition-colors duration-300 ${
-                    i === active ? 'bg-arc-700' : 'bg-ink-900/15 group-hover:bg-arc-500'
-                  }`}
-                />
-              </button>
-            ))}
+          <div className="grid h-full grid-flow-col auto-cols-fr gap-5">
+            {columns.map((col, c) => {
+              // Twice through, so the track fills the column before the
+              // loop point comes round.
+              const half = [...col, ...col]
+              return (
+                <div key={c} className="relative overflow-hidden">
+                  <div
+                    className="animate-wall flex flex-col gap-5 group-focus-within:[animation-play-state:paused] group-hover:[animation-play-state:paused]"
+                    data-paused={paused}
+                    style={{
+                      '--wall-duration': `${DURATIONS[c % DURATIONS.length]}s`,
+                    }}
+                  >
+                    {half.map((card, i) => (
+                      <Card key={`a-${card.key}-${i}`} card={card} />
+                    ))}
+                    {half.map((card, i) => (
+                      <Card key={`b-${card.key}-${i}`} card={card} duplicate />
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
           </div>
-        )}
-
-        {many && (
-          <p className="mt-3 text-xs text-ink-500">
-            Drag, swipe or use the arrow keys to turn the page.
-          </p>
-        )}
+        </div>
       </div>
     </section>
   )
 }
 
-function PressCard({ item, inert }) {
-  const readLabel = READ_LABEL[item.type] ?? 'Read more'
+function Header({ paused, onToggle }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-sm border border-paper-300 bg-paper-50 p-6 shadow-[0_14px_36px_-20px_rgba(15,28,24,0.4)] transition-colors duration-300 hover:border-ink-500/40 sm:p-9">
-      {/* whole-card link (overlay); coverage links sit above it via z-20 */}
-      <a
-        href={item.href}
-        target="_blank"
-        rel="noreferrer"
-        tabIndex={inert ? -1 : undefined}
-        aria-label={`${item.outlet}: ${item.title}`}
-        className="absolute inset-0 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
-      />
-
-      {/* masthead — outlet in caps over a single firm rule */}
-      <div className="relative flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b-2 border-ink-900 pb-2.5">
-        <span className="text-sm font-bold uppercase tracking-[0.2em] text-ink-900">
-          {item.outlet}
-        </span>
-        <span className="ml-auto text-xs tabular-nums text-ink-500">
-          {item.date}
-          {item.via && ` · via ${item.via}`}
-        </span>
-      </div>
-
-      {/* body — portrait leads the column, the way a feature page runs */}
-      <div className="relative flex flex-1 flex-col gap-6 pt-6 sm:flex-row sm:gap-8">
-        <figure className="m-0 sm:w-44 sm:shrink-0">
-          {item.image ? (
-            <img
-              src={item.image}
-              alt={item.person ?? item.outlet}
-              loading="lazy"
-              draggable={false}
-              className="aspect-square w-40 object-cover object-top sm:w-full"
-            />
-          ) : (
-            <div className="grid aspect-square w-40 place-items-center bg-paper-100 sm:w-full">
-              <ArcMark className="h-12 w-12 text-ink-500/60" strokeWidth={4} />
-            </div>
-          )}
-          {item.person && (
-            <figcaption className="mt-2 border-t border-ink-900/15 pt-2 text-xs leading-snug text-ink-500">
-              {item.person}
-            </figcaption>
-          )}
-        </figure>
-
-        <div className="min-w-0 flex-1">
-          {item.type && (
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-arc-700">
-              {item.type}
-            </p>
-          )}
-
-          <h3 className="mt-2 font-serif text-2xl font-bold leading-[1.15] tracking-tight text-ink-900 sm:text-[2.1rem]">
-            {item.title}
-          </h3>
-
-          {item.summary && (
-            <p className="mt-3 text-sm leading-relaxed text-ink-700 sm:text-base">
-              {item.summary}
-            </p>
-          )}
+    <Reveal>
+      <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink-900/15 pb-5">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+            In the media
+          </h2>
+          <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-ink-900 sm:text-3xl">
+            ARC in the press.
+          </p>
         </div>
-      </div>
-
-      {/* footer: coverage on the left, the call to action on the right */}
-      <div className="relative mt-7 flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-t border-ink-900/15 pt-5">
-        {item.coverage?.length > 0 ? (
-          <div className="min-w-0">
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-500">
-              Also covered by
-            </p>
-            <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
-              {item.coverage.map((cv) => (
-                <a
-                  key={cv.href}
-                  href={cv.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  tabIndex={inert ? -1 : undefined}
-                  className="relative z-20 text-xs font-medium text-ink-700 underline decoration-ink-900/25 underline-offset-4 transition-colors hover:text-arc-700 hover:decoration-arc-600"
-                >
-                  {cv.outlet}
-                </a>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <span />
+        {onToggle && (
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-pressed={paused}
+            className="inline-flex items-center gap-2 rounded-full border border-ink-900/20 px-3.5 py-1.5 text-xs font-semibold text-ink-700 transition-colors hover:border-arc-700 hover:text-arc-700"
+          >
+            {paused ? <PlayIcon /> : <PauseIcon />}
+            {paused ? 'Resume' : 'Pause'}
+          </button>
         )}
-        <span className="ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors group-hover:text-arc-800">
-          {readLabel}
-          <Arrow />
-        </span>
       </div>
-    </article>
+    </Reveal>
   )
 }
 
-function NavButton({ label, onClick, disabled, dir }) {
+function Card({ card, duplicate }) {
+  return card.kind === 'story' ? (
+    <StoryCard item={card.item} duplicate={duplicate} />
+  ) : (
+    <MentionCard card={card} duplicate={duplicate} />
+  )
+}
+
+/** A full press story: portrait on top, masthead, headline, summary. */
+function StoryCard({ item, duplicate }) {
+  const readLabel = READ_LABEL[item.type] ?? 'Read more'
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-900/20 text-ink-700 transition-all hover:border-arc-700 hover:bg-arc-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:border-ink-900/20 disabled:hover:bg-transparent disabled:hover:text-ink-700"
+    <a
+      href={item.href}
+      target="_blank"
+      rel="noreferrer"
+      tabIndex={duplicate ? -1 : undefined}
+      aria-hidden={duplicate}
+      className="group/card block overflow-hidden rounded-sm border border-paper-300 bg-paper-50 shadow-[0_10px_28px_-20px_rgba(15,28,24,0.45)] transition-colors hover:border-ink-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
     >
-      <svg
-        className={`h-4 w-4 ${dir < 0 ? 'rotate-180' : ''}`}
-        viewBox="0 0 16 16"
-        fill="none"
-        aria-hidden
-      >
-        <path
-          d="M3 8h9M9 4l4 4-4 4"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {item.image ? (
+        <img
+          src={item.image}
+          alt=""
+          loading="lazy"
+          draggable={false}
+          className="aspect-[4/3] w-full object-cover object-top"
         />
-      </svg>
-    </button>
+      ) : (
+        <div className="grid aspect-[4/3] w-full place-items-center bg-paper-100">
+          <ArcMark className="h-10 w-10 text-ink-500/60" strokeWidth={4} />
+        </div>
+      )}
+
+      <div className="p-5">
+        <div className="flex flex-wrap items-baseline gap-x-2 border-b border-ink-900 pb-2">
+          <span className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-ink-900">
+            {item.outlet}
+          </span>
+          <span className="ml-auto text-[0.68rem] tabular-nums text-ink-500">
+            {item.date}
+          </span>
+        </div>
+
+        {item.type && (
+          <p className="mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-arc-700">
+            {item.type}
+          </p>
+        )}
+
+        <h3 className="mt-1.5 font-serif text-lg font-bold leading-[1.2] tracking-tight text-ink-900">
+          {item.title}
+        </h3>
+
+        {item.summary && (
+          <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-ink-700">
+            {item.summary}
+          </p>
+        )}
+
+        <div className="mt-4 flex items-center gap-x-3 border-t border-ink-900/15 pt-3 text-xs">
+          {item.person && (
+            <span className="truncate italic text-ink-500">{item.person}</span>
+          )}
+          <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 font-semibold text-arc-700">
+            {readLabel}
+            <Arrow />
+          </span>
+        </div>
+      </div>
+    </a>
+  )
+}
+
+/** An outlet that picked a story up — the outlet and a link is all we hold. */
+function MentionCard({ card, duplicate }) {
+  return (
+    <a
+      href={card.href}
+      target="_blank"
+      rel="noreferrer"
+      tabIndex={duplicate ? -1 : undefined}
+      aria-hidden={duplicate}
+      className="group/card block rounded-sm border border-paper-300 bg-paper-100 p-5 transition-colors hover:border-ink-500/40 hover:bg-paper-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
+    >
+      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-ink-500">
+        Also covered by
+      </p>
+      <p className="mt-2 border-b border-ink-900 pb-2 text-sm font-bold uppercase tracking-[0.14em] text-ink-900">
+        {card.outlet}
+      </p>
+      <p className="mt-2.5 font-serif text-sm leading-snug text-ink-700">{card.story}</p>
+      <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-arc-700">
+        Read more
+        <Arrow />
+      </span>
+    </a>
   )
 }
 
 function Arrow() {
   return (
     <svg
-      className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
+      className="h-3 w-3 transition-transform duration-300 group-hover/card:translate-x-1"
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden
@@ -356,10 +302,27 @@ function Arrow() {
       <path
         d="M3 8h9M9 4l4 4-4 4"
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  )
+}
+
+function PauseIcon() {
+  return (
+    <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
+      <rect x="2" y="1.5" width="3" height="9" rx="1" />
+      <rect x="7" y="1.5" width="3" height="9" rx="1" />
+    </svg>
+  )
+}
+
+function PlayIcon() {
+  return (
+    <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
+      <path d="M3 1.5v9l8-4.5-8-4.5Z" />
     </svg>
   )
 }

@@ -71,6 +71,23 @@
     background-size: 28px 28px;
   }
 
+  /* News wall — each column creeps downward on its own clock. The track
+     holds its cards twice, so translating half its height loops seamlessly. */
+  .animate-wall {
+    animation: wall-scroll var(--wall-duration, 60s) linear infinite;
+    will-change: transform;
+  }
+
+  .animate-wall[data-paused='true'] {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-wall {
+      animation: none;
+    }
+  }
+
   /* hide the scrollbar on scroll-snap carousels (still scrollable) */
   .no-scrollbar {
     -ms-overflow-style: none;
@@ -78,5 +95,14 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@keyframes wall-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
   }
 }
