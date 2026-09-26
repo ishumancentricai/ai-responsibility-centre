@@ -119,9 +119,16 @@ export const MILESTONES = [
     items: [
       {
         track: 'Workshop',
-        title: 'AI Governance workshop at AI Day UBT',
-        text: 'A hands-on session with practitioners from industry on governing AI inside organisations — turning the obligations of the EU AI Act into concrete roles, processes and documentation that teams can actually run.',
+        title: '“KI-Governance entmystifiziert” — AI Day UBT',
+        text: 'A practical workshop with industry participants on governing AI as it shifts from assistant to actor: the risks that arrive with agentic systems, what regulation actually demands, and how companies implement it. Groups then worked the material through on their own cases — governance framed as the basis for safe innovation rather than as added bureaucracy.',
         authors: 'Curated by Valentin Mayer',
+        href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
+      },
+      {
+        track: 'Talk',
+        title: 'Scientific keynote at AI Day UBT',
+        text: 'Opening the university’s AI Day: the current challenges of deploying AI responsibly and sovereignly, and what matters most when putting that into practice. Followed by a panel with Lisa Precht (IBM) and Martin Braun (NeuroForge) on where Upper Franconia, Germany and the EU stand.',
+        authors: 'Prof. Dr. Niklas Kühl',
         href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
       },
       {
