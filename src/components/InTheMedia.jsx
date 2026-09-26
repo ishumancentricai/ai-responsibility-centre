@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import Reveal from './Reveal'
 import ArcMark from './ArcMark'
 import { PRESS } from '../data/content'
 
-// Medium, set as a small caps label rather than a coloured chip — the
-// outlet's own name should be the loudest thing on the card.
+// Call-to-action wording adapts to the medium.
 const READ_LABEL = {
   Interview: 'Read the interview',
   'Press release': 'Read the release',
@@ -13,10 +13,37 @@ const READ_LABEL = {
 }
 
 /**
- * InTheMedia — press & media coverage as a scroll-snap carousel (newest
- * first). Swipe, trackpad, drag, arrow keys and prev/next buttons all move
- * it; a progress rail tracks the centred card. Cards snap to the horizontal
- * centre, and edge spacers let the first/last card centre too.
+ * Where a card sits in the stack, given how far it is from the open page.
+ *
+ * Pages hinge on their left edge, the way a broadsheet does: the open page
+ * lies flat, unread pages wait underneath with their right edge peeking out,
+ * and a page you have read swings left past 90° and is gone. Everything is a
+ * transform on a composited layer, so the turn stays on the GPU.
+ */
+function pageState(offset) {
+  if (offset < 0) {
+    // Already turned — swung left off the spine.
+    return { rotateY: -118, x: '-4%', z: 40, scale: 1, opacity: 0 }
+  }
+  if (offset === 0) {
+    return { rotateY: 0, x: '0%', z: 0, scale: 1, opacity: 1 }
+  }
+  // Still to come: progressively further back, nudged right so the edges show.
+  const depth = Math.min(offset, 3)
+  return {
+    rotateY: 3.5 * depth,
+    x: `${2.6 * depth}%`,
+    z: -70 * depth,
+    scale: 1 - 0.035 * depth,
+    opacity: depth >= 3 ? 0 : 0.5 - 0.12 * (depth - 1),
+  }
+}
+
+/**
+ * InTheMedia — press & media coverage as a deck you leaf through, newest
+ * first. Drag, arrow keys, the prev/next buttons or the progress rail all
+ * turn the page. Only the open page takes pointer input, so the edges
+ * peeking out behind it can never swallow a click.
  *
  * Only outlet, headline, our own summary and outbound links — never article
  * text; portraits are ARC's own images.
@@ -24,35 +51,16 @@ const READ_LABEL = {
 export default function InTheMedia({
   className = 'border-b border-black/5 bg-white py-20 sm:py-28',
 }) {
-  const trackRef = useRef(null)
-  const cardRefs = useRef([])
+  const reduce = useReducedMotion()
   const [active, setActive] = useState(0)
+  const drag = useRef({ x: 0, moved: false })
   const many = PRESS.length > 1
-
-  // Track the most-visible card so the rail + emphasis follow the scroll.
-  useEffect(() => {
-    if (!many || !trackRef.current) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting && e.intersectionRatio >= 0.6) {
-            setActive(Number(e.target.dataset.idx))
-          }
-        }
-      },
-      { root: trackRef.current, threshold: [0.6] },
-    )
-    cardRefs.current.forEach((el) => el && io.observe(el))
-    return () => io.disconnect()
-  }, [many])
 
   if (!PRESS.length) return null
 
-  const goTo = (idx) => {
-    const el = cardRefs.current[idx]
-    if (el) el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
-  }
-  const step = (dir) => goTo(Math.min(Math.max(active + dir, 0), PRESS.length - 1))
+  const last = PRESS.length - 1
+  const goTo = (i) => setActive(Math.min(Math.max(i, 0), last))
+  const step = (dir) => goTo(active + dir)
 
   const onKeyDown = (e) => {
     if (e.key === 'ArrowRight') {
@@ -64,10 +72,25 @@ export default function InTheMedia({
     }
   }
 
-  // Edge spacers so the first & last cards can snap to the centre too
-  // (spacer + the flex gap ≈ half the empty track width beside a card).
-  const spacer =
-    'shrink-0 snap-none w-[calc(6%_-_20px)] sm:w-[calc(8%_-_20px)] lg:w-[calc(13%_-_20px)]'
+  // Pointer drag — a flick past the threshold turns the page. The flag
+  // suppresses the click that would otherwise follow the whole-card link.
+  const onPointerDown = (e) => {
+    drag.current = { x: e.clientX, moved: false }
+  }
+  const onPointerUp = (e) => {
+    const dx = e.clientX - drag.current.x
+    if (Math.abs(dx) > 60) {
+      drag.current.moved = true
+      step(dx < 0 ? 1 : -1)
+    }
+  }
+  const onClickCapture = (e) => {
+    if (drag.current.moved) {
+      e.preventDefault()
+      e.stopPropagation()
+      drag.current.moved = false
+    }
+  }
 
   return (
     <section className={className}>
@@ -84,7 +107,6 @@ export default function InTheMedia({
             </div>
             {many && (
               <div className="flex items-center gap-4">
-                {/* editorial counter — tabular so it never jitters */}
                 <p className="hidden text-sm tabular-nums text-ink-500 sm:block">
                   <span className="font-semibold text-ink-900">
                     {String(active + 1).padStart(2, '0')}
@@ -94,15 +116,15 @@ export default function InTheMedia({
                 </p>
                 <div className="hidden gap-2 sm:flex">
                   <NavButton
-                    label="Previous"
+                    label="Previous article"
                     onClick={() => step(-1)}
                     disabled={active === 0}
                     dir={-1}
                   />
                   <NavButton
-                    label="Next"
+                    label="Next article"
                     onClick={() => step(1)}
-                    disabled={active === PRESS.length - 1}
+                    disabled={active === last}
                     dir={1}
                   />
                 </div>
@@ -111,34 +133,61 @@ export default function InTheMedia({
           </div>
         </Reveal>
 
+        {/* Stage — one grid cell holds every page, so the section is exactly
+            as tall as the longest article and never jumps while turning. */}
         <div
-          ref={trackRef}
           onKeyDown={onKeyDown}
+          onPointerDown={many ? onPointerDown : undefined}
+          onPointerUp={many ? onPointerUp : undefined}
+          onClickCapture={onClickCapture}
           tabIndex={many ? 0 : undefined}
           role={many ? 'region' : undefined}
           aria-roledescription={many ? 'carousel' : undefined}
           aria-label={many ? 'Press coverage' : undefined}
-          className="no-scrollbar mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto py-2 focus-visible:outline-none"
+          className="mt-10 grid touch-pan-y select-none focus-visible:outline-none"
+          style={{ perspective: '1900px', perspectiveOrigin: '30% 50%' }}
         >
-          {many && <div className={spacer} aria-hidden />}
-          {PRESS.map((item, i) => (
-            <div
-              key={item.href}
-              data-idx={i}
-              ref={(el) => (cardRefs.current[i] = el)}
-              className={`w-[88%] shrink-0 snap-center transition-opacity duration-500 sm:w-[84%] lg:w-[74%] ${
-                many && i !== active ? 'opacity-40' : 'opacity-100'
-              }`}
-            >
-              <PressCard item={item} />
-            </div>
-          ))}
-          {many && <div className={spacer} aria-hidden />}
+          {PRESS.map((item, i) => {
+            const offset = i - active
+            const s = pageState(offset)
+            const buried = offset !== 0
+            return (
+              <motion.div
+                key={item.href}
+                className="col-start-1 row-start-1"
+                style={{
+                  transformOrigin: 'left center',
+                  backfaceVisibility: 'hidden',
+                  zIndex: PRESS.length - Math.abs(offset),
+                  pointerEvents: offset === 0 ? 'auto' : 'none',
+                }}
+                initial={false}
+                animate={
+                  reduce
+                    ? { opacity: offset === 0 ? 1 : 0 }
+                    : {
+                        rotateY: s.rotateY,
+                        x: s.x,
+                        z: s.z,
+                        scale: s.scale,
+                        opacity: s.opacity,
+                      }
+                }
+                transition={
+                  reduce
+                    ? { duration: 0.2 }
+                    : { duration: 0.75, ease: [0.33, 1, 0.68, 1] }
+                }
+                aria-hidden={buried}
+              >
+                <PressCard item={item} inert={buried} />
+              </motion.div>
+            )
+          })}
         </div>
 
-        {/* progress rail — reads as a scrollbar, not a dot cluster */}
         {many && (
-          <div className="mt-6 flex gap-1.5">
+          <div className="mt-7 flex gap-1.5">
             {PRESS.map((item, i) => (
               <button
                 key={item.href}
@@ -157,20 +206,33 @@ export default function InTheMedia({
             ))}
           </div>
         )}
+
+        {many && (
+          <p className="mt-3 text-xs text-ink-500">
+            Drag, swipe or use the arrow keys to turn the page.
+          </p>
+        )}
       </div>
     </section>
   )
 }
 
-function PressCard({ item }) {
+function PressCard({ item, inert }) {
   const readLabel = READ_LABEL[item.type] ?? 'Read more'
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-arc-800 bg-arc-900 p-6 transition-colors duration-300 hover:border-arc-500 sm:p-9">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-arc-800 bg-arc-900 p-6 shadow-xl shadow-arc-950/20 transition-colors duration-300 hover:border-arc-500 sm:p-9">
+      {/* spine — the shaded gutter a folded page shows at its hinge */}
+      <span
+        className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-black/35 to-transparent"
+        aria-hidden
+      />
+
       {/* whole-card link (overlay); coverage links sit above it via z-20 */}
       <a
         href={item.href}
         target="_blank"
         rel="noreferrer"
+        tabIndex={inert ? -1 : undefined}
         aria-label={`${item.outlet}: ${item.title}`}
         className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-300"
       />
@@ -200,6 +262,7 @@ function PressCard({ item }) {
                 src={item.image}
                 alt={item.person ?? item.outlet}
                 loading="lazy"
+                draggable={false}
                 className="h-20 w-20 rounded-full object-cover ring-1 ring-white/25 sm:h-24 sm:w-24"
               />
             ) : (
@@ -234,6 +297,7 @@ function PressCard({ item }) {
                   href={c.href}
                   target="_blank"
                   rel="noreferrer"
+                  tabIndex={inert ? -1 : undefined}
                   className="relative z-20 text-xs font-medium text-white/65 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white hover:decoration-arc-300"
                 >
                   {c.outlet}
