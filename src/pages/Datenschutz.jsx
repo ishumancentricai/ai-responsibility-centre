@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader'
 import Reveal from '../components/Reveal'
 import { LEGAL } from '../data/content'
 
-const { provider, controller, dpo, dpa, hosting, lastUpdated } = LEGAL
+const { provider, controller, dpo, dpa, hosting, contactForm, video, lastUpdated } = LEGAL
 
 export default function Datenschutz() {
   return (
@@ -95,28 +95,78 @@ export default function Datenschutz() {
 
               <Block title="4. Kontaktaufnahme">
                 <p>
-                  Auf dieser Website wird kein serverseitiges Kontaktformular betrieben.
-                  Die Schaltflächen zur Kontaktaufnahme öffnen Ihr lokales
-                  E-Mail-Programm. Wenn Sie uns per E-Mail kontaktieren, werden die von
-                  Ihnen mitgeteilten Daten (z. B. Name, E-Mail-Adresse, Inhalt der
-                  Nachricht) zur Bearbeitung Ihres Anliegens verarbeitet. Rechtsgrundlage
-                  ist unser berechtigtes Interesse an der Beantwortung Ihrer Anfrage (Art.
-                  6 Abs. 1 lit. f DSGVO) bzw. Art. 6 Abs. 1 lit. b DSGVO bei
-                  vertragsbezogenen Anfragen. Die Daten werden gelöscht, sobald sie für
-                  die Erreichung des Zwecks nicht mehr erforderlich sind und keine
-                  gesetzlichen Aufbewahrungspflichten entgegenstehen.
+                  Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen mitgeteilten
+                  Daten (z. B. Name, E-Mail-Adresse, Inhalt der Nachricht) zur Bearbeitung
+                  Ihres Anliegens verarbeitet. Rechtsgrundlage ist unser berechtigtes
+                  Interesse an der Beantwortung Ihrer Anfrage (Art. 6 Abs. 1 lit. f DSGVO)
+                  bzw. Art. 6 Abs. 1 lit. b DSGVO bei vertragsbezogenen Anfragen. Die
+                  Daten werden gelöscht, sobald sie für die Erreichung des Zwecks nicht
+                  mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten
+                  entgegenstehen.
+                </p>
+                <p className="mt-2">
+                  Auf der Seite „Contact“ steht zusätzlich ein Kontaktformular zur
+                  Verfügung. Die dort eingegebenen Daten (Name, E-Mail-Adresse, Betreff
+                  und Nachricht) werden nicht auf unserem eigenen Server verarbeitet,
+                  sondern über den Dienst <strong>{contactForm.provider}</strong>,{' '}
+                  {contactForm.address}, an unser Postfach zugestellt. Der Anbieter
+                  verarbeitet die Daten ausschließlich weisungsgebunden als
+                  Auftragsverarbeiter (Art. 28 DSGVO). Rechtsgrundlage ist Art. 6 Abs. 1
+                  lit. f DSGVO. Sie können uns alternativ jederzeit direkt per E-Mail
+                  erreichen. Weitere Informationen finden Sie in der{' '}
+                  <a
+                    className="text-arc-700 hover:underline"
+                    href={contactForm.privacyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Datenschutzerklärung von {contactForm.provider}
+                  </a>
+                  .
                 </p>
               </Block>
 
               <Block title="5. Cookies, Tracking und Analyse">
                 <p>
                   Diese Website verwendet keine Cookies, kein Tracking und keine
-                  Webanalyse-Dienste. Es werden keine Schriftarten, Karten oder sonstigen
-                  Inhalte dynamisch von Drittanbietern nachgeladen.
+                  Webanalyse-Dienste. Schriftarten und Karten werden nicht von
+                  Drittanbietern nachgeladen, sondern lokal ausgeliefert. Eine
+                  Einwilligung nach § 25 TDDDG ist daher nicht erforderlich; ein
+                  Cookie-Banner entfällt.
                 </p>
               </Block>
 
-              <Block title="6. Ihre Rechte als betroffene Person">
+              <Block title="6. Eingebettete Videos (Zwei-Klick-Lösung)">
+                <p>
+                  Auf der Seite „Events &amp; Milestones“ binden wir vereinzelt Videos des
+                  Dienstes <strong>{video.service}</strong> ein, betrieben von{' '}
+                  {video.provider}, {video.address}. Diese Videos werden{' '}
+                  <strong>nicht automatisch geladen</strong>. Beim Aufruf der Seite sehen
+                  Sie zunächst nur ein Vorschaubild, das von unserem eigenen Server
+                  ausgeliefert wird — es wird keine Verbindung zu {video.provider}{' '}
+                  hergestellt.
+                </p>
+                <p className="mt-2">
+                  Erst wenn Sie das Vorschaubild aktiv anklicken, wird das Video von
+                  youtube-nocookie.com nachgeladen. Dabei erfährt {video.provider} Ihre
+                  IP-Adresse und weitere Verbindungsdaten; eine Übermittlung in die USA
+                  kann nicht ausgeschlossen werden. Rechtsgrundlage ist Ihre durch den
+                  Klick erteilte Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie
+                  jederzeit mit Wirkung für die Zukunft widerrufen können, indem Sie keine
+                  weiteren Videos starten. Weitere Informationen finden Sie in der{' '}
+                  <a
+                    className="text-arc-700 hover:underline"
+                    href={video.privacyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Datenschutzerklärung von {video.provider}
+                  </a>
+                  .
+                </p>
+              </Block>
+
+              <Block title="7. Ihre Rechte als betroffene Person">
                 <p>Sie haben im Rahmen der gesetzlichen Vorgaben das Recht auf:</p>
                 <ul className="mt-2 list-disc space-y-1 pl-6">
                   <li>
@@ -134,7 +184,7 @@ export default function Datenschutz() {
                 </p>
               </Block>
 
-              <Block title="7. Beschwerderecht bei der Aufsichtsbehörde">
+              <Block title="8. Beschwerderecht bei der Aufsichtsbehörde">
                 <p>
                   Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über
                   die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Zuständig
@@ -154,7 +204,7 @@ export default function Datenschutz() {
                 </p>
               </Block>
 
-              <Block title="8. Verschlüsselung (SSL/TLS)">
+              <Block title="9. Verschlüsselung (SSL/TLS)">
                 <p>
                   Diese Website nutzt aus Sicherheitsgründen und zum Schutz der
                   Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung.

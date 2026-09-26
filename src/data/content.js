@@ -147,11 +147,13 @@ export const MILESTONES = [
         href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
       },
       {
-        track: 'Announcement',
+        track: 'Talk',
         title: 'Keynote at Brains on Silicon ’26 — Dresden',
         text: '“KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — a joint keynote with BAIOSPHERE CEO Michael Klimke on how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
-        // YouTube id; rendered as a privacy-friendly nocookie embed.
+        // YouTube id, played only on click; the poster is self-hosted so the
+        // page opens no connection to Google until the visitor presses play.
         video: 'cZoYgR4KS7U',
+        videoPoster: '/video/brains-on-silicon-2026.jpg',
         href: 'https://brainsonsilicon.com/',
       },
     ],
@@ -692,6 +694,21 @@ export const LEGAL = {
     address: ['Wagmüllerstraße 18', '80538 München', 'Deutschland'],
     web: 'https://www.datenschutz-bayern.de',
   },
+  // Auftragsverarbeiter des Kontaktformulars (Contact.jsx → api.web3forms.com).
+  // ACHTUNG: Anbieteranschrift und AV-Vertrag noch durch den behördlichen
+  // Datenschutzbeauftragten prüfen bzw. abschließen lassen.
+  contactForm: {
+    provider: 'Web3Forms',
+    address: '⟨Anschrift des Anbieters ergänzen⟩',
+    privacyUrl: 'https://web3forms.com/privacy',
+  },
+  // Eingebettete Videos — nur nach aktivem Klick (Zwei-Klick-Lösung).
+  video: {
+    provider: 'Google Ireland Limited',
+    address: 'Gordon House, Barrow Street, Dublin 4, Irland',
+    service: 'YouTube',
+    privacyUrl: 'https://policies.google.com/privacy',
+  },
   // Hosting-Dienstleister
   hosting: {
     provider: 'GitHub, Inc.',
@@ -700,7 +717,7 @@ export const LEGAL = {
     privacyUrl:
       'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
   },
-  lastUpdated: 'Juni 2026',
+  lastUpdated: 'September 2026',
 }
 
 // Number of doctoral researchers — derived from the PHDS list.

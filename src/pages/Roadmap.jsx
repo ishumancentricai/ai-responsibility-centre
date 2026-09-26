@@ -1,5 +1,6 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
+import VideoEmbed from '../components/VideoEmbed'
 import UpcomingEvents from '../components/UpcomingEvents'
 import { MILESTONES, HIGHLIGHTS } from '../data/content'
 
@@ -111,15 +112,11 @@ export default function Roadmap() {
                           )}
 
                           {item.video && (
-                            <div className="mt-4 overflow-hidden rounded-xl border border-black/5 bg-black">
-                              <iframe
-                                className="aspect-video w-full"
-                                src={`https://www.youtube-nocookie.com/embed/${item.video}`}
+                            <div className="mt-4">
+                              <VideoEmbed
+                                id={item.video}
                                 title={item.title}
-                                loading="lazy"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
+                                poster={item.videoPoster}
                               />
                             </div>
                           )}
