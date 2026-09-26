@@ -10,6 +10,7 @@ import {
 import ArcMark from '../components/ArcMark'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import UpcomingEvents from '../components/UpcomingEvents'
+import GapFigure from '../components/GapFigure'
 import InTheMedia from '../components/InTheMedia'
 import {
   VISION,
@@ -227,12 +228,29 @@ function Gaps() {
         <Stagger className="mt-12 grid gap-6 md:grid-cols-3" step={0.14}>
           {GAPS.map((gap, i) => (
             <StaggerItem key={gap.title}>
-              <article className="group h-full rounded-3xl border border-black/5 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-arc-600 text-base font-bold text-white">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-6 text-xl font-semibold text-ink-900">{gap.title}</h3>
-                <p className="mt-3 leading-relaxed text-ink-700">{gap.body}</p>
+              <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                {/* figure panel — the arch spanning the break */}
+                <div className="relative border-b border-black/5 bg-gradient-to-b from-arc-50/70 to-white px-8 pb-6 pt-8">
+                  <span className="absolute inset-0 bg-grid opacity-40" aria-hidden />
+                  <GapFigure
+                    variant={gap.figure}
+                    className="relative mx-auto h-28 w-full max-w-[13rem]"
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-bold tabular-nums tracking-[0.15em] text-arc-600">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className="h-px flex-1 bg-gradient-to-r from-arc-300 to-transparent"
+                      aria-hidden
+                    />
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold text-ink-900">{gap.title}</h3>
+                  <p className="mt-3 leading-relaxed text-ink-700">{gap.body}</p>
+                </div>
               </article>
             </StaggerItem>
           ))}

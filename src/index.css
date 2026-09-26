@@ -15,6 +15,12 @@
   --color-arc-900: #074535;
   --color-arc-950: #02261e;
 
+  /* Newsprint — the press cards are set as paper, not as brand panels */
+  --color-paper-50: #fdfcf9;
+  --color-paper-100: #f7f5ef;
+  --color-paper-200: #e9e6dc;
+  --color-paper-300: #d8d3c5;
+
   /* Neutral ink */
   --color-ink-900: #0f1c18;
   --color-ink-700: #2b3a35;

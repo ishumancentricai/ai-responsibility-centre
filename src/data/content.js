@@ -66,14 +66,17 @@ export const STRATEGY_PRINCIPLES = [
 export const GAPS = [
   {
     title: 'Trust gap',
+    figure: 'trust',
     body: 'AI systems make mistakes, yet trust in them too often rests on assumption rather than evidence, control or clear limits. Our goal is to make that trust earned — grounded in verifiable evidence, meaningful oversight and well-defined boundaries.',
   },
   {
     title: 'Design gap',
+    figure: 'design',
     body: 'The AI Act is in force, but the practicable standards, testing procedures and evidence needed to implement it are still missing. Our goal is to build the methods, tests and evidence that turn regulation into deployable practice.',
   },
   {
     title: 'Structure gap',
+    figure: 'structure',
     body: 'Safe AI needs technology, law and the social sciences, yet these disciplines rarely meet at a single interface. Our goal is to unite them in one centre, so responsible AI is built rather than merely demanded.',
   },
 ]
