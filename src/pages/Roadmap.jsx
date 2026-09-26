@@ -110,6 +110,20 @@ export default function Roadmap() {
                             </p>
                           )}
 
+                          {item.video && (
+                            <div className="mt-4 overflow-hidden rounded-xl border border-black/5 bg-black">
+                              <iframe
+                                className="aspect-video w-full"
+                                src={`https://www.youtube-nocookie.com/embed/${item.video}`}
+                                title={item.title}
+                                loading="lazy"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                              />
+                            </div>
+                          )}
+
                           {(item.authors || item.href) && (
                             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
                               {item.authors && (
@@ -124,7 +138,7 @@ export default function Roadmap() {
                                   rel="noreferrer"
                                   className="inline-flex items-center gap-1.5 font-semibold text-arc-700 transition-colors hover:text-arc-800"
                                 >
-                                  Read the paper
+                                  {item.paper ? 'Read the paper' : 'Event website'}
                                   <span aria-hidden>→</span>
                                 </a>
                               )}

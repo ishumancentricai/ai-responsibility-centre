@@ -150,6 +150,8 @@ export const MILESTONES = [
         track: 'Announcement',
         title: 'Keynote at Brains on Silicon ’26 — Dresden',
         text: '“KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — a joint keynote with BAIOSPHERE CEO Michael Klimke on how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
+        // YouTube id; rendered as a privacy-friendly nocookie embed.
+        video: 'cZoYgR4KS7U',
         href: 'https://brainsonsilicon.com/',
       },
     ],
