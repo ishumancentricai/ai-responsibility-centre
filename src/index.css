@@ -15,11 +15,13 @@
   --color-arc-900: #074535;
   --color-arc-950: #02261e;
 
-  /* Newsprint — the press cards are set as paper, not as brand panels */
-  --color-paper-50: #fdfcf9;
-  --color-paper-100: #f7f5ef;
-  --color-paper-200: #e9e6dc;
-  --color-paper-300: #d8d3c5;
+  /* Paper — the press cards are set as sheets, not as brand panels.
+     Near-neutral on purpose: the editorial feel comes from the typography,
+     not from a sepia wash. */
+  --color-paper-50: #ffffff;
+  --color-paper-100: #f6f7f6;
+  --color-paper-200: #eceeed;
+  --color-paper-300: #dcdfde;
 
   /* Neutral ink */
   --color-ink-900: #0f1c18;

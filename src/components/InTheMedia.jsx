@@ -220,13 +220,7 @@ export default function InTheMedia({
 function PressCard({ item, inert }) {
   const readLabel = READ_LABEL[item.type] ?? 'Read more'
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-sm border border-paper-300 bg-paper-50 p-6 shadow-[0_18px_40px_-18px_rgba(15,28,24,0.45)] transition-colors duration-300 hover:border-ink-500/40 sm:p-9">
-      {/* spine — the shaded gutter a folded sheet shows at its hinge */}
-      <span
-        className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-ink-900/12 via-ink-900/[0.03] to-transparent"
-        aria-hidden
-      />
-
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-sm border border-paper-300 bg-paper-50 p-6 shadow-[0_14px_36px_-20px_rgba(15,28,24,0.4)] transition-colors duration-300 hover:border-ink-500/40 sm:p-9">
       {/* whole-card link (overlay); coverage links sit above it via z-20 */}
       <a
         href={item.href}
@@ -237,84 +231,85 @@ function PressCard({ item, inert }) {
         className="absolute inset-0 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
       />
 
-      {/* masthead — outlet in caps between the rules a broadsheet uses */}
-      <div className="relative border-y-[3px] border-double border-ink-900/70 py-2">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="text-sm font-bold uppercase tracking-[0.2em] text-ink-900">
-            {item.outlet}
-          </span>
-          <span className="ml-auto text-xs tabular-nums text-ink-500">
-            {item.date}
-            {item.via && ` · via ${item.via}`}
-          </span>
+      {/* masthead — outlet in caps over a single firm rule */}
+      <div className="relative flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b-2 border-ink-900 pb-2.5">
+        <span className="text-sm font-bold uppercase tracking-[0.2em] text-ink-900">
+          {item.outlet}
+        </span>
+        <span className="ml-auto text-xs tabular-nums text-ink-500">
+          {item.date}
+          {item.via && ` · via ${item.via}`}
+        </span>
+      </div>
+
+      {/* body — portrait leads the column, the way a feature page runs */}
+      <div className="relative flex flex-1 flex-col gap-6 pt-6 sm:flex-row sm:gap-8">
+        <figure className="m-0 sm:w-44 sm:shrink-0">
+          {item.image ? (
+            <img
+              src={item.image}
+              alt={item.person ?? item.outlet}
+              loading="lazy"
+              draggable={false}
+              className="aspect-square w-40 object-cover object-top sm:w-full"
+            />
+          ) : (
+            <div className="grid aspect-square w-40 place-items-center bg-paper-100 sm:w-full">
+              <ArcMark className="h-12 w-12 text-ink-500/60" strokeWidth={4} />
+            </div>
+          )}
+          {item.person && (
+            <figcaption className="mt-2 border-t border-ink-900/15 pt-2 text-xs leading-snug text-ink-500">
+              {item.person}
+            </figcaption>
+          )}
+        </figure>
+
+        <div className="min-w-0 flex-1">
+          {item.type && (
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-arc-700">
+              {item.type}
+            </p>
+          )}
+
+          <h3 className="mt-2 font-serif text-2xl font-bold leading-[1.15] tracking-tight text-ink-900 sm:text-[2.1rem]">
+            {item.title}
+          </h3>
+
+          {item.summary && (
+            <p className="mt-3 text-sm leading-relaxed text-ink-700 sm:text-base">
+              {item.summary}
+            </p>
+          )}
         </div>
       </div>
 
-      {item.type && (
-        <p className="relative mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-arc-700">
-          {item.type}
-        </p>
-      )}
-
-      {/* content grows so the footer sits at a shared height across cards */}
-      <div className="relative flex flex-1 flex-col pt-3">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-7">
-          <div className="shrink-0">
-            {item.image ? (
-              <img
-                src={item.image}
-                alt={item.person ?? item.outlet}
-                loading="lazy"
-                draggable={false}
-                className="h-24 w-20 object-cover grayscale-[0.35] ring-1 ring-ink-900/15 sm:h-28 sm:w-24"
-              />
-            ) : (
-              <div className="flex h-24 w-20 items-center justify-center bg-paper-100 ring-1 ring-ink-900/15 sm:h-28 sm:w-24">
-                <ArcMark className="h-9 w-9 text-ink-500" strokeWidth={4} />
-              </div>
-            )}
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <h3 className="font-serif text-2xl font-bold leading-[1.15] tracking-tight text-ink-900 sm:text-[2rem]">
-              {item.title}
-            </h3>
-
-            {item.summary && (
-              <p className="mt-3 text-sm leading-relaxed text-ink-700 sm:text-base">
-                {item.summary}
-              </p>
-            )}
-          </div>
-        </div>
-
-        {item.coverage?.length > 0 && (
-          <div className="mt-7">
+      {/* footer: coverage on the left, the call to action on the right */}
+      <div className="relative mt-7 flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-t border-ink-900/15 pt-5">
+        {item.coverage?.length > 0 ? (
+          <div className="min-w-0">
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-500">
               Also covered by
             </p>
-            <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-2">
-              {item.coverage.map((c) => (
+            <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
+              {item.coverage.map((cv) => (
                 <a
-                  key={c.href}
-                  href={c.href}
+                  key={cv.href}
+                  href={cv.href}
                   target="_blank"
                   rel="noreferrer"
                   tabIndex={inert ? -1 : undefined}
                   className="relative z-20 text-xs font-medium text-ink-700 underline decoration-ink-900/25 underline-offset-4 transition-colors hover:text-arc-700 hover:decoration-arc-600"
                 >
-                  {c.outlet}
+                  {cv.outlet}
                 </a>
               ))}
             </div>
           </div>
+        ) : (
+          <span />
         )}
-      </div>
-
-      {/* shared-height footer: hairline + byline + call to action */}
-      <div className="relative mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-ink-900/20 pt-5 text-sm">
-        {item.person && <span className="italic text-ink-500">{item.person}</span>}
-        <span className="ml-auto inline-flex items-center gap-1.5 font-semibold text-arc-700 transition-colors group-hover:text-arc-800">
+        <span className="ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors group-hover:text-arc-800">
           {readLabel}
           <Arrow />
         </span>
