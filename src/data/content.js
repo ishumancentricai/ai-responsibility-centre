@@ -101,14 +101,6 @@ export const FUNDERS = [
 // without one the card falls back to a typographic plate in the brand green.
 export const EVENTS = [
   {
-    date: 'Sep 25, 2026',
-    title: 'AI Day UBT',
-    location: 'University of Bayreuth',
-    type: 'Campus event',
-    blurb: 'Campus-wide theme day on AI with keynotes and live demos.',
-    href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
-  },
-  {
     date: 'Oct 5, 2026, 15:30',
     title: 'Who Presses the Button?',
     location: 'Nokia Bell Labs, Cambridge',
@@ -126,6 +118,13 @@ export const MILESTONES = [
     period: 'September 2026',
     items: [
       {
+        track: 'Workshop',
+        title: 'AI Governance workshop at AI Day UBT',
+        text: 'A hands-on session with practitioners from industry on governing AI inside organisations — turning the obligations of the EU AI Act into concrete roles, processes and documentation that teams can actually run.',
+        authors: 'Curated by Valentin Mayer',
+        href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
+      },
+      {
         track: 'Research',
         title: 'Published in AI and Ethics',
         text: '“What is AI ethics, and what is it good for? Clarifying debates on AI ethics” — separating the instances of AI ethics (research, education, practice, governance instruments) from the purposes they serve (knowledge, communication, application), so that criticism of “ethics washing” lands on specific practices instead of dismissing the field as a whole.',
@@ -138,6 +137,16 @@ export const MILESTONES = [
         href: 'https://doi.org/10.1007/s43681-026-01326-6',
       },
       {
+        track: 'Talk',
+        title: 'Keynote at Brains on Silicon ’26 — Dresden',
+        text: '“KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — a joint keynote with BAIOSPHERE CEO Michael Klimke on how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
+        // YouTube id, played only on click; the poster is self-hosted so the
+        // page opens no connection to Google until the visitor presses play.
+        video: 'cZoYgR4KS7U',
+        videoPoster: '/video/brains-on-silicon-2026.jpg',
+        href: 'https://brainsonsilicon.com/',
+      },
+      {
         track: 'Research',
         title: 'Presented at ECAF ’26 — Ghent',
         text: '“Data-Centric Algorithmic Fairness: A Systematic Review of Data-Level Interventions for Algorithmic Fairness” — a systematic review of 79 papers mapping data-level fairness interventions into data refinement and data extension strategies, and proposing a unified data-centric fairness framework.',
@@ -147,16 +156,6 @@ export const MILESTONES = [
         venue: 'European Conference on Algorithmic Fairness (ECAF), Ghent',
         year: 2026,
         href: 'https://eref.uni-bayreuth.de/id/eprint/99124/',
-      },
-      {
-        track: 'Talk',
-        title: 'Keynote at Brains on Silicon ’26 — Dresden',
-        text: '“KI-Ökosysteme erfolgreich aufbauen – und Responsible AI in die Praxis bringen” — a joint keynote with BAIOSPHERE CEO Michael Klimke on how Bavaria’s AI network links research, industry and policy, and what it takes to put Responsible AI into practice.',
-        // YouTube id, played only on click; the poster is self-hosted so the
-        // page opens no connection to Google until the visitor presses play.
-        video: 'cZoYgR4KS7U',
-        videoPoster: '/video/brains-on-silicon-2026.jpg',
-        href: 'https://brainsonsilicon.com/',
       },
     ],
   },

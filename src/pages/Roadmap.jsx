@@ -8,6 +8,8 @@ const TRACK_STYLES = {
   Research: 'bg-arc-100 text-arc-800',
   Application: 'bg-violet-100 text-violet-800',
   Policy: 'bg-rose-100 text-rose-800',
+  Workshop: 'bg-sky-100 text-sky-800',
+  Talk: 'bg-indigo-100 text-indigo-800',
   Announcement: 'bg-amber-100 text-amber-800',
   Funding: 'bg-slate-200 text-slate-700',
 }
@@ -171,14 +173,16 @@ export default function Roadmap() {
           <span className="text-sm font-semibold uppercase tracking-wider text-ink-500">
             Tracks
           </span>
-          {['Research', 'Policy', 'Announcement', 'Funding'].map((track) => (
-            <span key={track} className="flex items-center gap-2 text-sm text-ink-700">
-              <span
-                className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`}
-              />
-              {track}
-            </span>
-          ))}
+          {['Research', 'Workshop', 'Talk', 'Policy', 'Announcement', 'Funding'].map(
+            (track) => (
+              <span key={track} className="flex items-center gap-2 text-sm text-ink-700">
+                <span
+                  className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`}
+                />
+                {track}
+              </span>
+            ),
+          )}
         </div>
       </section>
     </>
