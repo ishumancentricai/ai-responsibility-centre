@@ -123,6 +123,24 @@ export const EVENTS = [
       'Keynote by Niklas Kühl on human oversight between claim and practice: Article 14 of the EU AI Act asks for a human in the loop, but studies with 136 decision-makers and 101 radiologists show that oversight only works when the system is designed so that person can actually disagree. Free, in person or online.',
     href: 'https://www.eventbrite.co.uk/e/who-presses-the-button-human-oversight-of-ai-between-claim-and-practice-tickets-2001539238743',
   },
+  {
+    date: 'Oct 20, 2026',
+    title: 'Impulstag KI & Co.',
+    location: 'futurum, Stuttgart',
+    type: 'Talk',
+    blurb:
+      'Niklas Kühl on “Künstliche Intelligenz: Grundlagen und Trends für die Pflege” — what the technology can and cannot do for care work. Part of Diakonie Baden’s day on AI and innovation in the social sector.',
+    href: 'https://event.trippus.net/Home/Index/AEAKgIOWcm_ns1jaFGFAcO2KpwCk70fcGBXkYmXHken-nQhj3aWlhWE98fW4wF2ssxYNZrjbQkCY/AEAKgINZnls_2mCMUFdejsfh7oM_TXSipJJ-BRzFEeJiC52ORLoxzAd4gIWgdvZ2iNjhy4y2GvoC/de',
+  },
+  {
+    date: 'Nov 19, 2026, 17:00',
+    title: 'bidt Research Conference 2026',
+    location: 'Bayerische Akademie der Wissenschaften, Munich',
+    type: 'Talk',
+    blurb:
+      'Closing keynote by Niklas Kühl: “The Meat Proxy — On the (Im)Possibility of Appropriate Reliance in AI Advice”, on whether people can ever calibrate how far to trust what an AI advises. Closes day one of the two-day conference on digital transformation research.',
+    href: 'https://www.bidt.digital/research-conference-2026/',
+  },
 ]
 
 // Reverse-chronological track record: the most recent achievement is first,
