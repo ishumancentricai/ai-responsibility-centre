@@ -141,6 +141,15 @@ export const EVENTS = [
       'Closing keynote by Niklas Kühl: “The Meat Proxy — On the (Im)Possibility of Appropriate Reliance in AI Advice”, on whether people can ever calibrate how far to trust what an AI advises. Closes day one of the two-day conference on digital transformation research.',
     href: 'https://www.bidt.digital/research-conference-2026/',
   },
+  {
+    date: 'Dec 13–16, 2026',
+    title: 'ICIS 2026',
+    location: 'Lisbon, Portugal',
+    type: 'Conference',
+    blurb:
+      'Presenting “Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos” at the International Conference on Information Systems, this year under the theme “Digital Collaboration and Coexistence”.',
+    href: 'https://icis2026.aisconferences.org/',
+  },
 ]
 
 // Reverse-chronological track record: the most recent achievement is first,
@@ -149,6 +158,18 @@ export const MILESTONES = [
   {
     period: 'September 2026',
     items: [
+      {
+        track: 'Research',
+        title: 'Accepted at ICIS ’26 — Lisbon',
+        text: '“Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos” — fraud is rare, so each organisation’s own data is too thin to learn from, yet privacy blocks pooling it. Evaluated across five fraud datasets, collaborative diffusion beats oversampling and local generators at the task that matters, suggesting synthetic data earns its keep less through local realism than through structure that transfers between organisations.',
+        authors: 'Allmendinger, S., Zipperling, D., Kibar, B. B., & Kühl, N.',
+        paper:
+          'Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos',
+        properties: ['Sovereign'],
+        venue: 'International Conference on Information Systems (ICIS), Lisbon',
+        year: 2026,
+        href: 'https://arxiv.org/abs/2609.33754',
+      },
       {
         track: 'Workshop',
         title: '“KI-Governance entmystifiziert” — AI Day UBT',
