@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal, { Stagger, StaggerItem } from './Reveal'
 import ArcMark from './ArcMark'
@@ -26,6 +27,10 @@ function timeOf(date = '') {
  * Home and Events & Milestones pages so both stay in sync.
  *
  * Give an entry `image: '/events/<file>.jpg'` to use a photograph.
+ *
+ * Three or fewer fit the grid. Beyond that they become a horizontal rail —
+ * proximity snapping rather than mandatory, so a flick glides to rest instead
+ * of being yanked to the nearest card.
  */
 export default function UpcomingEvents({
   className = 'bg-white py-20 sm:py-28',
@@ -33,6 +38,51 @@ export default function UpcomingEvents({
   subheading = 'Where you’ll find us next.',
   cta,
 }) {
+  const rail = EVENTS.length > 3
+  const trackRef = useRef(null)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+
+  const sync = useCallback(() => {
+    const el = trackRef.current
+    if (!el) return
+    setAtStart(el.scrollLeft <= 2)
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2)
+  }, [])
+
+  useEffect(() => {
+    const el = trackRef.current
+    if (!rail || !el) return
+    sync()
+    el.addEventListener('scroll', sync, { passive: true })
+    window.addEventListener('resize', sync)
+    return () => {
+      el.removeEventListener('scroll', sync)
+      window.removeEventListener('resize', sync)
+    }
+  }, [rail, sync])
+
+  // Advance by exactly one card, measured rather than assumed, so the rail
+  // lands square whatever the breakpoint.
+  const page = (dir) => {
+    const el = trackRef.current
+    if (!el) return
+    const card = el.firstElementChild
+    const gap = 20
+    const step = card ? card.getBoundingClientRect().width + gap : el.clientWidth
+    el.scrollBy({ left: dir * step, behavior: 'smooth' })
+  }
+
+  const onKeyDown = (e) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      page(1)
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      page(-1)
+    }
+  }
+
   if (!EVENTS.length) return null
 
   return (
@@ -52,27 +102,96 @@ export default function UpcomingEvents({
                 {subheading}
               </p>
             </div>
-            {cta && (
-              <Link
-                to={cta.to}
-                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
-              >
-                {cta.label}
-                <Arrow />
-              </Link>
-            )}
+
+            <div className="flex items-center gap-5">
+              {cta && (
+                <Link
+                  to={cta.to}
+                  className="group inline-flex items-center gap-1.5 text-sm font-semibold text-arc-700 transition-colors hover:text-arc-800"
+                >
+                  {cta.label}
+                  <Arrow />
+                </Link>
+              )}
+              {rail && (
+                <div className="hidden gap-2 sm:flex">
+                  <NavButton
+                    label="Previous events"
+                    onClick={() => page(-1)}
+                    disabled={atStart}
+                    dir={-1}
+                  />
+                  <NavButton
+                    label="More events"
+                    onClick={() => page(1)}
+                    disabled={atEnd}
+                    dir={1}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </Reveal>
 
-        <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" step={0.1}>
-          {EVENTS.map((ev) => (
-            <StaggerItem key={`${ev.title}-${ev.date}`}>
-              <EventPoster ev={ev} />
-            </StaggerItem>
-          ))}
-        </Stagger>
+        {rail ? (
+          <Reveal delay={0.05}>
+            <div
+              ref={trackRef}
+              onKeyDown={onKeyDown}
+              tabIndex={0}
+              role="region"
+              aria-roledescription="carousel"
+              aria-label={heading}
+              className="no-scrollbar mt-10 flex snap-x scroll-smooth gap-5 overflow-x-auto overscroll-x-contain pb-2 focus-visible:outline-none"
+            >
+              {EVENTS.map((ev) => (
+                <div
+                  key={`${ev.title}-${ev.date}`}
+                  className="w-[86%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
+                >
+                  <EventPoster ev={ev} />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        ) : (
+          <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" step={0.1}>
+            {EVENTS.map((ev) => (
+              <StaggerItem key={`${ev.title}-${ev.date}`}>
+                <EventPoster ev={ev} />
+              </StaggerItem>
+            ))}
+          </Stagger>
+        )}
       </div>
     </section>
+  )
+}
+
+function NavButton({ label, onClick, disabled, dir }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-900/20 text-ink-700 transition-all hover:border-arc-700 hover:bg-arc-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:border-ink-900/20 disabled:hover:bg-transparent disabled:hover:text-ink-700"
+    >
+      <svg
+        className={`h-4 w-4 ${dir < 0 ? 'rotate-180' : ''}`}
+        viewBox="0 0 16 16"
+        fill="none"
+        aria-hidden
+      >
+        <path
+          d="M3 8h9M9 4l4 4-4 4"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
   )
 }
 
