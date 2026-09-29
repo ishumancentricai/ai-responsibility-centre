@@ -165,7 +165,7 @@ export const MILESTONES = [
         authors: 'Allmendinger, S., Zipperling, D., Kibar, B. B., & Kühl, N.',
         paper:
           'Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos',
-        properties: ['Sovereign'],
+        properties: ['Sovereign', 'Safe'],
         venue: 'International Conference on Information Systems (ICIS), Lisbon',
         year: 2026,
         href: 'https://arxiv.org/abs/2609.33754',
