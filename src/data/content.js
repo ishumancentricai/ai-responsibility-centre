@@ -554,11 +554,11 @@ export const PHDS = [
     group: 'cs',
     image: '/team/jannek-sekowski.jpg',
     research:
-      'Designing and evaluating interactive AI systems and natural-language interfaces for human–AI interaction.',
+      'Bridging machine learning and HCI for the end-to-end development, design, and evaluation of intelligent systems, ensuring effective human oversight.',
     links: {
       scholar: 'https://scholar.google.com/citations?user=rf9UGl8AAAAJ',
-      linkedin: 'https://www.linkedin.com/in/jannek-sekowski-59327b251/',
-      orcid: '',
+      linkedin: 'https://www.linkedin.com/in/jannek-sekowski/',
+      orcid: 'https://orcid.org/0009-0006-3324-7837',
       researchgate: '',
     },
   },
