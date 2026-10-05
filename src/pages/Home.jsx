@@ -55,21 +55,43 @@ function Hero() {
   })
 
   // Smooth the scroll progress for buttery transforms.
-  const p = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 })
+  const p = useSpring(scrollYProgress, { stiffness: 150, damping: 26, mass: 0.28 })
 
-  const markScale = useTransform(p, [0, 1], [1, 2.6])
-  const markRotate = useTransform(p, [0, 1], [0, 90])
-  const markOpacity = useTransform(p, [0, 0.7], [0.9, 0])
-  const textY = useTransform(p, [0, 1], [0, -120])
-  const textOpacity = useTransform(p, [0, 0.55], [1, 0])
-  const bgY = useTransform(p, [0, 1], [0, 160])
+  // Two acts that overlap, with the sticky pin letting go between them.
+  //
+  // The section is 150vh around a 100vh sticky child, so the hero stays
+  // pinned for the first 50vh — a third of the scroll range. Act one happens
+  // inside that third: the page cannot move, so only the arch does. It grows
+  // on an accelerating curve, the way a doorway rushes at you over the last
+  // couple of steps.
+  //
+  // The two acts deliberately overlap by LEAD. The arch is still sweeping
+  // past as the copy starts to go, and it finishes fading at the exact moment
+  // the pin releases — otherwise there is a beat where the arch is gone, the
+  // page is still pinned, and you are scrolling against nothing.
+  const WALK = 1 / 3
+  const LEAD = 0.07
+  const GO = WALK - LEAD
+
+  const markScale = useTransform(p, [0, 0.13, 0.24, WALK], [1, 1.9, 4.5, 11])
+  const markOpacity = useTransform(p, [0, 0.18, WALK], [0.9, 0.72, 0])
+
+  // Flat until GO, so nothing drifts while the arch still has the stage.
+  const textY = useTransform(p, [0, GO, 1], [0, 0, -70])
+  const textScale = useTransform(p, [0, GO, 1], [1, 1, 1.08])
+  const textOpacity = useTransform(p, [0, GO, 0.55], [1, 1, 0])
+  const bgY = useTransform(p, [0, GO, 1], [0, 0, 80])
+  const bgScale = useTransform(p, [0, GO, 1], [1, 1, 1.15])
+
+  // The cue has done its job as soon as the first scroll lands.
+  const cueOpacity = useTransform(p, [0, 0.08], [1, 0])
 
   return (
-    <section ref={ref} className="relative h-[160vh]">
+    <section ref={ref} className="relative h-[150vh]">
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden bg-arc-950 text-white">
         {/* animated backdrop */}
         <motion.div
-          style={reduce ? undefined : { y: bgY }}
+          style={reduce ? undefined : { y: bgY, scale: bgScale }}
           className="bg-grid absolute inset-0 opacity-20"
           aria-hidden
         />
@@ -84,11 +106,7 @@ function Hero() {
 
         {/* giant arch mark behind the text */}
         <motion.div
-          style={
-            reduce
-              ? undefined
-              : { scale: markScale, rotate: markRotate, opacity: markOpacity }
-          }
+          style={reduce ? undefined : { scale: markScale, opacity: markOpacity }}
           className="pointer-events-none absolute"
           aria-hidden
         >
@@ -97,7 +115,9 @@ function Hero() {
 
         {/* hero copy */}
         <motion.div
-          style={reduce ? undefined : { y: textY, opacity: textOpacity }}
+          style={
+            reduce ? undefined : { y: textY, scale: textScale, opacity: textOpacity }
+          }
           className="container-arc relative z-10 text-center"
         >
           <motion.p
@@ -152,7 +172,7 @@ function Hero() {
 
         {/* scroll cue */}
         <motion.div
-          style={reduce ? undefined : { opacity: textOpacity }}
+          style={reduce ? undefined : { opacity: cueOpacity }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="flex h-9 w-6 items-start justify-center rounded-full border border-white/25 p-1.5">
