@@ -310,6 +310,17 @@ export const PRESS = [
     href: 'https://www.stmd.bayern.de/pressemitteilungen/minister-dr-mehring-zu-ki-muessen-geister-die-wir-rufen-auch-beherrschen--bayerns-digitalminister-zieht-konsequenzen-aus-hochrangigem-ki-gipfel-bayerischer-ki-sicherheitsdialog-jaehrlicher-sicherheitsbericht-ki-ethikkommission-und-breit-angelegte-aufklaerungskampagne--ki-sicherheitsinstitut-soll-nach-bayern',
   },
   {
+    outlet: 'zeb',
+    date: 'September 2026',
+    type: 'Podcast',
+    title: 'Wer braucht noch eine Bank? Regionalbanken im Zeitalter von KI',
+    summary:
+      'A conversation on what AI changes for regional banks — and on appropriate reliance: how far anyone should lean on an AI’s judgement when the decision is a financial one.',
+    person: 'Prof. Dr. Niklas Kühl',
+    image: '/team/niklas-kuehl.jpeg',
+    href: 'https://zeb-consulting.com/de-DE/podcasts/wer-braucht-noch-eine-bank-regionalbanken-im-zeitalter-von-ki',
+  },
+  {
     outlet: 'WDR 5 Quarks',
     date: '10 August 2026',
     type: 'Podcast',
