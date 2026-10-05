@@ -115,15 +115,6 @@ export const RESEARCH_PROPERTIES = [
 // without one the card falls back to a typographic plate in the brand green.
 export const EVENTS = [
   {
-    date: 'Oct 5, 2026, 15:30',
-    title: 'Who Presses the Button?',
-    location: 'Nokia Bell Labs, Cambridge',
-    type: 'Talk',
-    blurb:
-      'Keynote by Niklas Kühl on human oversight between claim and practice: Article 14 of the EU AI Act asks for a human in the loop, but studies with 136 decision-makers and 101 radiologists show that oversight only works when the system is designed so that person can actually disagree. Free, in person or online.',
-    href: 'https://www.eventbrite.co.uk/e/who-presses-the-button-human-oversight-of-ai-between-claim-and-practice-tickets-2001539238743',
-  },
-  {
     date: 'Oct 20, 2026',
     title: 'Impulstag KI & Co.',
     location: 'futurum, Stuttgart',
@@ -156,6 +147,25 @@ export const EVENTS = [
 // so the page reads from the present (top) back in time (scrolling down).
 export const MILESTONES = [
   {
+    period: 'October 2026',
+    items: [
+      {
+        track: 'Policy',
+        title: 'AI summit of the Bavarian Digital Ministry',
+        text: 'Invited to the ministry’s high-level AI summit to discuss AI regulation alongside Google, IBM, Mistral AI and OpenAI, and experts from TU Munich, the Bavarian AI Council and the Augsburg diocese. The ministry drew its consequences the same day: a Bavarian AI security dialogue meeting at least twice a year, an independent annual AI security report from 2027, a Bavarian AI ethics forum convening in 2026, a public awareness campaign — and a renewed bid to bring the German AI security institute to Bavaria.',
+        authors: 'Prof. Dr. Niklas Kühl',
+        href: 'https://www.stmd.bayern.de/pressemitteilungen/minister-dr-mehring-zu-ki-muessen-geister-die-wir-rufen-auch-beherrschen--bayerns-digitalminister-zieht-konsequenzen-aus-hochrangigem-ki-gipfel-bayerischer-ki-sicherheitsdialog-jaehrlicher-sicherheitsbericht-ki-ethikkommission-und-breit-angelegte-aufklaerungskampagne--ki-sicherheitsinstitut-soll-nach-bayern',
+      },
+      {
+        track: 'Talk',
+        title: 'Keynote at Nokia Bell Labs — Cambridge',
+        text: '“Who Presses the Button? Human Oversight of AI Between Claim and Practice” — Article 14 of the EU AI Act asks for a human in the loop, but studies with 136 decision-makers and 101 radiologists show that oversight only works when the system is designed so that person can actually disagree. Hosted by the Cambridge Social Dynamics Team.',
+        authors: 'Prof. Dr. Niklas Kühl',
+        href: 'https://www.eventbrite.co.uk/e/who-presses-the-button-human-oversight-of-ai-between-claim-and-practice-tickets-2001539238743',
+      },
+    ],
+  },
+  {
     period: 'September 2026',
     items: [
       {
@@ -179,8 +189,8 @@ export const MILESTONES = [
       },
       {
         track: 'Talk',
-        title: 'Scientific keynote at AI Day UBT',
-        text: 'Opening the university’s AI Day: the current challenges of deploying AI responsibly and sovereignly, and what matters most when putting that into practice. Followed by a panel with Lisa Precht (IBM) and Martin Braun (NeuroForge) on where Upper Franconia, Germany and the EU stand.',
+        title: 'Hosted AI Day UBT — keynote “The Meat Proxy”',
+        text: 'Hosting the university’s AI Day and opening it with the keynote “The Meat Proxy”, on whether anyone can calibrate how far to trust what an AI advises. Alongside contributions from Lisa Precht (IBM) and Martin Braun (NeuroForge), and a panel on where Upper Franconia, Germany and the EU stand.',
         authors: 'Prof. Dr. Niklas Kühl',
         href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
       },
@@ -287,6 +297,18 @@ export const MILESTONES = [
 // outlets that picked up the same story (e.g. a dpa wire) as outbound links.
 // Leave `image` empty to show the ARC mark instead of a portrait.
 export const PRESS = [
+  {
+    outlet: 'Bayerisches Staatsministerium für Digitales',
+    date: '5 October 2026',
+    type: 'Press release',
+    title:
+      'Minister Dr. Mehring zu KI: „Müssen Geister, die wir rufen, auch beherrschen!“',
+    summary:
+      'Bavaria’s digital ministry draws its consequences from a high-level AI summit: a recurring AI security dialogue, an independent annual security report from 2027, an AI ethics forum and a public awareness campaign. Niklas Kühl was among the invited experts.',
+    person: 'Prof. Dr. Niklas Kühl',
+    image: '/team/niklas-kuehl.jpeg',
+    href: 'https://www.stmd.bayern.de/pressemitteilungen/minister-dr-mehring-zu-ki-muessen-geister-die-wir-rufen-auch-beherrschen--bayerns-digitalminister-zieht-konsequenzen-aus-hochrangigem-ki-gipfel-bayerischer-ki-sicherheitsdialog-jaehrlicher-sicherheitsbericht-ki-ethikkommission-und-breit-angelegte-aufklaerungskampagne--ki-sicherheitsinstitut-soll-nach-bayern',
+  },
   {
     outlet: 'WDR 5 Quarks',
     date: '10 August 2026',
