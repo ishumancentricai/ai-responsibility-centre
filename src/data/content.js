@@ -12,10 +12,23 @@ export const NAV = [
   // Contact is reached via the "Get in touch" button, so it's omitted here.
 ]
 
+// The five properties ARC works towards: the ones the vision names and the
+// only tags a publication may carry — one list under one name, because they
+// are one idea. What we say we stand for is what the research is measured
+// against, and a property is something you can test for rather than profess.
+// `content.test.js` enforces that nothing outside the set is used.
+export const RESEARCH_PROPERTIES = [
+  'Safe',
+  'Fair',
+  'Transparent',
+  'Sovereign',
+  'Accountable',
+]
+
 export const VISION = {
   statement:
     'Productive AI systems that put people at the centre — and stay committed to the common good.',
-  qualities: ['safe', 'transparent', 'fair', 'sovereign', 'accountable'],
+  properties: RESEARCH_PROPERTIES,
   ambition:
     'ARC is a centre for Responsible AI: the point of contact for research, policy and practice when the question is no longer only what AI can do — but how we shape it, for whom, and to what end.',
 }
@@ -97,17 +110,6 @@ export const FUNDERS = [
     logo: '/funding/uni-bayreuth.png',
     href: 'https://www.uni-bayreuth.de/',
   },
-]
-
-// The only properties a publication may be tagged with. Keeping the set
-// closed is the point: a column of tags is only comparable if everyone
-// draws from the same five. `content.test.js` enforces it.
-export const RESEARCH_PROPERTIES = [
-  'Safe',
-  'Fair',
-  'Transparent',
-  'Sovereign',
-  'Accountable',
 ]
 
 // Upcoming events where ARC participates — chronological (soonest first).
@@ -828,6 +830,17 @@ export const DOCTORAL_RESEARCHERS = PHDS.length
 // Events & Milestones pages so the two always show the same figures.
 const milestoneItems = MILESTONES.flatMap((group) => group.items)
 const countTrack = (track) => milestoneItems.filter((i) => i.track === track).length
+
+// How many publications contribute to each property — derived, so the vision
+// can show what actually stands behind each of its five words.
+export const PROPERTY_EVIDENCE = Object.fromEntries(
+  RESEARCH_PROPERTIES.map((prop) => [
+    prop,
+    milestoneItems.filter(
+      (i) => i.track === 'Research' && (i.properties ?? []).includes(prop),
+    ).length,
+  ]),
+)
 const countEventType = (re) => EVENTS.filter((e) => re.test(e.type)).length
 const isWorkshop = (text = '') => /workshop/i.test(text)
 

@@ -35,7 +35,7 @@ describe('NAV', () => {
 describe('core copy', () => {
   it('has vision and mission text', () => {
     expect(VISION.statement.length).toBeGreaterThan(0)
-    expect(Array.isArray(VISION.qualities)).toBe(true)
+    expect(Array.isArray(VISION.properties)).toBe(true)
     expect(MISSION.headline.length).toBeGreaterThan(0)
   })
 

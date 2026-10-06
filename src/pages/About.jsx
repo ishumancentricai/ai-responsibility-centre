@@ -1,5 +1,6 @@
 import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
+import VisionProperties from '../components/VisionProperties'
 import { VISION, MISSION, STRATEGY_PRINCIPLES } from '../data/content'
 
 export default function About() {
@@ -25,15 +26,7 @@ export default function About() {
                 {VISION.statement}
               </p>
             </Reveal>
-            <Stagger className="mt-8 flex flex-wrap gap-3">
-              {VISION.qualities.map((q) => (
-                <StaggerItem key={q}>
-                  <span className="inline-flex rounded-full border border-arc-200 bg-arc-50 px-5 py-2 text-base font-medium capitalize text-arc-800">
-                    {q}
-                  </span>
-                </StaggerItem>
-              ))}
-            </Stagger>
+            <VisionProperties className="mt-8" />
             <Reveal delay={0.1}>
               <p className="mt-8 text-lg leading-relaxed text-ink-700">
                 {VISION.ambition}

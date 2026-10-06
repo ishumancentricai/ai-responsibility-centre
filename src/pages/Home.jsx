@@ -11,6 +11,7 @@ import ArcMark from '../components/ArcMark'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import UpcomingEvents from '../components/UpcomingEvents'
 import GapFigure from '../components/GapFigure'
+import VisionProperties from '../components/VisionProperties'
 import InTheMedia from '../components/InTheMedia'
 import {
   VISION,
@@ -207,15 +208,7 @@ function Qualities() {
           </h2>
         </Reveal>
 
-        <Stagger className="mt-10 flex flex-wrap gap-3">
-          {VISION.qualities.map((q) => (
-            <StaggerItem key={q}>
-              <span className="inline-flex rounded-full border border-arc-200 bg-arc-50 px-5 py-2.5 text-base font-medium capitalize text-arc-800">
-                {q}
-              </span>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <VisionProperties className="mt-10" />
 
         <Reveal delay={0.1}>
           <p className="mt-10 max-w-3xl text-lg leading-relaxed text-ink-700">
