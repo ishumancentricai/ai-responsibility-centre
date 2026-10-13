@@ -10,6 +10,9 @@ import { motion, useReducedMotion } from 'framer-motion'
  * set instead of as three icons picked off a shelf.
  *
  * The arch draws itself on scroll; under reduced motion it is simply there.
+ * It does not change colour on hover: the card's border already answers the
+ * pointer, and a lightening arch made whichever figure you happened to be
+ * over look like a different green from its neighbours.
  */
 
 // The ARC arch, echoing the logo: feet at 36 and 84, a true semicircle.
@@ -103,7 +106,7 @@ export default function GapFigure({ variant = 'trust', className = '' }) {
         d={ARCH}
         stroke="currentColor"
         strokeWidth="3.5"
-        className="text-arc-600 transition-colors duration-300 group-hover:text-arc-500"
+        className="text-arc-600"
         variants={stroke(0.28, 0.95)}
       />
 

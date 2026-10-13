@@ -21,17 +21,19 @@ export default function Navbar() {
 
   // Solid (white) bar once scrolled or the mobile menu is open; otherwise the
   // bar is transparent over the dark hero and needs light-coloured text.
+  // Fully opaque, not translucent: it used to be 80% white over a backdrop
+  // blur, and without the blur the page showed straight through it.
   const solid = scrolled || open
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid ? 'border-b border-black/5 bg-white/80 backdrop-blur-xl' : 'bg-transparent'
+        solid ? 'border-b border-black/5 bg-white' : 'bg-transparent'
       }`}
     >
       <nav className="container-arc flex h-16 items-center justify-between sm:h-18">
         <Link to="/" className="group flex items-center gap-2.5" aria-label="ARC — home">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-arc-600 text-white shadow-sm transition-transform group-hover:scale-105">
+          <span className="grid h-9 w-9 place-items-center rounded-lg bg-arc-600 text-white transition-transform group-hover:scale-105">
             <ArcMark className="h-5 w-5" stroke="white" strokeWidth={6} />
           </span>
           <span className="flex flex-col leading-none">
@@ -43,7 +45,7 @@ export default function Navbar() {
               ARC
             </span>
             <span
-              className={`text-[10px] font-medium uppercase tracking-wider transition-colors ${
+              className={`text-xs font-medium uppercase tracking-wider transition-colors ${
                 solid ? 'text-ink-500' : 'text-white/70'
               }`}
             >
@@ -77,8 +79,8 @@ export default function Navbar() {
                     {isActive && (
                       <motion.span
                         layoutId="nav-pill"
-                        className={`absolute inset-0 -z-10 rounded-full ${
-                          solid ? 'bg-arc-50' : 'bg-white/15'
+                        className={`absolute inset-x-3 -bottom-0.5 h-0.5 ${
+                          solid ? 'bg-arc-600' : 'bg-white'
                         }`}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
@@ -91,7 +93,7 @@ export default function Navbar() {
           <li className="ml-2">
             <Link
               to="/contact"
-              className="rounded-full bg-arc-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-arc-700 hover:shadow"
+              className="rounded-full bg-arc-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-arc-700 hover:shadow"
             >
               Get in touch
             </Link>
@@ -101,7 +103,7 @@ export default function Navbar() {
         {/* mobile toggle */}
         <button
           onClick={() => setOpen((v) => !v)}
-          className={`grid h-10 w-10 place-items-center rounded-lg transition-colors lg:hidden ${
+          className={`grid h-10 w-10 place-items-center rounded-sm transition-colors lg:hidden ${
             solid ? 'text-ink-900' : 'text-white'
           }`}
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -142,8 +144,10 @@ export default function Navbar() {
                     to={item.to}
                     end={item.to === '/'}
                     className={({ isActive }) =>
-                      `block rounded-xl px-4 py-3 text-base font-medium ${
-                        isActive ? 'bg-arc-50 text-arc-700' : 'text-ink-700'
+                      `block border-l-2 px-4 py-3 text-base font-medium ${
+                        isActive
+                          ? 'border-arc-600 text-arc-700'
+                          : 'border-transparent text-ink-700'
                       }`
                     }
                   >

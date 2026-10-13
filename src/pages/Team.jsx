@@ -34,14 +34,14 @@ export default function Team() {
       <section className="bg-white py-20 sm:py-28">
         <div className="container-arc grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <div className="rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-8">
+            <div className="rounded-sm border border-ink-900/10 bg-white p-8">
               <Avatar
                 image={PERSON.image}
                 initials="NK"
                 name={PERSON.name}
-                className="h-48 w-48 rounded-2xl text-6xl"
+                className="h-48 w-48 rounded-sm text-6xl"
               />
-              <h2 className="mt-6 text-2xl font-bold tracking-tight text-ink-900">
+              <h2 className="mt-6 text-2xl font-bold tracking-display text-ink-900">
                 {PERSON.name}
               </h2>
               {PERSON.arcRole && (
@@ -62,7 +62,7 @@ export default function Team() {
 
           <div>
             <Reveal>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+              <h3 className="text-sm font-semibold uppercase tracking-label text-arc-600">
                 Career
               </h3>
             </Reveal>
@@ -86,7 +86,7 @@ export default function Team() {
       <section className="border-t border-black/5 bg-white py-20 sm:py-24">
         <div className="container-arc">
           <Reveal>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+            <h2 className="text-sm font-semibold uppercase tracking-label text-arc-600">
               Members
             </h2>
           </Reveal>
@@ -99,13 +99,13 @@ export default function Team() {
           <Stagger className="mt-12 grid gap-6 md:grid-cols-2" step={0.12}>
             {TEAM.map((member) => (
               <StaggerItem key={member.name}>
-                <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-arc-50 to-white p-8">
+                <article className="flex h-full flex-col rounded-sm border border-ink-900/10 bg-white p-8">
                   <div className="flex items-center gap-5">
                     <Avatar
                       image={member.image}
                       initials={member.initials}
                       name={member.name}
-                      className="h-20 w-20 shrink-0 rounded-2xl text-2xl"
+                      className="h-20 w-20 shrink-0 rounded-sm text-2xl"
                     />
                     <div>
                       <h3 className="text-xl font-bold tracking-tight text-ink-900">
@@ -147,10 +147,10 @@ export default function Team() {
       </section>
 
       {/* Researchers — grouped by discipline */}
-      <section className="border-t border-black/5 bg-arc-50/40 py-20 sm:py-24">
+      <section className="border-t border-black/5 bg-white py-20 sm:py-24">
         <div className="container-arc">
           <Reveal>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+            <h2 className="text-sm font-semibold uppercase tracking-label text-arc-600">
               Researchers
             </h2>
           </Reveal>
@@ -172,13 +172,13 @@ export default function Team() {
                 <Stagger className="mt-6 grid gap-6 sm:grid-cols-2" step={0.1}>
                   {members.map((phd) => (
                     <StaggerItem key={phd.name}>
-                      <article className="flex h-full flex-col rounded-3xl border border-black/5 bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-xl">
+                      <article className="flex h-full flex-col rounded-sm border border-black/5 bg-white p-7 transition-all hover:-translate-y-1">
                         <div className="flex items-center gap-4">
                           <Avatar
                             image={phd.image}
                             initials={phd.initials}
                             name={phd.name}
-                            className="h-16 w-16 rounded-2xl text-xl"
+                            className="h-16 w-16 rounded-sm text-xl"
                           />
                           <div>
                             <h4 className="text-lg font-bold tracking-tight text-ink-900">
@@ -212,7 +212,7 @@ export default function Team() {
       <section className="border-t border-black/5 bg-white py-20 sm:py-24">
         <div className="container-arc">
           <Reveal>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+            <h2 className="text-sm font-semibold uppercase tracking-label text-arc-600">
               In collaboration with
             </h2>
           </Reveal>
@@ -295,7 +295,7 @@ function SocialLinks({ links = {}, name }) {
           rel="noreferrer"
           aria-label={`${name} on ${i.label}`}
           title={i.label}
-          className="grid h-9 w-9 place-items-center rounded-full border border-black/5 bg-white transition-all hover:-translate-y-0.5 hover:border-arc-200 hover:shadow-sm"
+          className="grid h-9 w-9 place-items-center rounded-full border border-black/5 bg-white transition-all hover:-translate-y-0.5 hover:border-arc-200"
         >
           {i.icon}
         </a>

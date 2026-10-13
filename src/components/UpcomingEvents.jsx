@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal, { Stagger, StaggerItem } from './Reveal'
-import ArcMark from './ArcMark'
-import { EVENTS } from '../data/content'
+import Illustration from './Illustration'
+import { EVENTS, illustrationByTitle } from '../data/content'
 
 /**
  * Split "Oct 5, 2026, 15:30" or "Sep 14–15, 2026" into the month and day
@@ -12,12 +12,6 @@ import { EVENTS } from '../data/content'
 function splitDate(date = '') {
   const m = /^([A-Za-z]{3,})\s+(\d+(?:[–-]\d+)?)/.exec(date)
   return m ? { month: m[1].slice(0, 3), day: m[2] } : { month: null, day: null }
-}
-
-// Everything after the day and year — a time, if the entry carries one.
-function timeOf(date = '') {
-  const m = /,\s*(\d{1,2}:\d{2})\s*$/.exec(date)
-  return m ? m[1] : null
 }
 
 /**
@@ -91,7 +85,7 @@ export default function UpcomingEvents({
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+              <h2 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-label text-arc-600">
                 <span className="relative flex h-2 w-2" aria-hidden>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-arc-500 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-arc-600" />
@@ -196,89 +190,109 @@ function NavButton({ label, onClick, disabled, dir }) {
 }
 
 function EventPoster({ ev }) {
-  const Tag = ev.href ? 'a' : 'div'
   const { month, day } = splitDate(ev.date)
-  const time = timeOf(ev.date)
 
   return (
-    <Tag
-      {...(ev.href ? { href: ev.href, target: '_blank', rel: 'noreferrer' } : {})}
-      className={`group relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-2xl bg-arc-950 p-6 transition-shadow duration-300 ${
-        ev.href
-          ? 'hover:shadow-2xl hover:shadow-arc-950/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-400 focus-visible:ring-offset-2'
-          : ''
+    <article
+      className={`group relative flex h-full flex-col overflow-hidden rounded-sm border border-ink-900/15 bg-white transition-colors duration-300 ${
+        ev.href ? 'focus-within:border-arc-600 hover:border-arc-600' : ''
       }`}
     >
-      {ev.image ? (
-        <img
-          src={ev.image}
-          alt=""
-          loading="lazy"
-          className="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
-        />
-      ) : (
-        /* No photograph yet: an engraved arch mark on the deep brand green,
-           cropped hard so it reads as a printed poster rather than a gap. */
-        <span className="absolute inset-0 -z-20 overflow-hidden" aria-hidden>
-          <span className="absolute inset-0 bg-gradient-to-br from-arc-800 via-arc-900 to-arc-950" />
-          <ArcMark
-            className="absolute -right-16 -top-20 h-80 w-80 text-white/[0.07]"
-            strokeWidth={3}
+      {/* One height for all three kinds, so the cards line up. The picture
+          is positioned into the 16:9 box rather than sized with h-full: a
+          percentage height inside an aspect-ratio box that is itself a flex
+          child does not reliably resolve, and when it fails object-cover has
+          no height to crop against and the picture letterboxes instead. */}
+      <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden border-b border-ink-900/10 bg-white">
+        {ev.logo ? (
+          <div className="absolute inset-0 grid place-items-center px-6 py-9">
+            <img
+              src={ev.logo}
+              alt=""
+              loading="lazy"
+              className="max-h-full max-w-full object-contain"
+            />
+          </div>
+        ) : ev.image ? (
+          <img
+            src={ev.image}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover"
           />
-          <span className="absolute inset-0 bg-grid opacity-[0.35]" />
-        </span>
-      )}
-
-      {/* scrim — anchors the type and keeps contrast on any photograph */}
-      <span
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900 via-ink-900/75 to-ink-900/25 transition-opacity duration-300 group-hover:from-ink-900 group-hover:via-ink-900/70"
-        aria-hidden
-      />
-
-      {/* date plate, top-left — tear-off calendar, not a pill */}
-      <div className="absolute left-6 top-6 flex flex-col items-center rounded-lg bg-white/95 px-3 py-2 text-arc-900 shadow-sm backdrop-blur-sm">
-        {month ? (
-          <>
-            <span className="text-[0.65rem] font-bold uppercase tracking-[0.18em]">
-              {month}
-            </span>
-            <span className="text-2xl font-bold leading-none tabular-nums">{day}</span>
-          </>
         ) : (
-          <span className="text-xs font-bold uppercase tracking-wide">{ev.date}</span>
+          // Wrapped rather than positioned directly: Illustration's figure is
+          // already `relative` for its credit, and passing `absolute` here put
+          // two position classes on one element — the figure lost its height
+          // and the picture vanished.
+          <div className="absolute inset-0">
+            <Illustration
+              item={illustrationByTitle(ev.art)}
+              className="h-full w-full"
+              imgClassName="h-full w-full object-cover"
+            />
+          </div>
         )}
       </div>
 
-      {/* billing */}
-      <div className="relative">
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-arc-300">
-          {ev.type}
-          {time && <span className="text-white/45"> · {time}</span>}
-        </p>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        {/* Dateline: the day carries the card, the type sits opposite it. */}
+        <div className="flex items-start justify-between gap-3 border-b border-ink-900/15 pb-3">
+          {month ? (
+            <span className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold leading-none tracking-display tabular-nums text-ink-900">
+                {day}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-label text-ink-500">
+                {month}
+              </span>
+            </span>
+          ) : (
+            <span className="text-xs font-bold uppercase tracking-label text-ink-900">
+              {ev.date}
+            </span>
+          )}
 
-        <h3 className="mt-2 text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl">
+          <span className="text-xs font-semibold uppercase tracking-label text-arc-700">
+            {ev.type}
+          </span>
+        </div>
+
+        <h3 className="mt-4 text-lg font-bold leading-tight tracking-tight text-ink-900">
           {ev.title}
         </h3>
 
-        <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-white/70">
+        <p className="mt-1.5 flex items-center gap-1.5 text-sm text-ink-500">
           <PinIcon />
           {ev.location}
         </p>
 
         {ev.blurb && (
-          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/65">
+          <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-ink-700">
             {ev.blurb}
           </p>
         )}
 
         {ev.href && (
-          <span className="mt-4 inline-flex items-center gap-1.5 border-t border-white/15 pt-4 text-sm font-semibold text-white">
+          <span className="mt-5 inline-flex items-center gap-1.5 border-t border-ink-900/15 pt-4 text-sm font-semibold text-arc-700 transition-colors group-hover:text-arc-800">
             Event website
             <Arrow />
           </span>
         )}
       </div>
-    </Tag>
+
+      {/* Covers the card, but sits under the picture credit so the artist
+          and licence links stay clickable. */}
+      {ev.href && (
+        <a
+          href={ev.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${ev.title} — event website`}
+          className="absolute inset-0 z-10 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
+        />
+      )}
+    </article>
   )
 }
 

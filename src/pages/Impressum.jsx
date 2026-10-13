@@ -113,7 +113,7 @@ export default function Impressum() {
 function Block({ title, children }) {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-ink-900">{title}</h2>
+      <h2 className="text-lg font-semibold text-ink-900 tracking-display">{title}</h2>
       <div className="mt-2 space-y-1">{children}</div>
     </div>
   )

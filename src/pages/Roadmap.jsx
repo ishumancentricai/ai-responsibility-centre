@@ -4,15 +4,18 @@ import VideoEmbed from '../components/VideoEmbed'
 import UpcomingEvents from '../components/UpcomingEvents'
 import { MILESTONES, HIGHLIGHTS, PROJECTS } from '../data/content'
 
+// Each track keeps its colour, but wears it as a dot and a word rather than
+// as a tinted fill — the badge itself stays white like everything else.
 const TRACK_STYLES = {
-  Research: 'bg-arc-100 text-arc-800',
-  Application: 'bg-violet-100 text-violet-800',
-  Policy: 'bg-rose-100 text-rose-800',
-  Workshop: 'bg-sky-100 text-sky-800',
-  Talk: 'bg-indigo-100 text-indigo-800',
-  Announcement: 'bg-amber-100 text-amber-800',
-  Funding: 'bg-slate-200 text-slate-700',
+  Research: { dot: 'bg-arc-600', text: 'text-arc-800' },
+  Application: { dot: 'bg-violet-600', text: 'text-violet-800' },
+  Policy: { dot: 'bg-rose-600', text: 'text-rose-800' },
+  Workshop: { dot: 'bg-sky-600', text: 'text-sky-800' },
+  Talk: { dot: 'bg-indigo-600', text: 'text-indigo-800' },
+  Announcement: { dot: 'bg-amber-600', text: 'text-amber-800' },
+  Funding: { dot: 'bg-slate-500', text: 'text-slate-700' },
 }
+const FALLBACK_TRACK = { dot: 'bg-slate-500', text: 'text-slate-700' }
 
 export default function Roadmap() {
   return (
@@ -58,7 +61,7 @@ export default function Roadmap() {
             {/* "Now" marker */}
             <div className="relative mb-12 flex flex-col gap-4 sm:flex-row sm:gap-8">
               <div className="ml-8 sm:ml-0 sm:w-36 sm:pr-6 sm:text-right">
-                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+                <span className="text-sm font-semibold uppercase tracking-label text-arc-600">
                   Now
                 </span>
               </div>
@@ -92,16 +95,10 @@ export default function Roadmap() {
                       {group.items.map((item, idx) => (
                         <li
                           key={idx}
-                          className="rounded-2xl border border-black/5 bg-arc-50/40 p-5 transition-all hover:shadow-md"
+                          className="border border-ink-900/10 bg-white p-5 transition-colors hover:border-ink-900/25"
                         >
                           <div className="flex flex-wrap items-center gap-3">
-                            <span
-                              className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                                TRACK_STYLES[item.track] ?? 'bg-slate-100 text-slate-700'
-                              }`}
-                            >
-                              {item.track}
-                            </span>
+                            <TrackBadge track={item.track} />
                             <span className="font-semibold text-ink-900">
                               {item.title}
                             </span>
@@ -155,7 +152,7 @@ export default function Roadmap() {
             {/* origin marker */}
             <div className="relative mt-14 flex flex-col gap-4 sm:flex-row sm:gap-8">
               <div className="ml-8 sm:ml-0 sm:w-36 sm:pr-6 sm:text-right">
-                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-400">
+                <span className="text-sm font-semibold uppercase tracking-label text-arc-400">
                   Where it began
                 </span>
               </div>
@@ -169,7 +166,7 @@ export default function Roadmap() {
       </section>
 
       {/* Legend */}
-      <section className="border-t border-black/5 bg-arc-50/40 py-12">
+      <section className="border-t border-black/5 bg-white py-12">
         <div className="container-arc flex flex-wrap items-center gap-x-6 gap-y-3">
           <span className="text-sm font-semibold uppercase tracking-wider text-ink-500">
             Tracks
@@ -178,7 +175,7 @@ export default function Roadmap() {
             (track) => (
               <span key={track} className="flex items-center gap-2 text-sm text-ink-700">
                 <span
-                  className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? '').split(' ')[0]}`}
+                  className={`h-3 w-3 rounded-full ${(TRACK_STYLES[track] ?? FALLBACK_TRACK).dot}`}
                 />
                 {track}
               </span>
@@ -201,12 +198,25 @@ function ProjectTag({ id }) {
       target="_blank"
       rel="noreferrer"
       title={`${project.full} — funded by ${project.funder}`}
-      className="inline-flex items-center gap-1.5 rounded-full border border-ink-900/15 bg-white px-2.5 py-1 text-xs font-semibold text-ink-700 transition-colors hover:border-arc-600 hover:bg-arc-100 hover:text-arc-900"
+      className="group/project inline-flex items-center gap-1.5 rounded-full border border-ink-900/15 bg-white px-2.5 py-1 text-xs font-semibold text-ink-700 transition-colors hover:border-arc-600 hover:bg-arc-600 hover:text-white"
     >
-      <span className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink-500">
+      <span className="text-xs font-bold uppercase tracking-label text-ink-500 transition-colors group-hover/project:text-white/70">
         Project
       </span>
       {project.name}
     </a>
+  )
+}
+
+/** Track badge: white, with the track's colour carried by a dot and the word. */
+function TrackBadge({ track }) {
+  const style = TRACK_STYLES[track] ?? FALLBACK_TRACK
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full border border-ink-900/15 bg-white px-2.5 py-0.5 text-xs font-semibold ${style.text}`}
+    >
+      <span className={`h-1.5 w-1.5 rounded-full ${style.dot}`} aria-hidden />
+      {track}
+    </span>
   )
 }

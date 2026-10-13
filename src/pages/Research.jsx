@@ -40,7 +40,7 @@ export default function Research() {
         <div className="container-arc">
           <Reveal>
             <div className="mb-12 border-b border-black/10 pb-6">
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-500">
+              <p className="text-xs font-semibold uppercase tracking-label text-ink-500">
                 Filter by property
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-2.5">
@@ -73,7 +73,7 @@ export default function Research() {
                   </span>
                   <div className="flex flex-1 flex-col gap-5 lg:flex-row lg:items-start lg:gap-10">
                     <div className="min-w-0 flex-1">
-                      <h2 className="text-lg font-semibold leading-snug text-ink-900">
+                      <h2 className="text-lg font-semibold leading-snug text-ink-900 tracking-display">
                         {p.paper ?? p.title}
                       </h2>
                       {p.authors && <p className="mt-1.5 text-ink-700">{p.authors}</p>}
@@ -95,7 +95,7 @@ export default function Research() {
 
                     {p.properties?.length > 0 && (
                       <div className="lg:w-44 lg:shrink-0">
-                        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-500">
+                        <p className="text-xs font-semibold uppercase tracking-label text-ink-500">
                           Contributes to
                         </p>
                         <ul className="mt-2 flex flex-wrap gap-1.5">

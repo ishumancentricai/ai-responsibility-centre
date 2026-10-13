@@ -1,45 +1,15 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import Reveal from './Reveal'
 import ArcMark from './ArcMark'
-import { PRESS } from '../data/content'
+import Illustration from './Illustration'
+import MediumIcon from './MediumIcon'
+import { PRESS, illustrationByTitle } from '../data/content'
 
-// Call-to-action wording adapts to the medium.
-const READ_LABEL = {
-  Interview: 'Read the interview',
-  'Press release': 'Read the release',
-  Podcast: 'Listen to the episode',
-  Video: 'Watch the interview',
-}
-
-// Seconds per full pass, one per column. Deliberately uneven, so the columns
-// never fall into step and the wall keeps drifting rather than marching.
-const DURATIONS = [74, 92, 83, 101]
-
-/**
- * Every card on the wall: each press story, plus each outlet that picked a
- * story up. The syndication mentions carry only the outlet and a link — that
- * is all we hold on them — which makes them the short cards, and the stories
- * with a portrait the tall ones.
- */
-function buildCards() {
-  const stories = PRESS.map((item) => ({ kind: 'story', key: item.href, item }))
-  const mentions = PRESS.flatMap((item) =>
-    (item.coverage ?? []).map((cv) => ({
-      kind: 'mention',
-      key: `${item.href}#${cv.href}`,
-      outlet: cv.outlet,
-      href: cv.href,
-      story: item.title,
-    })),
-  )
-
-  // Shuffled once, with a fixed seed. Dealing a neatly interleaved list
-  // round-robin would hand every story to the same two columns; a seeded
-  // shuffle scatters tall and short while keeping the wall identical on
-  // every render.
-  return shuffle([...stories, ...mentions], 0x5eed)
-}
+// Seconds per full pass, one per row. Deliberately uneven, so the rows never
+// fall into step and the wall keeps drifting rather than marching.
+const DURATIONS = [168, 208]
+const ROWS = 2
 
 /** Fisher–Yates driven by mulberry32, so the order is mixed but fixed. */
 function shuffle(list, seed) {
@@ -58,61 +28,48 @@ function shuffle(list, seed) {
   return out
 }
 
-// Deal round-robin, so neighbouring columns never start on the same card.
-function dealColumns(cards, count) {
-  const cols = Array.from({ length: count }, () => [])
-  cards.forEach((card, i) => cols[i % count].push(card))
-  return cols
-}
-
-const pick = (w) => (w >= 1024 ? 4 : w >= 640 ? 2 : 1)
-
-/** 4 columns on a desktop, 2 on a tablet, 1 on a phone. */
-function useColumnCount() {
-  const [count, setCount] = useState(() =>
-    typeof window === 'undefined' ? 4 : pick(window.innerWidth),
-  )
-  useEffect(() => {
-    const onResize = () => setCount(pick(window.innerWidth))
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
-  return count
+function dealRows(cards, count) {
+  const rows = Array.from({ length: count }, () => [])
+  cards.forEach((card, i) => rows[i % count].push(card))
+  return rows
 }
 
 /**
- * InTheMedia — press coverage as a wall of columns creeping downward, each on
- * its own clock. Cards take the height their content needs, so the wall stays
- * uneven without anything jumping.
+ * InTheMedia — press coverage as two rows drifting left to right, each on its
+ * own clock. The rows run the full width of the window rather than the text
+ * column, which is what lets two rows hold the coverage in little height.
+ *
+ * Only the stories travel. Outlets that reprinted one hang off that story and
+ * appear on hover, so the wall stays about ARC's own coverage rather than
+ * seven papers carrying the same wire piece.
  *
  * The drift pauses on hover and on keyboard focus, and there is an explicit
- * pause control besides (WCAG 2.2.2). Under reduced motion the wall is simply
- * a static grid. Each column renders its cards twice so the loop closes
+ * pause control besides (WCAG 2.2.2). Under reduced motion the wall is a
+ * static grid. Each row renders its cards twice so the loop closes
  * seamlessly; the second pass is hidden from assistive tech.
  *
  * Only outlet, headline, our own summary and outbound links — never article
  * text; portraits are ARC's own images.
  */
 export default function InTheMedia({
-  className = 'border-b border-black/5 bg-paper-200 py-20 sm:py-28',
+  className = 'border-b border-black/5 bg-white py-20 sm:py-28',
 }) {
   const reduce = useReducedMotion()
   const [paused, setPaused] = useState(false)
-  const columnCount = useColumnCount()
-  const cards = useMemo(() => buildCards(), [])
-  const columns = useMemo(() => dealColumns(cards, columnCount), [cards, columnCount])
+  const cards = useMemo(() => shuffle(PRESS, 0x5eed), [])
+  const rows = useMemo(() => dealRows(cards, ROWS), [cards])
 
   if (!PRESS.length) return null
 
-  // A static grid when the visitor has asked for less motion.
   if (reduce) {
     return (
       <section className={className}>
         <div className="container-arc">
           <Header />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {cards.map((card) => (
-              <Card key={card.key} card={card} />
+          <div className="border-b border-ink-900/15" />
+          <div className="mt-10 grid gap-5 lg:grid-cols-2">
+            {cards.map((item) => (
+              <StoryCard key={item.href} item={item} />
             ))}
           </div>
         </div>
@@ -120,44 +77,42 @@ export default function InTheMedia({
     )
   }
 
-  const mask = 'linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent)'
+  const mask = 'linear-gradient(to right, transparent, #000 4%, #000 96%, transparent)'
 
   return (
     <section className={className}>
       <div className="container-arc">
         <Header paused={paused} onToggle={() => setPaused((p) => !p)} />
+      </div>
+      {/* Wider than the text column, but held off the window edge by the
+          same gutter the rest of the page keeps. */}
+      <div className="mx-6 border-b border-ink-900/15 sm:mx-8" />
 
-        {/* The wall. Hovering or tabbing into it stops the drift. */}
-        <div
-          className="group relative mt-10 h-[34rem] overflow-hidden sm:h-[40rem] lg:h-[46rem]"
-          style={{ maskImage: mask, WebkitMaskImage: mask }}
-        >
-          <div className="grid h-full grid-flow-col auto-cols-fr gap-5">
-            {columns.map((col, c) => {
-              // Twice through, so the track fills the column before the
-              // loop point comes round.
-              const half = [...col, ...col]
-              return (
-                <div key={c} className="relative overflow-hidden">
-                  <div
-                    className="animate-wall flex flex-col gap-5 group-focus-within:[animation-play-state:paused] group-hover:[animation-play-state:paused]"
-                    data-paused={paused}
-                    style={{
-                      '--wall-duration': `${DURATIONS[c % DURATIONS.length]}s`,
-                    }}
-                  >
-                    {half.map((card, i) => (
-                      <Card key={`a-${card.key}-${i}`} card={card} />
-                    ))}
-                    {half.map((card, i) => (
-                      <Card key={`b-${card.key}-${i}`} card={card} duplicate />
-                    ))}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+      {/* Full-bleed: the rows leave the text column and use the whole window. */}
+      <div
+        className="group mt-8 flex flex-col gap-5 overflow-hidden py-2"
+        style={{ maskImage: mask, WebkitMaskImage: mask }}
+      >
+        {rows.map((row, r) => {
+          // Twice through, so the track is wider than any window before the
+          // loop point comes round.
+          const half = [...row, ...row]
+          return (
+            <div
+              key={r}
+              className="animate-wall flex w-max gap-5 group-focus-within:[animation-play-state:paused] group-hover:[animation-play-state:paused]"
+              data-paused={paused}
+              style={{ '--wall-duration': `${DURATIONS[r % DURATIONS.length]}s` }}
+            >
+              {half.map((item, i) => (
+                <StoryCard key={`a-${item.href}-${i}`} item={item} />
+              ))}
+              {half.map((item, i) => (
+                <StoryCard key={`b-${item.href}-${i}`} item={item} duplicate />
+              ))}
+            </div>
+          )
+        })}
       </div>
     </section>
   )
@@ -166,12 +121,12 @@ export default function InTheMedia({
 function Header({ paused, onToggle }) {
   return (
     <Reveal>
-      <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink-900/15 pb-5">
+      <div className="flex flex-wrap items-end justify-between gap-4 pb-5">
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+          <h2 className="text-sm font-semibold uppercase tracking-label text-arc-600">
             In the media
           </h2>
-          <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug text-ink-900 sm:text-3xl">
+          <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug tracking-display text-ink-900 sm:text-3xl">
             ARC in the press.
           </p>
         </div>
@@ -191,122 +146,138 @@ function Header({ paused, onToggle }) {
   )
 }
 
-function Card({ card, duplicate }) {
-  return card.kind === 'story' ? (
-    <StoryCard item={card.item} duplicate={duplicate} />
-  ) : (
-    <MentionCard card={card} duplicate={duplicate} />
-  )
-}
-
-/** A full press story: portrait on top, masthead, headline, summary. */
+/**
+ * A press story, laid on its side so the row stays shallow. Set in the site's
+ * own typeface: a second family for these headlines alone read as a fifth
+ * voice on a page that already has few.
+ *
+ * Every card is the same height. That is what keeps the rows even, and it
+ * also bounds the tall pictures: their band takes its width from the card's
+ * height, so without a fixed height a long headline would quietly make the
+ * picture beside it wider.
+ *
+ * Not an anchor itself: the reprint list and the picture credit hold links of
+ * their own, and an anchor inside an anchor is invalid — the browser unnests
+ * it and the inner links stop working. A covering link sits beneath both
+ * instead.
+ */
 function StoryCard({ item, duplicate }) {
-  const readLabel = READ_LABEL[item.type] ?? 'Read more'
-  return (
-    <a
-      href={item.href}
-      target="_blank"
-      rel="noreferrer"
-      tabIndex={duplicate ? -1 : undefined}
-      aria-hidden={duplicate}
-      className="group/card block overflow-hidden rounded-sm border border-paper-300 bg-paper-50 shadow-[0_10px_28px_-20px_rgba(15,28,24,0.45)] transition-colors hover:border-ink-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
-    >
-      {item.image ? (
-        <img
-          src={item.image}
-          alt=""
-          loading="lazy"
-          draggable={false}
-          className="aspect-[4/3] w-full object-cover object-top"
-        />
-      ) : (
-        <div className="grid aspect-[4/3] w-full place-items-center bg-paper-100">
-          <ArcMark className="h-10 w-10 text-ink-500/60" strokeWidth={4} />
-        </div>
-      )}
+  const reprints = item.coverage ?? []
+  const art = item.art ? illustrationByTitle(item.art) : null
+  // A tall picture goes beside the text, a wide one beneath it. For a tall
+  // one `portrait` holds its width/height, so the band can take exactly the
+  // width that picture needs at the card's height rather than being cropped
+  // into a fixed one.
+  const portrait = art ? art.portrait : item.portrait
 
-      <div className="p-5">
-        <div className="flex flex-wrap items-baseline gap-x-2 border-b border-ink-900 pb-2">
-          <span className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-ink-900">
+  return (
+    <article
+      aria-hidden={duplicate}
+      className={`group/card relative flex h-[21rem] shrink-0 overflow-hidden rounded-sm border border-paper-300 bg-paper-50 transition duration-300 ease-out hover:z-10 hover:scale-[1.015] hover:border-ink-500/40 ${
+        portrait
+          ? 'w-auto min-w-[28rem] max-w-[38rem] flex-row'
+          : 'w-auto min-w-[26rem] max-w-[34rem] flex-col'
+      }`}
+    >
+      <div
+        className={portrait ? 'flex min-w-0 flex-1 flex-col p-5' : 'min-w-0 shrink-0 p-5'}
+      >
+        <div className="flex items-baseline gap-2 border-b border-ink-900 pb-1.5">
+          <span className="truncate text-xs font-bold uppercase tracking-label text-ink-900">
             {item.outlet}
           </span>
-          <span className="ml-auto text-[0.68rem] tabular-nums text-ink-500">
-            {item.date}
-          </span>
+          {!portrait && (
+            <span className="ml-auto shrink-0 text-xs tabular-nums text-ink-500">
+              {item.date}
+            </span>
+          )}
         </div>
 
-        {item.type && (
-          <p className="mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-arc-700">
-            {item.type}
-          </p>
-        )}
-
-        <h3 className="mt-1.5 font-serif text-lg font-bold leading-[1.2] tracking-tight text-ink-900">
-          {item.title}
+        <h3
+          className={`mt-2 text-lg font-bold leading-tight tracking-display text-ink-900 ${
+            portrait ? 'line-clamp-3' : 'line-clamp-2'
+          }`}
+        >
+          {item.titleEn ?? item.title}
         </h3>
 
-        {item.summary && (
-          <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-ink-700">
-            {item.summary}
+        {item.type && (
+          <p className="mt-2.5 text-arc-700">
+            <MediumIcon medium={item.type} className="h-5 w-5" />
           </p>
         )}
 
-        <div className="mt-4 flex items-center gap-x-3 border-t border-ink-900/15 pt-3 text-xs">
-          {item.person && (
-            <span className="truncate italic text-ink-500">{item.person}</span>
-          )}
-          <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 font-semibold text-arc-700">
-            {readLabel}
-            <Arrow />
+        {portrait && (
+          <span className="mt-auto pt-3 text-xs tabular-nums text-ink-500">
+            {item.date}
           </span>
-        </div>
+        )}
       </div>
-    </a>
-  )
-}
 
-/** An outlet that picked a story up — the outlet and a link is all we hold. */
-function MentionCard({ card, duplicate }) {
-  return (
-    <a
-      href={card.href}
-      target="_blank"
-      rel="noreferrer"
-      tabIndex={duplicate ? -1 : undefined}
-      aria-hidden={duplicate}
-      className="group/card block rounded-sm border border-paper-300 bg-paper-100 p-5 transition-colors hover:border-ink-500/40 hover:bg-paper-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
-    >
-      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-ink-500">
-        Also covered by
-      </p>
-      <p className="mt-2 border-b border-ink-900 pb-2 text-sm font-bold uppercase tracking-[0.14em] text-ink-900">
-        {card.outlet}
-      </p>
-      <p className="mt-2.5 font-serif text-sm leading-snug text-ink-700">{card.story}</p>
-      <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-arc-700">
-        Read more
-        <Arrow />
-      </span>
-    </a>
-  )
-}
+      {/* Beside the text when the picture is tall, beneath it when wide. */}
+      <div
+        style={portrait ? { aspectRatio: portrait } : undefined}
+        className={
+          portrait
+            ? 'w-auto shrink-0 self-stretch border-l border-paper-300'
+            : 'min-h-0 w-full flex-1 border-t border-paper-300'
+        }
+      >
+        {art ? (
+          <Illustration
+            item={art}
+            className="h-full w-full"
+            imgClassName="h-full w-full object-cover"
+          />
+        ) : item.image ? (
+          <img
+            src={item.image}
+            alt=""
+            loading="lazy"
+            draggable={false}
+            className="h-full w-full object-cover object-top grayscale-[0.15] transition-all duration-500 group-hover/card:grayscale-0"
+          />
+        ) : (
+          <div className="grid h-full w-full place-items-center bg-paper-100">
+            <ArcMark className="h-8 w-8 text-ink-500/60" strokeWidth={4} />
+          </div>
+        )}
+      </div>
 
-function Arrow() {
-  return (
-    <svg
-      className="h-3 w-3 transition-transform duration-300 group-hover/card:translate-x-1"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M3 8h9M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      {/* Covers the card, under the reprint list and the picture credit so
+          both stay clickable. */}
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noreferrer"
+        tabIndex={duplicate ? -1 : undefined}
+        aria-label={`${item.outlet}: ${item.titleEn ?? item.title}`}
+        className="absolute inset-0 z-10 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
       />
-    </svg>
+
+      {/* The outlets that reprinted the story, rising from the bottom edge.
+          Inside the card rather than beside it: the row clips its own
+          overflow to run the marquee, so anything escaping would be cut off. */}
+      {reprints.length > 0 && (
+        <div className="absolute inset-x-0 bottom-0 z-20 translate-y-full border-t border-ink-900/15 bg-paper-50 px-5 py-3 transition-transform duration-300 group-focus-within/card:translate-y-0 group-hover/card:translate-y-0">
+          <ul className="flex flex-wrap gap-x-3 gap-y-0.5">
+            {reprints.map((cv) => (
+              <li key={cv.href}>
+                <a
+                  href={cv.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  tabIndex={duplicate ? -1 : undefined}
+                  className="text-xs font-medium text-ink-700 underline decoration-ink-900/25 underline-offset-2 transition-colors hover:text-arc-700 hover:decoration-arc-600"
+                >
+                  {cv.outlet}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </article>
   )
 }
 

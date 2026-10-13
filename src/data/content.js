@@ -131,28 +131,33 @@ export const EVENTS = [
   {
     date: 'Oct 20, 2026',
     title: 'Impulstag KI & Co.',
+    art: 'Digital Nomads Beyond the Cubicle',
     location: 'futurum, Stuttgart',
     type: 'Talk',
     blurb:
-      'Niklas Kühl on “Künstliche Intelligenz: Grundlagen und Trends für die Pflege” — what the technology can and cannot do for care work. Part of Diakonie Baden’s day on AI and innovation in the social sector.',
+      'Niklas Kühl on AI in nursing care — what the technology can and cannot do for the work. Part of Diakonie Baden’s day on AI in the social sector.',
     href: 'https://event.trippus.net/Home/Index/AEAKgIOWcm_ns1jaFGFAcO2KpwCk70fcGBXkYmXHken-nQhj3aWlhWE98fW4wF2ssxYNZrjbQkCY/AEAKgINZnls_2mCMUFdejsfh7oM_TXSipJJ-BRzFEeJiC52ORLoxzAd4gIWgdvZ2iNjhy4y2GvoC/de',
   },
   {
     date: 'Nov 19, 2026, 17:00',
     title: 'bidt Research Conference 2026',
+    art: 'Brain Control',
     location: 'Bayerische Akademie der Wissenschaften, Munich',
     type: 'Talk',
     blurb:
-      'Closing keynote by Niklas Kühl: “The Meat Proxy — On the (Im)Possibility of Appropriate Reliance in AI Advice”, on whether people can ever calibrate how far to trust what an AI advises. Closes day one of the two-day conference on digital transformation research.',
+      'Closing keynote by Niklas Kühl, “The Meat Proxy”: can anyone calibrate how far to trust what an AI advises? Closes day one of the conference.',
     href: 'https://www.bidt.digital/research-conference-2026/',
   },
   {
     date: 'Dec 13–16, 2026',
     title: 'ICIS 2026',
+    // The conference's own mark, shown whole rather than cropped. Used to
+    // identify the event we present at — referential use, not endorsement.
+    logo: '/events/icis-2026.png',
     location: 'Lisbon, Portugal',
     type: 'Conference',
     blurb:
-      'Presenting “Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos” at the International Conference on Information Systems, this year under the theme “Digital Collaboration and Coexistence”.',
+      'Presenting our paper on collaborative synthetic data: letting organisations detect fraud together without handing over their data.',
     href: 'https://icis2026.aisconferences.org/',
   },
 ]
@@ -319,7 +324,144 @@ export const MILESTONES = [
   },
 ]
 
+// ---------------------------------------------------------------------------
+// Artwork from Better Images of AI (betterimagesofai.org), a non-profit
+// project of We and AI, BBC R&D and the Leverhulme Centre for the Future of
+// Intelligence. It exists because the usual stock imagery of AI — glowing
+// brains, blue robots — misleads, which makes it the right library for a
+// centre arguing for responsible AI.
+//
+// Every image is CC BY 4.0. The licence REQUIRES visible attribution naming
+// the artist and linking to the source and the licence; omitting it
+// terminates the licence. `Illustration` renders that credit — do not use
+// these files without it.
+//
+// The files are served from our own domain, both to keep the page free of
+// third-party requests and because they were scaled down to 1600px for the
+// web. That scaling is a modification under CC BY.
+// `portrait` holds width/height for a file taller than it is wide, measured
+// from the file itself. Cards lay a portrait picture alongside the text and a
+// landscape one beneath it; the ratio lets a tall picture take exactly the
+// width it needs beside the text rather than being cropped to a fixed band.
+// ---------------------------------------------------------------------------
+export const ILLUSTRATION_SOURCE = {
+  name: 'Better Images of AI',
+  href: 'https://betterimagesofai.org',
+  licence: 'CC BY 4.0',
+  licenceHref: 'https://creativecommons.org/licenses/by/4.0/',
+}
+
+export const ILLUSTRATIONS = [
+  {
+    file: '/illustrations/seeing-more-seeing-less.jpg',
+    title: 'Seeing More — Seeing Less',
+    artist: 'Anna Riepe & FARI',
+    alt: 'Paper collage. A photograph of the Atomium in Brussels, cut into diagonal strips and reassembled over a grid of numbers',
+  },
+  {
+    file: '/illustrations/digital-nomads-across-time.jpg',
+    title: 'Digital Nomads Across Time',
+    artist: 'Yutong Liu & Digit',
+    alt: 'The undying sun hangs in the sky, as people gather around signal towers, working through their digital devices',
+  },
+  {
+    file: '/illustrations/digital-nomads-beyond-the-cubicle.jpg',
+    title: 'Digital Nomads Beyond the Cubicle',
+    artist: 'Yutong Liu & Digit',
+    alt: 'Within the frames are people bound to their office cubicles; beyond them, individuals work freely from diverse locations, connected through digital si',
+  },
+  {
+    file: '/illustrations/digital-nomads-digital-based-connection.jpg',
+    title: 'Digital Nomads: Digital-Based Connection',
+    artist: 'Yutong Liu & Digit',
+    alt: 'Through signals from communication towers, people exchange ideas via digital transmission across different locations, accomplishing their work and bui',
+  },
+  {
+    file: '/illustrations/wheel-of-progress.jpg',
+    title: 'Wheel of Progress',
+    artist: 'Leo Lau & Digit',
+    alt: 'Two workers running inside a scroll wheel embedded in a computer mouse, controlled by a giant capitalist hand',
+  },
+  {
+    file: '/illustrations/knowledge-sweatshop.jpg',
+    title: 'Knowledge Sweatshop',
+    artist: 'Leo Lau & Digit',
+    alt: 'A row of knowledge workers operate sewing machines producing piles of spreadsheets and reports',
+  },
+  {
+    file: '/illustrations/brain-control.jpg',
+    portrait: 1287 / 1600,
+    title: 'Brain Control',
+    artist: 'Bart Fish & Power Tools of AI',
+    alt: 'A brain diagram shows ChatGPT has replaced core functions of the brain, while a young girl in the bottom right covers her eyes in horror. Degraded ima',
+  },
+  {
+    file: '/illustrations/networks.jpg',
+    title: 'Networks',
+    artist: 'Pauline Wee & DAIR',
+    alt: 'This image depicts clusters of various mushrooms growing on a network of surveillance cameras against a dark green textured background',
+  },
+  {
+    file: '/illustrations/binarisation.jpg',
+    title: 'Binarisation',
+    artist: 'Beckett LeClair',
+    alt: 'A long rainbow ribbon feeds into a grey meat grinder bearing a simplified neural network diagram on its side. Out the other end spills a collection of',
+  },
+  {
+    file: '/illustrations/limits-of-classification.jpg',
+    title: 'Limits of Classification',
+    artist: 'Nadia Piet & Archival Images of AI + AIxDESIGN',
+    alt: 'This illustration depicts a progression from a fish to a woman, showcasing transitional stages that defy classification boundaries, emphasising fluid',
+  },
+  {
+    file: '/illustrations/facial-recognition.jpg',
+    title: 'Facial Recognition',
+    artist: 'Alyssa Chen',
+    alt: 'Polytype diagrams with geometric tile designs',
+  },
+  {
+    file: '/illustrations/the-ai-race.jpg',
+    title: 'The AI Race',
+    artist: 'Gloria Mendoza',
+    alt: "A heritage painting of a woman's head in profile jutting out of a silhouette",
+  },
+  {
+    file: '/illustrations/talking-to-ai-2-0.jpg',
+    title: 'Talking to AI 2.0',
+    artist: 'Yutong Liu & Kingston School of Art',
+    alt: 'This image shows an individual with orange hair interacting with a large, abstract digital mirrored structure. The structure is composed of squares in',
+  },
+  {
+    file: '/illustrations/exploring-ai-2-0.jpg',
+    portrait: 1131 / 1600,
+    title: 'Exploring AI 2.0',
+    artist: 'Yutong Liu & Kingston School of Art',
+    alt: 'This image features a grid of 35 square tiles with blue, pink, burgundy and orange figures inside the tiles interacting with dark green letters of the',
+  },
+  {
+    file: '/illustrations/talking-to-ai.jpg',
+    portrait: 1131 / 1600,
+    title: 'Talking to AI',
+    artist: 'Yutong Liu & Kingston School of Art',
+    alt: 'This image shows an individual with orange hair interacting with a large, abstract digital mirrored structure. The structure is composed of squares in',
+  },
+]
+
+/**
+ * Look one up by title. Every entry that wants artwork names it, so there is
+ * no automatic assignment to go stale or to put the same picture in two
+ * places without anyone noticing.
+ */
+export function illustrationByTitle(title) {
+  return ILLUSTRATIONS.find((i) => i.title === title)
+}
+
 // Press & media coverage featuring ARC and its members — newest first.
+// `title` is always the headline the outlet actually published and stays the
+// record of it; `titleEn` is our own translation and is what the cards show,
+// since the site is in English. Keep both — a translation must never
+// overwrite what was actually printed.
+//
 // COPYRIGHT: store only the outlet, the piece's own headline, our OWN short
 // neutral summary and an outbound link. Never reproduce article text or use a
 // publication's photo — portraits are ARC's own team images. `coverage` lists
@@ -328,10 +470,12 @@ export const MILESTONES = [
 export const PRESS = [
   {
     outlet: 'Bayerisches Staatsministerium für Digitales',
+    art: 'The AI Race',
     date: '5 October 2026',
     type: 'Press release',
     title:
       'Minister Dr. Mehring zu KI: „Müssen Geister, die wir rufen, auch beherrschen!“',
+    titleEn: 'Minister Mehring on AI: “We must also master the spirits we summon”',
     summary:
       'Bavaria’s digital ministry draws its consequences from a high-level AI summit: a recurring AI security dialogue, an independent annual security report from 2027, an AI ethics forum and a public awareness campaign. Niklas Kühl was among the invited experts.',
     person: 'Prof. Dr. Niklas Kühl',
@@ -340,9 +484,11 @@ export const PRESS = [
   },
   {
     outlet: 'zeb',
+    art: 'Knowledge Sweatshop',
     date: 'September 2026',
     type: 'Podcast',
     title: 'Wer braucht noch eine Bank? Regionalbanken im Zeitalter von KI',
+    titleEn: 'Who still needs a bank? Regional banks in the age of AI',
     summary:
       'A conversation on what AI changes for regional banks — and on appropriate reliance: how far anyone should lean on an AI’s judgement when the decision is a financial one.',
     person: 'Prof. Dr. Niklas Kühl',
@@ -351,9 +497,11 @@ export const PRESS = [
   },
   {
     outlet: 'WDR 5 Quarks',
+    art: 'Seeing More — Seeing Less',
     date: '10 August 2026',
     type: 'Podcast',
     title: 'Verantwortungsvolle KI',
+    titleEn: 'Responsible AI',
     summary:
       'A WDR 5 Quarks “Wissenschaft und mehr” segment on responsible AI — how AI systems can be built and governed so people keep meaningful control.',
     person: 'Prof. Dr. Niklas Kühl',
@@ -366,11 +514,15 @@ export const PRESS = [
     date: '4 August 2026',
     type: 'Press release',
     title: 'So will die Uni Bayreuth die KI zähmen',
+    titleEn: 'How the University of Bayreuth intends to tame AI',
     summary:
       'The University of Bayreuth launches the AI Responsibility Centre — an interdisciplinary centre uniting information systems, law and philosophy to build trustworthy, well-governed AI, funded by the Bavarian State Ministry of Science and the Arts.',
     person: 'Team of the AI Responsibility Centre (ARC)',
     image: '/team/team_upright.jpg',
+    portrait: 1019 / 1200,
     href: 'https://www.uni-bayreuth.de/pressemitteilung/ARC',
+    // `title` only where the outlet ran its own headline; the dpa reprints
+    // inherit this item's title, because that is the headline they ran.
     coverage: [
       {
         outlet: 'Süddeutsche Zeitung',
@@ -396,14 +548,21 @@ export const PRESS = [
         outlet: 'diebayern.de',
         href: 'https://www.diebayern.de/bildung/so-will-die-uni-bayreuth-die-ki-zaehmen-3165871',
       },
-      { outlet: 'idw', href: 'https://idw-online.de/de/news875507' },
+      {
+        outlet: 'idw',
+        title:
+          'University of Bayreuth Establishes Interdisciplinary Centre for Responsible AI Research and Development',
+        href: 'https://idw-online.de/de/news875507',
+      },
     ],
   },
   {
     outlet: 'Frankenpost',
+    art: 'Exploring AI 2.0',
     date: '3 August 2026',
     type: 'Interview',
     title: '„Die KI ist nicht böse geworden“',
+    titleEn: '“AI has not turned evil”',
     // Our own neutral one-liner about the topic — not a quote from the article.
     summary:
       'An interview on the risks of agentic AI — why recent “break-out” incidents reflect gaps in oversight and IT security rather than malicious machines, and how responsible AI keeps humans in control.',
@@ -416,6 +575,8 @@ export const PRESS = [
     date: '16 July 2026',
     type: 'Press release',
     title: 'Wie KI Wahlentscheidungen vorhersagt',
+    titleEn: 'How AI predicts voting decisions',
+    art: 'Talking to AI',
     summary:
       'How do language models “predict” elections? A Bayreuth–LMU study probes what LLMs encode internally about political preferences across six national elections — a complement to, not a replacement for, traditional polling.',
     person: 'Simeon Allmendinger, Prof. Dr. Niklas Kühl',

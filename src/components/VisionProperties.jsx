@@ -19,8 +19,10 @@ import { VISION, PROPERTY_EVIDENCE } from '../data/content'
  * width it is given, so the full-bleed section on the home page and the narrow
  * column on the About page get the same thing, just broken differently.
  *
- * At rest the row is ink only, so five pills in a line stay quiet. The brand
- * green belongs to the one you are pointing at.
+ * At rest the row is ink only, so five pills in a line stay quiet. The one
+ * you are pointing at fills with the logo's own green and turns white — the
+ * same pairing as the mark in the header, so the accent reads as the brand
+ * rather than as a generic highlight.
  */
 export default function VisionProperties({ className = '' }) {
   return (
@@ -32,24 +34,24 @@ export default function VisionProperties({ className = '' }) {
             <StaggerItem key={property} y={12}>
               <Link
                 to={`/research?property=${property}`}
-                className="group inline-flex items-center gap-2.5 rounded-full border border-ink-900/15 bg-white px-4 py-2.5 transition-colors duration-300 hover:border-arc-600 hover:bg-arc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
+                className="group inline-flex items-center gap-2.5 rounded-full border border-ink-900/15 bg-white px-4 py-2.5 transition-colors duration-300 hover:border-arc-600 hover:bg-arc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
               >
                 <PropertyIcon
                   name={property}
-                  className="h-4 w-4 shrink-0 text-ink-500 transition-colors duration-300 group-hover:text-arc-800"
+                  className="h-4 w-4 shrink-0 text-ink-500 transition-colors duration-300 group-hover:text-white"
                 />
 
-                <span className="text-base font-medium capitalize leading-none text-ink-900 transition-colors duration-300 group-hover:text-arc-900">
+                <span className="text-base font-medium capitalize leading-none text-ink-900 transition-colors duration-300 group-hover:text-white">
                   {property}
                 </span>
 
                 {count > 0 && (
                   <>
                     <span
-                      className="h-3.5 w-px bg-ink-900/15 transition-colors duration-300 group-hover:bg-arc-600"
+                      className="h-3.5 w-px bg-ink-900/15 transition-colors duration-300 group-hover:bg-white/40"
                       aria-hidden
                     />
-                    <span className="text-xs font-medium tabular-nums leading-none text-ink-500 transition-colors duration-300 group-hover:text-arc-800">
+                    <span className="text-xs font-medium tabular-nums leading-none text-ink-500 transition-colors duration-300 group-hover:text-white/75">
                       {count}
                       <span className="sr-only">
                         {count === 1 ? ' publication' : ' publications'}

@@ -43,11 +43,11 @@ export default function TeamHero({ eyebrow, title, intro, stats = [] }) {
   const copyOpacity = useTransform(p, [0, 0.6], [1, 0])
   const scrimOpacity = useTransform(p, [0, 0.8], [1, 0.4])
 
-  // Pointer spotlight — springs make it trail the cursor rather than snap.
+  // Pointer position — the spring makes the photo trail the cursor rather
+  // than snap to it.
   const px = useMotionValue(-1000)
   const py = useMotionValue(-1000)
   const spotX = useSpring(px, { stiffness: 140, damping: 22, mass: 0.6 })
-  const spotY = useSpring(py, { stiffness: 140, damping: 22, mass: 0.6 })
   // The photo leans a few pixels against the cursor.
   const driftX = useTransform(spotX, (v) =>
     v < 0 ? 0 : (v - (panelRef.current?.offsetWidth ?? 0) / 2) * -0.014,
@@ -114,14 +114,6 @@ export default function TeamHero({ eyebrow, title, intro, stats = [] }) {
         />
 
         {/* Cursor spotlight. */}
-        {animate && (
-          <motion.div
-            style={{ left: spotX, top: spotY }}
-            className="pointer-events-none absolute h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-arc-300/20 blur-3xl"
-            aria-hidden
-          />
-        )}
-
         {/* Copy. */}
         <motion.div
           style={animate ? { y: copyY, opacity: copyOpacity } : undefined}
@@ -132,7 +124,7 @@ export default function TeamHero({ eyebrow, title, intro, stats = [] }) {
               initial={reduce ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-arc-200 backdrop-blur"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-label text-arc-200"
             >
               {eyebrow}
             </motion.p>

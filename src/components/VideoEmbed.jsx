@@ -53,7 +53,7 @@ export default function VideoEmbed({ id, title, poster }) {
 
           {/* play affordance */}
           <span
-            className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 shadow-lg transition-transform duration-300 group-hover:scale-110"
+            className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 transition-transform duration-300 group-hover:scale-110"
             aria-hidden
           >
             <svg className="ml-1 h-6 w-6 text-arc-900" viewBox="0 0 24 24" fill="none">
@@ -73,7 +73,7 @@ export default function VideoEmbed({ id, title, poster }) {
 
 function Frame({ children }) {
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-black/5 bg-ink-900">
+    <div className="relative aspect-video w-full overflow-hidden rounded-sm border border-black/5 bg-ink-900">
       {children}
     </div>
   )

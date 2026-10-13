@@ -32,6 +32,15 @@
     'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
 
+  /* Corners: 4px on every surface, full-round on pills and controls. The
+     logo tile is the one exception — it is a brand element, and squaring it
+     off made the mark look clipped. Keep it out of blanket radius changes. */
+
+  /* Letter-spacing: one tight setting for display type, one wide setting for
+     the uppercase micro labels. Everything else uses Tailwind's defaults. */
+  --tracking-display: -0.04em;
+  --tracking-label: 0.18em;
+
   --default-transition-duration: 200ms;
 }
 
@@ -71,10 +80,20 @@
     background-size: 28px 28px;
   }
 
-  /* News wall — each column creeps downward on its own clock. The track
-     holds its cards twice, so translating half its height loops seamlessly. */
+  /* Picture credits sit over the image and surface on hover. Devices without
+     a pointer never fire hover, so there they stay visible — without this the
+     CC BY attribution would simply be absent on a phone, which terminates
+     the licence. */
+  @media (hover: none) {
+    .credit-overlay {
+      opacity: 1;
+    }
+  }
+
+  /* News wall — each row drifts sideways on its own clock. The track holds
+     its cards twice, so translating half its width loops seamlessly. */
   .animate-wall {
-    animation: wall-scroll var(--wall-duration, 60s) linear infinite;
+    animation: wall-drift var(--wall-duration, 60s) linear infinite;
     will-change: transform;
   }
 
@@ -98,11 +117,11 @@
   }
 }
 
-@keyframes wall-scroll {
+@keyframes wall-drift {
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
   to {
-    transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, 0, 0);
   }
 }

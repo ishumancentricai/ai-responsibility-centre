@@ -12,10 +12,12 @@ import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import UpcomingEvents from '../components/UpcomingEvents'
 import GapFigure from '../components/GapFigure'
 import VisionProperties from '../components/VisionProperties'
+import Illustration from '../components/Illustration'
 import InTheMedia from '../components/InTheMedia'
 import {
   VISION,
   MISSION,
+  illustrationByTitle,
   PILLARS,
   GAPS,
   HIGHLIGHTS,
@@ -28,7 +30,7 @@ export default function Home() {
     <>
       <Hero />
       <UpcomingEvents
-        className="border-b border-black/5 bg-arc-50/40 py-24 sm:py-32"
+        className="border-b border-black/5 bg-white py-24 sm:py-32"
         cta={{ label: 'View all events & milestones', to: '/roadmap' }}
       />
       <InTheMedia />
@@ -96,22 +98,13 @@ function Hero() {
           className="bg-grid absolute inset-0 opacity-20"
           aria-hidden
         />
-        <div
-          className="absolute -left-40 top-1/4 h-[32rem] w-[32rem] rounded-full bg-arc-600/25 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="absolute -right-40 bottom-1/4 h-[28rem] w-[28rem] rounded-full bg-arc-400/20 blur-3xl"
-          aria-hidden
-        />
-
         {/* giant arch mark behind the text */}
         <motion.div
           style={reduce ? undefined : { scale: markScale, opacity: markOpacity }}
           className="pointer-events-none absolute"
           aria-hidden
         >
-          <ArcMark className="h-[44vh] w-[44vh] text-arc-500/40" strokeWidth={2.5} />
+          <ArcMark className="h-[34vh] w-[34vh] text-arc-500/40" strokeWidth={2.5} />
         </motion.div>
 
         {/* hero copy */}
@@ -125,7 +118,7 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-arc-200 backdrop-blur"
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-label text-arc-200"
           >
             University of Bayreuth
           </motion.p>
@@ -158,7 +151,7 @@ function Hero() {
           >
             <Link
               to="/about"
-              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-arc-900 shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-arc-900 transition-transform hover:-translate-y-0.5"
             >
               Discover ARC
             </Link>
@@ -195,45 +188,57 @@ function Hero() {
 function Qualities() {
   return (
     <section className="bg-white py-24 sm:py-32">
-      <div className="container-arc">
+      {/* The artwork stands beside the whole block rather than beside one
+          paragraph of it. Portrait on a wide screen, which crops the 16:9
+          source — a deliberate framing, and CC BY permits it as long as the
+          credit stays, which it does. On narrow screens it reverts to the
+          picture's own 16:9 above the text. */}
+      <div className="container-arc grid gap-10 lg:grid-cols-[1fr_1.45fr] lg:items-start lg:gap-14">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
-            Our vision
-          </p>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-3xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            AI systems are here to stay. Those who help shape their use also shape the
-            standards, values and limits of their deployment.
-          </h2>
+          <Illustration
+            item={illustrationByTitle('Digital Nomads Across Time')}
+            className="rounded-sm border border-ink-900/10"
+            imgClassName="aspect-[16/9] w-full object-cover lg:aspect-[4/5]"
+          />
         </Reveal>
 
-        <VisionProperties className="mt-10" />
+        <div>
+          <Reveal delay={0.05}>
+            <p className="text-sm font-semibold uppercase tracking-label text-arc-600">
+              Our vision
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-4 text-balance text-3xl font-bold tracking-display sm:text-4xl">
+              AI systems are here to stay. Those who help shape their use also shape the
+              standards, values and limits of their deployment.
+            </h2>
+          </Reveal>
 
-        <Reveal delay={0.1}>
-          <p className="mt-10 max-w-3xl text-lg leading-relaxed text-ink-700">
-            {VISION.ambition}
-          </p>
-        </Reveal>
+          <VisionProperties className="mt-10" />
+
+          <Reveal delay={0.15}>
+            <p className="mt-10 text-lg leading-relaxed text-ink-700">
+              {VISION.ambition}
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   )
 }
 
-/* ------------------------------------------------------------------ */
-/* Gaps — why we need ARC. Cards reveal with parallax-y stagger.       */
-/* ------------------------------------------------------------------ */
 function Gaps() {
   return (
-    <section className="border-y border-black/5 bg-arc-50/40 py-24 sm:py-32">
+    <section className="border-y border-black/5 bg-white py-24 sm:py-32">
       <div className="container-arc">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+          <p className="text-sm font-semibold uppercase tracking-label text-arc-600">
             Why ARC?
           </p>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="mt-4 max-w-2xl text-3xl font-bold tracking-display sm:text-4xl">
             Three gaps we close.
           </h2>
         </Reveal>
@@ -241,9 +246,9 @@ function Gaps() {
         <Stagger className="mt-12 grid gap-6 md:grid-cols-3" step={0.14}>
           {GAPS.map((gap, i) => (
             <StaggerItem key={gap.title}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <article className="group flex h-full flex-col overflow-hidden rounded-sm border border-black/5 bg-white transition-all duration-300 hover:-translate-y-1">
                 {/* figure panel — the arch spanning the break */}
-                <div className="relative border-b border-black/5 bg-gradient-to-b from-arc-50/70 to-white px-8 pb-6 pt-8">
+                <div className="relative border-b border-ink-900/10 bg-white px-8 pb-6 pt-8">
                   <span className="absolute inset-0 bg-grid opacity-40" aria-hidden />
                   <GapFigure
                     variant={gap.figure}
@@ -253,7 +258,7 @@ function Gaps() {
 
                 <div className="flex flex-1 flex-col p-8">
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold tabular-nums tracking-[0.15em] text-arc-600">
+                    <span className="text-xs font-bold tabular-nums tracking-label text-arc-600">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span
@@ -261,7 +266,9 @@ function Gaps() {
                       aria-hidden
                     />
                   </div>
-                  <h3 className="mt-4 text-xl font-semibold text-ink-900">{gap.title}</h3>
+                  <h3 className="mt-4 text-xl font-semibold text-ink-900 tracking-tight">
+                    {gap.title}
+                  </h3>
                   <p className="mt-3 leading-relaxed text-ink-700">{gap.body}</p>
                 </div>
               </article>
@@ -278,19 +285,17 @@ function Gaps() {
 /* ------------------------------------------------------------------ */
 function Stats() {
   return (
-    <section className="bg-white py-16 sm:py-20">
+    // A full-bleed band: the colour runs edge to edge while the figures stay
+    // in the text column, so the banner reads as a rule across the page
+    // rather than as another card.
+    <section className="bg-arc-900 py-16 text-white sm:py-20">
       <div className="container-arc">
-        <Stagger
-          className="grid grid-cols-2 gap-8 border-y border-black/5 py-16 lg:grid-cols-4"
-          step={0.1}
-        >
+        <Stagger className="grid grid-cols-2 gap-8 lg:grid-cols-4" step={0.1}>
           {HIGHLIGHTS.map((s) => (
             <StaggerItem key={s.label}>
-              <p className="text-4xl font-bold tracking-tight text-arc-600 sm:text-5xl">
-                {s.value}
-              </p>
-              <p className="mt-2 font-medium text-ink-900">{s.label}</p>
-              <p className="mt-1 text-sm text-ink-500">{s.sub}</p>
+              <p className="text-4xl font-bold tracking-display sm:text-5xl">{s.value}</p>
+              <p className="mt-2 font-medium">{s.label}</p>
+              <p className="mt-1 text-sm text-white/65">{s.sub}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -313,12 +318,12 @@ function Pillars() {
     <section className="bg-white py-24 sm:py-32">
       <div className="container-arc">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+          <p className="text-sm font-semibold uppercase tracking-label text-arc-600">
             Our mission
           </p>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-3xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-balance text-3xl font-bold tracking-display sm:text-4xl">
             {MISSION.headline}
           </h2>
         </Reveal>
@@ -333,10 +338,10 @@ function Pillars() {
             <StaggerItem key={pillar.id}>
               <Link
                 to={PILLAR_LINKS[pillar.id]}
-                className="group flex h-full flex-col rounded-3xl border border-black/5 bg-gradient-to-b from-white to-arc-50/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-arc-200 hover:shadow-xl"
+                className="group flex h-full flex-col rounded-sm border border-ink-900/10 bg-white p-8 transition-colors duration-300 hover:border-arc-600"
               >
                 <ArcMark className="h-9 w-9 text-arc-600" strokeWidth={5} />
-                <h3 className="mt-6 text-xl font-semibold text-ink-900">
+                <h3 className="mt-6 text-xl font-semibold text-ink-900 tracking-tight">
                   {pillar.title}
                 </h3>
                 <p className="mt-3 flex-1 leading-relaxed text-ink-700">{pillar.body}</p>
@@ -408,12 +413,12 @@ function Strategy() {
     <section className="bg-white py-24 sm:py-32">
       <div className="container-arc">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-arc-600">
+          <p className="text-sm font-semibold uppercase tracking-label text-arc-600">
             Our strategy
           </p>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-3xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-balance text-3xl font-bold tracking-display sm:text-4xl">
             A self-sustaining cycle of research, impact and funding.
           </h2>
         </Reveal>
@@ -421,9 +426,11 @@ function Strategy() {
         <Stagger className="mt-12 grid gap-6 sm:grid-cols-3" step={0.12}>
           {STRATEGY_PRINCIPLES.map((s, i) => (
             <StaggerItem key={s.title}>
-              <div className="h-full rounded-3xl border-l-4 border-arc-500 bg-arc-50/50 p-7">
+              <div className="h-full border-l-2 border-arc-600 bg-white py-1 pl-6 pr-2">
                 <span className="text-sm font-semibold text-arc-600">0{i + 1}</span>
-                <h3 className="mt-2 text-xl font-semibold text-ink-900">{s.title}</h3>
+                <h3 className="mt-2 text-xl font-semibold text-ink-900 tracking-tight">
+                  {s.title}
+                </h3>
                 <p className="mt-3 leading-relaxed text-ink-700">{s.body}</p>
               </div>
             </StaggerItem>
@@ -439,16 +446,12 @@ function Strategy() {
 /* ------------------------------------------------------------------ */
 function CallToAction() {
   return (
-    <section className="bg-arc-50/40 py-24 sm:py-32">
+    <section className="bg-white py-24 sm:py-32">
       <div className="container-arc">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] bg-arc-950 px-8 py-16 text-center text-white sm:px-16 sm:py-20">
-            <div
-              className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-arc-600/30 blur-3xl"
-              aria-hidden
-            />
+          <div className="relative overflow-hidden rounded-sm bg-arc-950 px-8 py-16 text-center text-white sm:px-16 sm:py-20">
             <ArcMark className="mx-auto h-12 w-12 text-arc-400" strokeWidth={4} />
-            <h2 className="mx-auto mt-6 max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mx-auto mt-6 max-w-2xl text-balance text-3xl font-bold tracking-display sm:text-4xl">
               Help shape responsible AI — for whom, and to what end.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/70">
@@ -457,7 +460,7 @@ function CallToAction() {
             </p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-arc-900 shadow-lg transition-transform hover:-translate-y-0.5"
+              className="mt-8 inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-arc-900 transition-transform hover:-translate-y-0.5"
             >
               Get in touch
             </Link>
@@ -476,7 +479,7 @@ function Funders() {
     <section className="border-t border-black/5 bg-white py-16">
       <div className="container-arc text-center">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ink-500">
+          <p className="text-sm font-semibold uppercase tracking-label text-ink-500">
             Funded by
           </p>
         </Reveal>
@@ -503,7 +506,7 @@ function Funders() {
                     className={`w-auto object-contain transition-opacity group-hover:opacity-70 ${f.logoHeight || 'h-12 sm:h-14'}`}
                   />
                 </div>
-                <span className="text-xs font-medium leading-snug text-ink-600">
+                <span className="text-xs font-medium leading-snug text-ink-500">
                   {f.name}
                 </span>
               </a>

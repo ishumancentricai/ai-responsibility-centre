@@ -46,7 +46,7 @@ export default function Contact() {
         <div className="container-arc grid gap-12 lg:grid-cols-2">
           <Reveal>
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-ink-900">
+              <h2 className="text-2xl font-bold tracking-display text-ink-900">
                 AI Responsibility Centre (ARC)
               </h2>
               <p className="mt-4 leading-relaxed text-ink-700">{CONTACT.chair}</p>
@@ -122,7 +122,7 @@ export default function Contact() {
 
           <Reveal delay={0.08}>
             {status === 'success' ? (
-              <div className="flex h-full flex-col items-start justify-center rounded-3xl border border-arc-200 bg-arc-50/60 p-8">
+              <div className="flex h-full flex-col items-start justify-center border border-ink-900/10 bg-white p-8">
                 <div className="grid h-12 w-12 place-items-center rounded-full bg-arc-600 text-white">
                   <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path
@@ -134,7 +134,9 @@ export default function Contact() {
                     />
                   </svg>
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-ink-900">Thank you!</h3>
+                <h3 className="mt-5 text-xl font-bold text-ink-900 tracking-tight">
+                  Thank you!
+                </h3>
                 <p className="mt-2 leading-relaxed text-ink-700">
                   Your message has been sent — we’ll get back to you shortly.
                 </p>
@@ -148,7 +150,7 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="rounded-3xl border border-black/5 bg-arc-50/40 p-8"
+                className="border border-ink-900/10 bg-white p-8"
               >
                 <div className="grid gap-5">
                   <Field label="Name" name="name" type="text" />
@@ -171,7 +173,7 @@ export default function Contact() {
                       name="message"
                       rows={5}
                       required
-                      className="mt-1.5 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-arc-500 focus:ring-2 focus:ring-arc-500/30"
+                      className="mt-1.5 w-full rounded-sm border border-black/10 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-arc-500 focus:ring-2 focus:ring-arc-500/30"
                     />
                   </div>
 
@@ -188,7 +190,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="rounded-full bg-arc-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-arc-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-full bg-arc-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-arc-700 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {status === 'submitting' ? 'Sending…' : 'Send message'}
                   </button>
@@ -231,7 +233,7 @@ function Field({ label, name, type, required = true }) {
         name={name}
         type={type}
         required={required}
-        className="mt-1.5 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-arc-500 focus:ring-2 focus:ring-arc-500/30"
+        className="mt-1.5 w-full rounded-sm border border-black/10 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-arc-500 focus:ring-2 focus:ring-arc-500/30"
       />
     </div>
   )
