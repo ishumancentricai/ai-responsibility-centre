@@ -882,11 +882,15 @@ export const HIGHLIGHTS = [
     sub: 'Mandates & advisory roles',
   },
   {
-    // Track only. Matching the word in a title counted a talk *given at*
-    // someone else's workshop as a workshop we ran.
-    value: countEventType(/workshop/i) + countTrack('Workshop'),
-    label: 'Workshops',
-    sub: 'Hands-on methods & training',
+    // Talks and workshops together: both are ARC in a room with an audience,
+    // and splitting them left two thin numbers instead of one real one. Counted
+    // by track, never by title — matching /workshop/i against titles counted a
+    // talk given *at* someone else's workshop as a workshop we ran. Upcoming
+    // entries count too, and cannot double up: an event moves out of EVENTS
+    // and into MILESTONES once it has happened.
+    value: countEventType(/talk|workshop/i) + countTrack('Talk') + countTrack('Workshop'),
+    label: 'Talks & workshops',
+    sub: 'Keynotes, invited talks & training',
   },
   {
     value: DOCTORAL_RESEARCHERS,
