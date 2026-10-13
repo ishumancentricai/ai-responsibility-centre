@@ -112,6 +112,18 @@ export const FUNDERS = [
   },
 ]
 
+// Named research projects. A milestone carries `project: 'FAIRLEA'` and the
+// timeline resolves the badge and link from here, so the project is credited
+// the same way everywhere it appears.
+export const PROJECTS = {
+  FAIRLEA: {
+    name: 'FAIRLEA',
+    full: 'Fair AI Research for Law Enforcement Agencies',
+    funder: 'Volkswagen Foundation',
+    href: 'https://fairlea.de',
+  },
+}
+
 // Upcoming events where ARC participates — chronological (soonest first).
 // Optional `image: '/events/<file>.jpg'` turns the card into a photo poster;
 // without one the card falls back to a typographic plate in the brand green.
@@ -151,6 +163,13 @@ export const MILESTONES = [
   {
     period: 'October 2026',
     items: [
+      {
+        track: 'Talk',
+        title: 'Invited talk — Cybercrime units’ national working meeting',
+        text: '“KI, Deepfakes und Herausforderungen bei der Beweiswürdigung im Strafverfahren” — what AI-generated evidence does to the assessment of proof in criminal proceedings, given to the national working meeting of the IuK/cybercrime central offices and coordinators in Bayreuth.',
+        authors: 'Prof. Dr. Christian Rückert',
+        project: 'FAIRLEA',
+      },
       {
         track: 'Policy',
         title: 'AI summit of the Bavarian Digital Ministry',
@@ -208,6 +227,14 @@ export const MILESTONES = [
         venue: 'AI and Ethics 6(5), Article 528',
         year: 2026,
         href: 'https://doi.org/10.1007/s43681-026-01326-6',
+      },
+      {
+        track: 'Talk',
+        title: 'Invited talk — Cybercrime Workshop, GRK 2475',
+        text: '“AI and Deepfakes in the Evaluation of Evidence and the Establishment of Suspicion in Criminal Cases” — when a deepfake can be told from evidence, and what that does to suspicion and proof. Given at the annual workshop of DFG Research Training Group 2475 “Cybercrime and Forensic Computing” at Forschungscampus Waischenfeld.',
+        authors: 'Prof. Dr. Christian Rückert',
+        project: 'FAIRLEA',
+        href: 'https://www.cybercrime.fau.de/',
       },
       {
         track: 'Talk',
@@ -842,7 +869,6 @@ export const PROPERTY_EVIDENCE = Object.fromEntries(
   ]),
 )
 const countEventType = (re) => EVENTS.filter((e) => re.test(e.type)).length
-const isWorkshop = (text = '') => /workshop/i.test(text)
 
 export const HIGHLIGHTS = [
   {
@@ -856,9 +882,9 @@ export const HIGHLIGHTS = [
     sub: 'Mandates & advisory roles',
   },
   {
-    value:
-      countEventType(/workshop/i) +
-      milestoneItems.filter((i) => i.track === 'Workshop' || isWorkshop(i.title)).length,
+    // Track only. Matching the word in a title counted a talk *given at*
+    // someone else's workshop as a workshop we ran.
+    value: countEventType(/workshop/i) + countTrack('Workshop'),
     label: 'Workshops',
     sub: 'Hands-on methods & training',
   },

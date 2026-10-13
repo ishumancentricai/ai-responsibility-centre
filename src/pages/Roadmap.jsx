@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader'
 import Reveal, { Stagger, StaggerItem } from '../components/Reveal'
 import VideoEmbed from '../components/VideoEmbed'
 import UpcomingEvents from '../components/UpcomingEvents'
-import { MILESTONES, HIGHLIGHTS } from '../data/content'
+import { MILESTONES, HIGHLIGHTS, PROJECTS } from '../data/content'
 
 const TRACK_STYLES = {
   Research: 'bg-arc-100 text-arc-800',
@@ -123,13 +123,14 @@ export default function Roadmap() {
                             </div>
                           )}
 
-                          {(item.authors || item.href) && (
-                            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                          {(item.authors || item.href || item.project) && (
+                            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
                               {item.authors && (
                                 <span className="italic text-ink-500">
                                   {item.authors}
                                 </span>
                               )}
+                              {item.project && <ProjectTag id={item.project} />}
                               {item.href && (
                                 <a
                                   href={item.href}
@@ -186,5 +187,26 @@ export default function Roadmap() {
         </div>
       </section>
     </>
+  )
+}
+
+/** Credits the project a milestone came out of, linking to the project site. */
+function ProjectTag({ id }) {
+  const project = PROJECTS[id]
+  if (!project) return null
+
+  return (
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noreferrer"
+      title={`${project.full} — funded by ${project.funder}`}
+      className="inline-flex items-center gap-1.5 rounded-full border border-ink-900/15 bg-white px-2.5 py-1 text-xs font-semibold text-ink-700 transition-colors hover:border-arc-600 hover:bg-arc-100 hover:text-arc-900"
+    >
+      <span className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink-500">
+        Project
+      </span>
+      {project.name}
+    </a>
   )
 }
