@@ -639,6 +639,16 @@ export const PHDS = [
     },
   },
   {
+    name: 'Julika Schmitz',
+    initials: 'JS',
+    group: 'cs',
+    // TODO: replace with Julika's own description of her work, and add her
+    // portrait at /team/julika-schmitz.jpg plus scholar/LinkedIn/ORCID links.
+    // Until then the card falls back to an initials tile and shows no links.
+    research: 'Information systems and human-centric artificial intelligence.',
+    links: {},
+  },
+  {
     name: 'Timo Speith',
     initials: 'TS',
     group: 'phil',
