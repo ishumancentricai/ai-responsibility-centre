@@ -353,6 +353,12 @@ export const ILLUSTRATION_SOURCE = {
 
 export const ILLUSTRATIONS = [
   {
+    file: '/illustrations/the-intimacy-factory-1.jpg',
+    title: 'The intimacy factory 1',
+    artist: 'Jenny Kidd & Synthetic Pasts',
+    alt: 'A paper collage of hands forming heart shapes, cut-out stone hearts and microchip boards scattered across a crumpled beige ground, with the words “Zero Rejection” repeated twice',
+  },
+  {
     file: '/illustrations/algorithmic-memory.jpg',
     title: 'Algorithmic memory',
     artist: 'Jenny Kidd & Synthetic Pasts',
