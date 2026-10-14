@@ -353,6 +353,18 @@ export const ILLUSTRATION_SOURCE = {
 
 export const ILLUSTRATIONS = [
   {
+    file: '/illustrations/algorithmic-memory.jpg',
+    title: 'Algorithmic memory',
+    artist: 'Jenny Kidd & Synthetic Pasts',
+    alt: 'A photograph of two people on a beach at sunset, framed by a dense grid of hundreds of small images and overlaid with coloured pins trailing lines across the whole picture',
+  },
+  {
+    file: '/illustrations/synthetic-or-slop.jpg',
+    title: 'Synthetic or slop?',
+    artist: 'Marcin Wilkowski',
+    alt: 'A portrait from an eighteenth-century painting set against a violet-tinted grid of landscape paintings, with a pixelated rainbow-coloured shape bleeding across the right-hand side',
+  },
+  {
     file: '/illustrations/seeing-more-seeing-less.jpg',
     title: 'Seeing More — Seeing Less',
     artist: 'Anna Riepe & FARI',
@@ -468,6 +480,37 @@ export function illustrationByTitle(title) {
 // outlets that picked up the same story (e.g. a dpa wire) as outbound links.
 // Leave `image` empty to show the ARC mark instead of a portrait.
 export const PRESS = [
+  {
+    outlet: 'Nordkurier',
+    date: '13 October 2026',
+    type: 'Interview',
+    title: '„Die Debatte wird falsch geführt“',
+    titleEn: '“The debate is being had the wrong way round”',
+    summary:
+      'On the existential-risk warnings around AI: doom scenarios are speculation rather than science, while the harm these systems already do goes under-discussed. Unregulated and without accountability a curse; with clear rules and real liability, a blessing.',
+    person: 'Prof. Dr. Niklas Kühl',
+    art: 'Wheel of Progress',
+    href: 'https://nkukit.github.io/PDFs/Nordkurier_Anthropic.pdf',
+    coverage: [
+      {
+        outlet: 'Frankenpost',
+        title: 'KI-Experte der Uni Bayreuth: „Die Debatte wird falsch geführt“',
+        href: 'https://www.frankenpost.de/inhalt.ki-experte-der-uni-bayreuth-die-debatte-wird-falsch-gefuehrt.5ff537e9-fa10-4e3a-9ee8-5205441cca49.html',
+      },
+    ],
+  },
+  {
+    outlet: 'human',
+    date: 'October 2026',
+    type: 'Interview',
+    title: '„Übertriebener Pessimismus ärgert mich“',
+    titleEn: '“Overblown pessimism annoys me”',
+    summary:
+      'On calibrated trust rather than blanket trust — following an AI where it is right and your own judgement where it is not — and why a human kept in the loop who cannot meaningfully intervene ends up carrying the blame for the provider.',
+    person: 'Prof. Dr. Niklas Kühl',
+    art: 'Talking to AI 2.0',
+    href: 'https://human-magazin.de/?na=v&id=122',
+  },
   {
     outlet: 'Bayerisches Staatsministerium für Digitales',
     art: 'The AI Race',
