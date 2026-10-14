@@ -514,7 +514,7 @@ export const PRESS = [
     summary:
       'On calibrated trust rather than blanket trust — following an AI where it is right and your own judgement where it is not — and why a human kept in the loop who cannot meaningfully intervene ends up carrying the blame for the provider.',
     person: 'Prof. Dr. Niklas Kühl',
-    art: 'Talking to AI 2.0',
+    art: 'The intimacy factory 1',
     href: 'https://human-magazin.de/?na=v&id=122',
   },
   {
