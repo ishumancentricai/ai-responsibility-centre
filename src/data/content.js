@@ -129,16 +129,6 @@ export const PROJECTS = {
 // without one the card falls back to a typographic plate in the brand green.
 export const EVENTS = [
   {
-    date: 'Oct 20, 2026',
-    title: 'Impulstag KI & Co.',
-    art: 'Digital Nomads Beyond the Cubicle',
-    location: 'futurum, Stuttgart',
-    type: 'Talk',
-    blurb:
-      'Niklas Kühl on AI in nursing care — what the technology can and cannot do for the work. Part of Diakonie Baden’s day on AI in the social sector.',
-    href: 'https://event.trippus.net/Home/Index/AEAKgIOWcm_ns1jaFGFAcO2KpwCk70fcGBXkYmXHken-nQhj3aWlhWE98fW4wF2ssxYNZrjbQkCY/AEAKgINZnls_2mCMUFdejsfh7oM_TXSipJJ-BRzFEeJiC52ORLoxzAd4gIWgdvZ2iNjhy4y2GvoC/de',
-  },
-  {
     date: 'Nov 19, 2026, 17:00',
     title: 'bidt Research Conference 2026',
     art: 'Brain Control',
@@ -168,6 +158,13 @@ export const MILESTONES = [
   {
     period: 'October 2026',
     items: [
+      {
+        track: 'Talk',
+        title: '“KI: Grundlagen und Trends für die Pflege” — Impulstag, Stuttgart',
+        text: 'What AI can and cannot do for nursing work, given at Diakonie Baden’s day on AI and innovation in the social sector, at the futurum in Stuttgart.',
+        authors: 'Prof. Dr. Niklas Kühl',
+        href: 'https://event.trippus.net/Home/Index/AEAKgIOWcm_ns1jaFGFAcO2KpwCk70fcGBXkYmXHken-nQhj3aWlhWE98fW4wF2ssxYNZrjbQkCY/AEAKgINZnls_2mCMUFdejsfh7oM_TXSipJJ-BRzFEeJiC52ORLoxzAd4gIWgdvZ2iNjhy4y2GvoC/de',
+      },
       {
         track: 'Talk',
         title: 'Invited talk — Cybercrime units’ national working meeting',
