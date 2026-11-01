@@ -860,11 +860,14 @@ export const PHDS = [
     initials: 'DM',
     group: 'phil',
     role: 'Postdoctoral researcher',
-    // TODO: replace with Desirée's own description of her work, and add her
-    // portrait at /team/desiree-martin.jpg plus scholar/LinkedIn/ORCID links.
-    // Until then the card falls back to an initials tile and shows no links.
-    research: 'Philosophy of artificial intelligence.',
-    links: {},
+    // Drawn from her published project description, not from her own words:
+    // worth confirming with her, and her portrait plus scholar/LinkedIn/ORCID
+    // links are still missing. Until then the card shows an initials tile.
+    research:
+      'Ethics of artificial intelligence, with a focus on moral agency — most AI ethics guidelines leave unclear who is actually answerable. Her work asks which values can be embedded in AI systems, how they can be made legible to users, stakeholders and the law, and how their implementation can be measured.',
+    links: {
+      researchgate: 'https://www.researchgate.net/profile/Desiree-Martin-11',
+    },
   },
   {
     name: 'Timo Speith',
