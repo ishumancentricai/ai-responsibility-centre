@@ -160,6 +160,19 @@ export const MILESTONES = [
     items: [
       {
         track: 'Talk',
+        title:
+          '“Four Readings of Adaptivity and the Agents They Imply” — 15th Peripatetic Conference, Zakopane',
+        text: 'Calling an artefact an “adaptive agent” is systematically ambiguous: four mature traditions read adaptation as homeostatic stability, as reward-driven learning, as the survival of a precarious system, or as coherence of agent–environment coupling — and each commits one to a different kind of agent. A language model that converges within a context window it then discards, its parameters unchanged, respectively adapts, does not adapt, is not a candidate at all, and is underspecified. Three questions disambiguate it: what adapts to what, against whose standard, and could the system register its own failure by that standard. The last carries the weight — a system that cannot detect its own failure should not operate without societal oversight, however adaptively it performs. Given at the conference on “From Kinds of Learning to Structures of Agency”, organised by the Human Interactivity and Language Lab, University of Warsaw.',
+        authors: 'Dr. Bartosz Michał Radomski',
+        // ARC's own photograph of the talk. Our slide bills it for Bayreuth
+        // and ARC, which is why it earns a place here rather than a mention.
+        image: '/events/peripatetic-2026-radomski.jpeg',
+        imageAlt:
+          'Bartosz Michał Radomski speaking beside his title slide, which bills the talk for the University of Bayreuth and the AI Responsibility Centre.',
+        href: 'https://hill.psych.uw.edu.pl/cogsys2026/',
+      },
+      {
+        track: 'Talk',
         title: '“KI: Grundlagen und Trends für die Pflege” — Impulstag, Stuttgart',
         text: 'What AI can and cannot do for nursing work, given at Diakonie Baden’s day on AI and innovation in the social sector, at the futurum in Stuttgart.',
         authors: 'Prof. Dr. Niklas Kühl',

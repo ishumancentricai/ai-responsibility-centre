@@ -110,6 +110,18 @@ export default function Roadmap() {
                             </p>
                           )}
 
+                          {/* Our own photograph of the moment, when there is
+                              one. Held to 16:9 so a row of cards keeps an even
+                              rhythm whatever the original crop. */}
+                          {item.image && (
+                            <img
+                              src={item.image}
+                              alt={item.imageAlt ?? ''}
+                              loading="lazy"
+                              className="mt-4 aspect-[16/9] w-full rounded-sm border border-ink-900/10 object-cover"
+                            />
+                          )}
+
                           {item.video && (
                             <div className="mt-4">
                               <VideoEmbed
