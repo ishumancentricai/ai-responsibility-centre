@@ -856,6 +856,17 @@ export const PHDS = [
     links: {},
   },
   {
+    name: 'Desirée Martin',
+    initials: 'DM',
+    group: 'phil',
+    role: 'Postdoctoral researcher',
+    // TODO: replace with Desirée's own description of her work, and add her
+    // portrait at /team/desiree-martin.jpg plus scholar/LinkedIn/ORCID links.
+    // Until then the card falls back to an initials tile and shows no links.
+    research: 'Philosophy of artificial intelligence.',
+    links: {},
+  },
+  {
     name: 'Timo Speith',
     initials: 'TS',
     group: 'phil',
