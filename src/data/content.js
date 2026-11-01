@@ -860,11 +860,11 @@ export const PHDS = [
     initials: 'DM',
     group: 'phil',
     role: 'Postdoctoral researcher',
-    // Drawn from her published project description, not from her own words:
-    // worth confirming with her, and her portrait plus scholar/LinkedIn/ORCID
-    // links are still missing. Until then the card shows an initials tile.
+    // Written from her published work rather than from her own words — still
+    // worth confirming with her. Her portrait and her scholar/LinkedIn/ORCID
+    // links are missing; until then the card shows an initials tile.
     research:
-      'Ethics of artificial intelligence, with a focus on moral agency — most AI ethics guidelines leave unclear who is actually answerable. Her work asks which values can be embedded in AI systems, how they can be made legible to users, stakeholders and the law, and how their implementation can be measured.',
+      'Ethics of artificial intelligence, and the distance between naming a value and building for it. Her work sets the values that ethics guidelines invoke against those regulation actually encodes, and develops methods for carrying ethics into development — pairing scenarios of harm with technical ones, so that a concern becomes a design change rather than a principle.',
     links: {
       researchgate: 'https://www.researchgate.net/profile/Desiree-Martin-11',
     },
