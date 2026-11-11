@@ -122,14 +122,12 @@ function Header({ paused, onToggle }) {
   return (
     <Reveal>
       <div className="flex flex-wrap items-end justify-between gap-4 pb-5">
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-label text-arc-600">
-            In the media
-          </h2>
-          <p className="mt-3 max-w-2xl text-2xl font-semibold leading-snug tracking-display text-ink-900 sm:text-3xl">
-            ARC in the press.
-          </p>
-        </div>
+        {/* No kicker above this one: "In the media" and "ARC in the press"
+            said the same thing twice. The headline carries the section, so
+            it is the heading element rather than a paragraph under one. */}
+        <h2 className="max-w-2xl text-2xl font-semibold leading-snug tracking-display text-ink-900 sm:text-3xl">
+          ARC in the press.
+        </h2>
         {onToggle && (
           <button
             type="button"
