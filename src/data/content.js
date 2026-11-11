@@ -156,6 +156,25 @@ export const EVENTS = [
 // so the page reads from the present (top) back in time (scrolling down).
 export const MILESTONES = [
   {
+    period: 'November 2026',
+    items: [
+      {
+        track: 'Research',
+        title: 'Published in Electronic Markets',
+        text: '“Tracing truth: How traceability enhances fake news detection design” — media literacy and fact-checking have had limited effect against fake news, because readers stay sceptical and carry their own biases. The paper introduces decision support traceability: explaining what the classifier saw (system traceability) alongside the chain of sources a story came through (object traceability). A controlled online experiment compared each mechanism on its own against both together. Each helped by itself, and the combination identified fake news most accurately — the two are complementary, and a detection interface should carry both.',
+        authors: 'Brachten, F., Kühl, N., Eisenhardt, D., & Meske, C.',
+        paper: 'Tracing truth: How traceability enhances fake news detection design',
+        properties: ['Transparent', 'Accountable'],
+        venue: 'Electronic Markets, 36(1), article 89',
+        year: 2026,
+        // Open access under CC BY 4.0, so the DOI is the permanent public
+        // address. The SharedIt link from the publisher is view-only and
+        // would be the worse link for a paper anyone may already read.
+        href: 'https://doi.org/10.1007/s12525-026-00938-4',
+      },
+    ],
+  },
+  {
     period: 'October 2026',
     items: [
       {
