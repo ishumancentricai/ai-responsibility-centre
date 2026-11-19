@@ -192,6 +192,17 @@ export const MILESTONES = [
       },
       {
         track: 'Talk',
+        title: 'Keynote at byte — Bavarian Agency for Digital Affairs',
+        text: 'The keynote on recent developments in AI and what they mean for public administration, given at byte, the Free State of Bavaria’s digital agency. The agency sits under the Digital Ministry, whose own AI summit opened the same month.',
+        authors: 'Prof. Dr. Niklas Kühl',
+        // No link: byte published nothing about the keynote, and its agency
+        // homepage is not the event. The date comes from the record rather
+        // than from a page — the entry was written up on 23 October, above
+        // the Stuttgart Impulstag of the 20th, which puts the talk in that
+        // window. Replace this with the exact date when it is to hand.
+      },
+      {
+        track: 'Talk',
         title: '“KI: Grundlagen und Trends für die Pflege” — Impulstag, Stuttgart',
         text: 'What AI can and cannot do for nursing work, given at Diakonie Baden’s day on AI and innovation in the social sector, at the futurum in Stuttgart.',
         authors: 'Prof. Dr. Niklas Kühl',
@@ -248,6 +259,10 @@ export const MILESTONES = [
         text: 'Hosting the university’s AI Day and opening it with the keynote “The Meat Proxy”, on whether anyone can calibrate how far to trust what an AI advises. Alongside contributions from Lisa Precht (IBM) and Martin Braun (NeuroForge), and a panel on where Upper Franconia, Germany and the EU stand.',
         authors: 'Prof. Dr. Niklas Kühl',
         href: 'https://www.rais2.uni-bayreuth.de/de/events/ai_day_2026/index.html',
+        // The university’s own report on the day. It sits on this entry alone
+        // rather than on the workshop too: this is the entry about the day as
+        // a whole, and the same link twice in a row reads as a mistake.
+        report: 'https://ubtaktuell.uni-bayreuth.de/en/successful-ai-day-2026',
       },
       {
         track: 'Research',
@@ -513,8 +528,25 @@ export function illustrationByTitle(title) {
 // neutral summary and an outbound link. Never reproduce article text or use a
 // publication's photo — portraits are ARC's own team images. `coverage` lists
 // outlets that picked up the same story (e.g. a dpa wire) as outbound links.
-// Leave `image` empty to show the ARC mark instead of a portrait.
+// Leave `image` empty to show the ARC mark instead of a portrait. `href` is
+// optional: a print piece with no online edition gets a card without a link
+// rather than a link to someone else's copy of it.
 export const PRESS = [
+  {
+    outlet: 'Guter Rat',
+    art: 'Limits of Classification',
+    // Issue 12/2026, on sale from November.
+    date: 'November 2026',
+    type: 'Interview',
+    title: '»Normen haben zu wenig Biss«',
+    titleEn: '“Norms have too little bite”',
+    summary:
+      'Three experts on catastrophe scenarios, the risks that are real and what regulation would have to do. Niklas Kühl argues that the argument about human extinction pulls attention away from the harm these systems already do — deepfakes, pressure on democratic processes, and wrong decisions about hiring, creditworthiness and medical treatment — damage that falls well short of ending the world and still changes a life completely.',
+    person: 'Prof. Dr. Niklas Kühl',
+    // Print only: the issue is not online, and the one copy that is — a PDF
+    // re-hosted elsewhere — is exactly what the rule above rules out. So no
+    // href, and the card renders without a link until Burda publishes one.
+  },
   {
     outlet: 'Nordkurier',
     date: '13 October 2026',
@@ -525,7 +557,6 @@ export const PRESS = [
       'On the existential-risk warnings around AI: doom scenarios are speculation rather than science, while the harm these systems already do goes under-discussed. Unregulated and without accountability a curse; with clear rules and real liability, a blessing.',
     person: 'Prof. Dr. Niklas Kühl',
     art: 'Wheel of Progress',
-    href: 'https://nkukit.github.io/PDFs/Nordkurier_Anthropic.pdf',
     coverage: [
       {
         outlet: 'Frankenpost',
@@ -668,7 +699,7 @@ export const PERSON = {
   arcRole: 'Executive Director',
   role: 'Professor of Information Systems and Human-centric Artificial Intelligence',
   affiliation:
-    'Faculty of Law, Business and Economics, University of Bayreuth · Fraunhofer FIT (Business Analytics)',
+    'Faculty of Law, Business and Economics, University of Bayreuth and Fraunhofer FIT (Business Analytics)',
   bio: 'Niklas Kühl works at the interface of machine learning and human-centric design. His research builds and studies real-world AI applications — spanning human–AI collaboration, decision support, explainable and responsible AI, and generative AI — and turns those insights into evidence for policy and practice.',
   image: '/team/niklas-kuehl.jpeg',
   links: {

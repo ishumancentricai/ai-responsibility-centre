@@ -4,7 +4,7 @@ import Reveal from '../components/Reveal'
 import { CONTACT, PERSON } from '../data/content'
 
 export default function Contact() {
-  // idle · submitting · success · error
+  // idle, submitting, success, error
   const [status, setStatus] = useState('idle')
 
   async function handleSubmit(e) {

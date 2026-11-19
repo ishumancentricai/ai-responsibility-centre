@@ -132,7 +132,7 @@ export default function Roadmap() {
                             </div>
                           )}
 
-                          {(item.authors || item.href || item.project) && (
+                          {(item.authors || item.href || item.report || item.project) && (
                             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
                               {item.authors && (
                                 <span className="italic text-ink-500">
@@ -148,6 +148,21 @@ export default function Roadmap() {
                                   className="inline-flex items-center gap-1.5 font-semibold text-arc-700 transition-colors hover:text-arc-800"
                                 >
                                   {item.paper ? 'Read the paper' : 'Event website'}
+                                  <span aria-hidden>→</span>
+                                </a>
+                              )}
+                              {/* A second link, for when someone else wrote up
+                                  the event afterwards. Kept apart from `href`
+                                  so the labels stay honest: one goes to the
+                                  event, the other to the account of it. */}
+                              {item.report && (
+                                <a
+                                  href={item.report}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex items-center gap-1.5 font-semibold text-arc-700 transition-colors hover:text-arc-800"
+                                >
+                                  Read the report
                                   <span aria-hidden>→</span>
                                 </a>
                               )}

@@ -28,6 +28,15 @@ function shuffle(list, seed) {
   return out
 }
 
+/**
+ * Not every story has a link: a print piece with no online edition is a card
+ * without one. So the key is the story itself rather than its href, which
+ * would be undefined for those and collide across them.
+ */
+function keyOf(item) {
+  return `${item.outlet}|${item.date}|${item.title}`
+}
+
 function dealRows(cards, count) {
   const rows = Array.from({ length: count }, () => [])
   cards.forEach((card, i) => rows[i % count].push(card))
@@ -49,7 +58,8 @@ function dealRows(cards, count) {
  * seamlessly; the second pass is hidden from assistive tech.
  *
  * Only outlet, headline, our own summary and outbound links — never article
- * text; portraits are ARC's own images.
+ * text; portraits are ARC's own images. A story that was only ever in print
+ * gets a card with no link rather than a link to a copy of it.
  */
 export default function InTheMedia({
   className = 'border-b border-black/5 bg-white py-20 sm:py-28',
@@ -69,7 +79,7 @@ export default function InTheMedia({
           <div className="border-b border-ink-900/15" />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {cards.map((item) => (
-              <StoryCard key={item.href} item={item} />
+              <StoryCard key={keyOf(item)} item={item} />
             ))}
           </div>
         </div>
@@ -105,10 +115,10 @@ export default function InTheMedia({
               style={{ '--wall-duration': `${DURATIONS[r % DURATIONS.length]}s` }}
             >
               {half.map((item, i) => (
-                <StoryCard key={`a-${item.href}-${i}`} item={item} />
+                <StoryCard key={`a-${keyOf(item)}-${i}`} item={item} />
               ))}
               {half.map((item, i) => (
-                <StoryCard key={`b-${item.href}-${i}`} item={item} duplicate />
+                <StoryCard key={`b-${keyOf(item)}-${i}`} item={item} duplicate />
               ))}
             </div>
           )
@@ -243,15 +253,18 @@ function StoryCard({ item, duplicate }) {
       </div>
 
       {/* Covers the card, under the reprint list and the picture credit so
-          both stay clickable. */}
-      <a
-        href={item.href}
-        target="_blank"
-        rel="noreferrer"
-        tabIndex={duplicate ? -1 : undefined}
-        aria-label={`${item.outlet}: ${item.titleEn ?? item.title}`}
-        className="absolute inset-0 z-10 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
-      />
+          both stay clickable. Only when there is somewhere to go: an anchor
+          with no href still takes focus and leads nowhere. */}
+      {item.href && (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noreferrer"
+          tabIndex={duplicate ? -1 : undefined}
+          aria-label={`${item.outlet}: ${item.titleEn ?? item.title}`}
+          className="absolute inset-0 z-10 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arc-600"
+        />
+      )}
 
       {/* The outlets that reprinted the story, rising from the bottom edge.
           Inside the card rather than beside it: the row clips its own
