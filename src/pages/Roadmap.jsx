@@ -110,16 +110,38 @@ export default function Roadmap() {
                             </p>
                           )}
 
-                          {/* Our own photograph of the moment, when there is
-                              one. Held to 16:9 so a row of cards keeps an even
-                              rhythm whatever the original crop. */}
+                          {/* A photograph of the moment, when there is one.
+                              Held to 16:9 so a row of cards keeps an even
+                              rhythm whatever the original crop. `imageCredit`
+                              carries the line a photograph we did not take has
+                              to be published with, and `imageCreditHref` points
+                              it at where the picture was published; our own
+                              pictures need neither. */}
                           {item.image && (
-                            <img
-                              src={item.image}
-                              alt={item.imageAlt ?? ''}
-                              loading="lazy"
-                              className="mt-4 aspect-[16/9] w-full rounded-sm border border-ink-900/10 object-cover"
-                            />
+                            <figure className="mt-4">
+                              <img
+                                src={item.image}
+                                alt={item.imageAlt ?? ''}
+                                loading="lazy"
+                                className="aspect-[16/9] w-full rounded-sm border border-ink-900/10 object-cover"
+                              />
+                              {item.imageCredit && (
+                                <figcaption className="mt-1.5 text-xs text-ink-500">
+                                  {item.imageCreditHref ? (
+                                    <a
+                                      href={item.imageCreditHref}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="underline decoration-ink-900/25 underline-offset-2 transition-colors hover:text-arc-700 hover:decoration-arc-600"
+                                    >
+                                      {item.imageCredit}
+                                    </a>
+                                  ) : (
+                                    item.imageCredit
+                                  )}
+                                </figcaption>
+                              )}
+                            </figure>
                           )}
 
                           {item.video && (

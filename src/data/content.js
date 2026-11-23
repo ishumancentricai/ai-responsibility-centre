@@ -129,16 +129,6 @@ export const PROJECTS = {
 // without one the card falls back to a typographic plate in the brand green.
 export const EVENTS = [
   {
-    date: 'Nov 19, 2026, 17:00',
-    title: 'bidt Research Conference 2026',
-    art: 'Brain Control',
-    location: 'Bayerische Akademie der Wissenschaften, Munich',
-    type: 'Talk',
-    blurb:
-      'Closing keynote by Niklas Kühl, “The Meat Proxy”: can anyone calibrate how far to trust what an AI advises? Closes day one of the conference.',
-    href: 'https://www.bidt.digital/research-conference-2026/',
-  },
-  {
     date: 'Dec 13–16, 2026',
     title: 'ICIS 2026',
     // The conference's own mark, shown whole rather than cropped. Used to
@@ -158,6 +148,27 @@ export const MILESTONES = [
   {
     period: 'November 2026',
     items: [
+      {
+        track: 'Talk',
+        title:
+          '“The Meat Proxy — On the (Im)Possibility of Appropriate Reliance in AI Advice” — bidt Research Conference, Munich',
+        text: 'A detailed explanation from an AI does not by itself help anyone decide better, and a convincing one can make a wrong recommendation easier to follow. Two studies carry the argument. Experts identifying bird species could judge what the system recommended and did better working with it. Radiologists followed a wrong diagnosis considerably more often when it was justified step by step than when the same diagnosis came as a shorter differential with its reasons. An explanation supports a critical check only where the reader can follow it with their own knowledge — which makes appropriate reliance the goal, rather than reliance as often as possible. Closing day one of the conference at the Bavarian Academy of Sciences and Humanities in Munich.',
+        authors: 'Prof. Dr. Niklas Kühl',
+        // bidt's photograph of the keynote, used with their credit line and
+        // linked back to the post they published it in. Not ours, which is why
+        // it carries a credit at all — the Radomski picture below is an ARC
+        // one and needs none.
+        //
+        // The two studies named here are prior work rather than ARC output,
+        // so they are described in the talk and not listed as publications.
+        image: '/events/bidt-research-conference-2026.jpeg',
+        imageAlt:
+          'Niklas Kühl at the lectern of the Bayerische Akademie der Wissenschaften, beside a slide asking what characterises effective human oversight, in front of a full hall.',
+        imageCredit: 'Photo: bidt / Klaus D. Wolf',
+        imageCreditHref:
+          'https://www.linkedin.com/feed/update/urn:li:activity:7529509883478450176/',
+        href: 'https://www.bidt.digital/research-conference-2026/',
+      },
       {
         track: 'Research',
         title: 'Published in Electronic Markets',
