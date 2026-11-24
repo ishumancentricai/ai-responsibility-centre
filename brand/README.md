@@ -17,8 +17,9 @@ website. Use these as the basis for PowerPoint, Word and other templates.
 
 ## Quick reference
 
-- **Primary colour:** `#00805A` (arc-600) · **Dark:** `#02261E` (arc-950) ·
-  **Tint:** `#ECFDF5` (arc-50) · full palette + hex codes are in the PDF.
+- **Colours:** `#00805A` (arc-600) is the primary, `#02261E` (arc-950) the
+  dark and `#ECFDF5` (arc-50) the tint. The full palette with hex codes is in
+  the PDF.
 - **Typeface:** Inter (open source, Google Fonts). Office fallback: Arial / Aptos.
 
 ## Using the logos in PowerPoint / Office

@@ -210,7 +210,7 @@ function Qualities() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-4 text-balance text-3xl font-bold tracking-display sm:text-4xl">
-              AI systems are here to stay. Those who help shape their use also shape the
+              AI systems are here to stay. Those who help shape their use also set the
               standards, values and limits of their deployment.
             </h2>
           </Reveal>

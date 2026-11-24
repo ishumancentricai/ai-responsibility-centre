@@ -30,7 +30,7 @@ export const VISION = {
     'Productive AI systems that put people at the centre — and stay committed to the common good.',
   properties: RESEARCH_PROPERTIES,
   ambition:
-    'ARC is a centre for Responsible AI: the point of contact for research, policy and practice when the question is no longer only what AI can do — but how we shape it, for whom, and to what end.',
+    'ARC is a centre for Responsible AI: the point of contact for research, policy and practice when the question is no longer what AI can do, but how it is built, for whom, and to what end.',
 }
 
 export const MISSION = {
@@ -248,7 +248,7 @@ export const MILESTONES = [
       {
         track: 'Research',
         title: 'Accepted at ICIS ’26 — Lisbon',
-        text: '“Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos” — fraud is rare, so each organisation’s own data is too thin to learn from, yet privacy blocks pooling it. Evaluated across five fraud datasets, collaborative diffusion beats oversampling and local generators at the task that matters, suggesting synthetic data earns its keep less through local realism than through structure that transfers between organisations.',
+        text: '“Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos” — fraud is rare, so each organisation’s own data is too thin to learn from, yet privacy blocks pooling it. Evaluated across five fraud datasets, collaborative diffusion beats oversampling and local generators at detection itself, suggesting synthetic data works less through local realism than through structure that transfers between organisations.',
         authors: 'Allmendinger, S., Zipperling, D., Kibar, B. B., & Kühl, N.',
         paper:
           'Collaborative Synthetic Data for Privacy-Preserving Financial Fraud Detection Across Organizational Silos',
@@ -923,10 +923,11 @@ export const PHDS = [
     name: 'Julika Schmitz',
     initials: 'JS',
     group: 'cs',
-    // TODO: replace with Julika's own description of her work, and add her
-    // portrait at /team/julika-schmitz.jpg plus scholar/LinkedIn/ORCID links.
-    // Until then the card falls back to an initials tile and shows no links.
-    research: 'Information systems and human-centric artificial intelligence.',
+    image: '/team/julika-schmitz.jpg',
+    // Her own wording, kept as she gave it. Her scholar/LinkedIn/ORCID links
+    // are still missing, so the card shows none.
+    research:
+      'Responsible AI and AI governance, with a focus on transparency and accountability in the development and use of AI systems.',
     links: {},
   },
   {

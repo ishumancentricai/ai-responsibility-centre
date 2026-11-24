@@ -14,7 +14,7 @@ export default function About() {
     <>
       <PageHeader
         eyebrow="About ARC"
-        title="Building AI responsibility — not just demanding it."
+        title="Building AI responsibility instead of demanding it."
         intro="The AI Responsibility Centre unites technology, law and the social sciences at one interface, to make responsible AI directly actionable."
       />
 
